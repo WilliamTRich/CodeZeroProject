@@ -1,5 +1,5 @@
 // import { createConnection } from 'mysql';
-const { Sequelize } = require('sequelize');
+import { Sequelize } from 'sequelize';
 
 // const sequelize = new Sequelize('database', 'username', 'password', {
 const sequelize = new Sequelize('code_zero', 'root', 'root', {
@@ -18,4 +18,6 @@ sequelize
         console.error('Unable to connect to the database:', err);
     });
 
-module.exports =  { sequelize };
+
+export default sequelize
+// module.exports = { sequelize } 
