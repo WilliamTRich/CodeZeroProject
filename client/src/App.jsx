@@ -8,9 +8,14 @@ import {
 } from 'react-router-dom';
 import Dashboard from './pages/dashboard/index';
 import Login from './pages/login-reg/index';
+import MainScreen from './pages/mainpage/index';
 const router = createBrowserRouter([
     {
         path: '/',
+        element: <MainScreen/>,
+    },
+    {
+        path: 'dashboard',
         element: <Dashboard />,
     },
     {

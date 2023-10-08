@@ -14,4 +14,4 @@ const MainScreen = () => {
     
 };
 
-export { MainScreen };
+export default MainScreen;
