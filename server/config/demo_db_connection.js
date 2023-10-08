@@ -1,24 +1,21 @@
-import { createConnection } from 'mysql';
-import { Sequelize } from 'sequelize';
+// import { createConnection } from 'mysql';
+const { Sequelize } = require('sequelize');
 
-
-const con = createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root"
-});
-
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-    con.query("CREATE DATABASE mydb", function (err, result) {
-    if (err) throw err;
-    console.log("Database created");
-    });
-});
-
-// Option 3: Passing parameters separately (other dialects)
-const sequelize = new Sequelize('database', 'username', 'password', {
+// const sequelize = new Sequelize('database', 'username', 'password', {
+const sequelize = new Sequelize('code_zero', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
 });
+
+
+// Test the connection
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
+
+module.exports =  { sequelize };
