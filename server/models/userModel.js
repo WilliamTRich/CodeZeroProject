@@ -1,16 +1,38 @@
-const UserModel = (sequelize, Sequelize) => {
-    const {INTEGER, STRING, FLOAT, BOOLEAN, DATE} = Sequelize
-    const User = sequelize.define('User', {
-        id: {type: INTEGER, primaryKey: true, autoIncrement: true},
-        first_name: {type: STRING},
-        last_name: {type: STRING},
-        email: {type: STRING},
-        password: {type: STRING},
-        created_at: {type: DATE },
-        updated_at: {type: DATE},
+//Imports
+const { DataTypes } = require('sequelize');
+const { bcrypt } = require('bcrypt')
+require('dotenv').config()
 
+module.exports = (sequelize, Sequelize) => {
+    const UserModel = sequelize.define('User', {
+        id: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+            defaultValue: DataTypes.UUID
+        },
+        firstName: {
+            type: DataTypes.STRING,
+        },
+        lastName: {
+            type: DataTypes.STRING
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     })
-    return User
-}
 
-export default UserModel
+    /*UserModel.beforeCreate(async (user, options) => {
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        user.password = hashedPassword;
+    })*/
+
+    return UserModel
+}

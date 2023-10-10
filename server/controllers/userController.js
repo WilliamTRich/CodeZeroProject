@@ -1,19 +1,52 @@
-const { model } = require('sequelize');
-//change user to what make sence for your project 17 times on this page
-const { User } = require('../models/userModel')
+//Imports
+const db = require('../models')
+const { jwt } = require('express-jwt')
+require('dotenv').config()
 
-//test route
+const UserModel = db.users
+const Op = db.Sequelize.Op
+//Create User
+module.exports.createUser = async (req, res) => {
+    const{ email, password } = req.body
+    console.log("Here 1")
+    try {
+        const userExist = false
+
+        if(userExist) {
+            return res
+                .status(400)
+                .json({ message: "Email is already in use."})
+        } else {
+            console.log("Here 2")
+            UserModel.create({
+                email: email,
+                password: password
+            })
+                .then(userRes => {
+                    console.log("Here 3")
+                    const user = {
+                        userId: userRes.id,
+                        email: userRes.email
+                    }
+                    console.log("Here 4")
+                    //const accessToken = jwt.sign(user, process.env.JWT_SECRET)
+                    return res.json({
+                        userId: user.id,
+                        email: user.email
+                    })
+                })
+                .catch(e => console.log(e))
+        }
+    } catch(e) {
+        console.log(e)
+    }
+}
+
+/*//test route
 module.exports.index = (req, res) => {
     res.json({
         message: "Hello from users"
     })
-}
-
-//create one
-module.exports.create = (req,res)=> {
-    User.create(req.body)
-    .then(user => res.json(user))
-    .catch(err => res.status(400).json(err))
 }
 
 //find all
@@ -56,10 +89,11 @@ module.exports.updateOne = (req, res) => {
 //delete one
 module.exports.deleteOne = (req, res)=> {
     User.deleteOne({ _id: req.params.id })
-    .then(result => {
-        res.json({ result: result })
-    })
-    .catch((err) => {
-        res.json({ message: 'Something went  wrong', error: err })
-    });
-}
+        .then(result => {
+            res.json({ result: result })
+        })
+        .catch((err) => {
+            res.json({ message: 'Something went  wrong', error: err })
+        });
+}*/
+
