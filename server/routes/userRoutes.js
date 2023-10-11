@@ -9,7 +9,7 @@ module.exports = (app) => {
     app.post('/api/loginUser', userController.loginUser)
     app.get('/api/logoutUser', userController.logoutUser)
     app.get('/api/getUser', userController.getUser)
-    app.get('/api/findUsersByTrainerId', userController.findUsersByTrainerId)
+    // app.get('/api/findUsersByTrainerId', userController.findUsersByTrainerId)
     app.get('/api/allUsers', userController.findAllUsers)
     app.get('/api/findOneUser', userController.findOneUser)
 
