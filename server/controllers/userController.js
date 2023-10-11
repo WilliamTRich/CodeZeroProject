@@ -66,12 +66,11 @@ module.exports.logoutUser = (req, res) => {
 //get one user by id
 //will need to change jwt!!!!!
 module.exports.getUser = (req, res) => {
-  const decodedJwt = jwt.decode(req.cookies.userToken, { complete: true });
-  User.findOne({ _id: decodedJwt.payload.id })
+  const userId = req.params._id;
+  User.findOne({ userId })
     .then((oneUser) => res.json(oneUser))
     .catch((err) => res.status(500).json(err));
 };
-
 
 //get all users by a trainers id *********************************** not sure if this should be in trainerController or maybe an associations controller?????
 module.exports.findUsersByTrainerId = (req, res) => {
@@ -84,7 +83,6 @@ module.exports.findUsersByTrainerId = (req, res) => {
       res.status(500).json({ message: "Internal Server Error", error: err });
     });
 };
-
 
 //get all users
 module.exports.findAllUsers = (req, res) => {
