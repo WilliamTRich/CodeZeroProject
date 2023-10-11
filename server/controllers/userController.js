@@ -72,6 +72,7 @@ module.exports.getUser = (req, res) => {
     .catch((err) => res.status(500).json(err));
 };
 
+
 //get all users by a trainers id *********************************** not sure if this should be in trainerController or maybe an associations controller?????
 module.exports.findUsersByTrainerId = (req, res) => {
   const trainerId = req.params.trainerId; // if trainerId is passed as a URL parameter
@@ -83,6 +84,7 @@ module.exports.findUsersByTrainerId = (req, res) => {
       res.status(500).json({ message: "Internal Server Error", error: err });
     });
 };
+
 
 //get all users
 module.exports.findAllUsers = (req, res) => {

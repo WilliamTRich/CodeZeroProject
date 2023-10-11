@@ -18,7 +18,8 @@
     "mongoose": "^7.6.1",
     "mongoose-unique-validator": "^4.0.0",
     "mysql2": "^3.6.1",
-    "sequelize": "^6.33.0"
+    "sequelize": "^6.33.0",
+    "shortid": "^2.2.16"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
