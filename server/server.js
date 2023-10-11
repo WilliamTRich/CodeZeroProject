@@ -2,20 +2,17 @@
 const express = require('express');
 const cors = require('cors');
 const userRouter = require('./routes/userRoutes')
+const port = 8000;
+
 
 const app = express();
-
 app.use(cors());
-app.use(express.json()); // This is new
-app.use(express.urlencoded({ extended: true })); // This is new
+app.use(express.json(), express.urlencoded({ extended: true }));
 
-const db = require('./models')
-db.sequelize.sync({force: true})
-    .then(() => console.log("Synced to DB"))
-    .catch((e) => console.log(e))
 
+require("./config/mongooseConfig");
 require('./routes/userRoutes')(app)
-app.listen(8000, () => {
-    console.log("Listening at Port 8000")
+app.listen(port, () => {
+    console.log(`Listening on port: ${port}`)
 })
 
