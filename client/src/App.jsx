@@ -9,6 +9,8 @@ import {
 import Dashboard from './pages/dashboard/index';
 import Login from './pages/login-reg/index';
 import MainScreen from './pages/mainpage/index';
+import Chat from './pages/chat/Chat';
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
     {
         path: 'login',
         element: <Login />,
+    },
+    {
+        path: 'chat',
+        element: <Chat />,
     },
 ]);
 
