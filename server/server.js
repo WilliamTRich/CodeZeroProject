@@ -3,6 +3,8 @@
 const express = require("express");
 const cors = require("cors");
 // const userRouter = require('./routes/userRoutes')
+const bodyParser = require("body-parser")
+// const parse = require("parse-json")
 
 const userRouter = require("./routes/userRoutes");
 require("dotenv").config();
@@ -10,6 +12,9 @@ const port = 8000;
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.json())
+// app.use(parse.json())
+
 app.use(express.json(), express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {

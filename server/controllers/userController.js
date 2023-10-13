@@ -3,29 +3,22 @@ const { User } = require("../models/userModel");
 // const { Trainer } = require('../models/trainerModel')
 // const { Calendar } = require('../models/caelndarModel')  // for later!!!!
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-//note we will be switching to oauth and not jwt
+
 //also the key needs to be changed to w/e key we have re: CHANGE_ME_KEY
 
 //register new user with create method pulling from the request body
 module.exports.registerUser = (req, res) => {
   User.create(req.body)
     .then((user) => {
-      const userToken = jwt.sign(
-        //this will be changed/removed
-        { id: user._id },
-        process.env.JWT_SECRET
-      );
+      console.log("user successfully made")
       res
-        //making a cookie called userToken
-        // .cookie("usertoken", userToken, { httpOnly: true })
         //send info back to the user
         .json({
           msg: "success!",
           user: user, //all user info in one
           id: user._id, //id separated
-          firstName: user.firstName,
-        }); //first name seperated
+          firstName: user.firstName,//first name seperated
+        }); 
     })
     .catch((err) => {
       console.log("in err" + err);
@@ -50,16 +43,14 @@ module.exports.loginUser = async (req, res) => {
   if (!correctPassword) {
     return res.sendStatus(400);
   }
-  //jwt WILL BE CHANGED
-  const userToken = jwt.sign({ id: user._id }, process.env.CHANGE_ME_KEY);
   res
-    .cookie("usertoken", userToken, { httpOnly: true }) //will be changed
+    // .cookie("usertoken", userToken, { httpOnly: true }) //will be changed
     .json({ msg: "success!", id: user._id, firstName: user.firstName });
 };
 
 //will need to change to oatuh format but this is logout
 module.exports.logoutUser = (req, res) => {
-  res.clearCookie("usertoken");
+  // res.clearCookie("usertoken");
   res.sendStatus(200);
 };
 

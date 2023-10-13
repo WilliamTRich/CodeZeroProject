@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt');
 const uniqueValidator = require('mongoose-unique-validator');
 
-
 const TrainerSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -27,6 +26,8 @@ const TrainerSchema = new mongoose.Schema({
     }
     //will probably need to add calendar assocaitionns here 
 }, { timestamps: true });
+
+
 
 
 // validating the password and confirm password match before saving to the db
@@ -59,4 +60,3 @@ TrainerSchema.plugin( uniqueValidator);
 
 //export the Trainer 
 module.exports.Trainer = mongoose.model("Trainer", TrainerSchema);
-

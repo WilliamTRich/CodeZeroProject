@@ -50,11 +50,8 @@ module.exports.loginTrainer = async (req, res) => {
   if (!correctPassword) {
     return res.sendStatus(400);
   }
-  //jwt WILL BE CHANGED
-  const trainerToken = jwt.sign({ id: trainer._id }, process.env.CHANGE_ME_KEY);
 
   res
-    .cookie("trainertoken", trainerToken, { httpOnly: true }) //will be changed
     .json({ msg: "success!", id: trainer._id, firstName: trainer.firstName });
 };
 
