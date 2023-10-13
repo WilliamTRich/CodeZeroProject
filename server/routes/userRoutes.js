@@ -1,5 +1,5 @@
 const userController = require("../controllers/userController");
-const { authenticate } = require("../config/jwtConfig"); // will remove in switch to oauth
+// const { authenticate } = require("../config/jwtConfig"); // will remove in switch to oauth
 
 module.exports = (app) => {
   // app.get('/api/allUsers', authenticate, userController.index)

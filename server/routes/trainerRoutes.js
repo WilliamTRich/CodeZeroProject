@@ -1,5 +1,4 @@
 const trainerController = require('../controllers/trainerController');
-const { authenticate } = require('../config/jwtConfig'); // will remove in switch to oauth
 
 
 module.exports = (app) => {
