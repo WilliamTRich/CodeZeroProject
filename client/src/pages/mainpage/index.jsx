@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const MainScreen = () => {
     return(
         <div>
-            <div className='mainscreenlogin'>
+            <div className='mainscreenlogin flex'>
                 {/* tried to float login to the right using float-right bg-slate-100 did not work as planned */}
                 <Link to="login">
                 <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded m-1.5">Log in As Client</button>

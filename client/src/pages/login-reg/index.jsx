@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { LoginSplash } from '../../components/LoginSplash';
 const Login = () => {
     const [register, setRegister] = useState(false);
     return (
@@ -48,12 +48,21 @@ const Login = () => {
                             </div>
                             <button>submit</button>
                         </form>
+                        
                     </div>
                 )}
+                <div className="" id="auth-spashpage">
+                <img src="{LoginSplash}" alt="" />
             </div>
-            <div className="" id="auth-spashpage"></div>
+            </div>
+            <div className="" id="auth-spashpage">
+                {/* <img src="{'LoginSplash'}" alt="" /> */}
+                <LoginSplash/>
+            
+            </div>
         </>
     );
+    
 };
 
 export default Login;
