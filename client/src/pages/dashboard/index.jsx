@@ -1,8 +1,9 @@
 //Imports
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GoalsTracker } from '../../components/goalsTracker';
+import { AddGoal} from '../../components/AddGoal';
 import { CaloriesGraph } from '../../components/caloriesGraph';
+import { GoalsList } from '../../components/GoalsList';
 
 //Components
 
@@ -15,7 +16,10 @@ const Dashboard = () => {
                     Login
                 </button>
             </Link>
-            <GoalsTracker/>
+            <div className='goalstracker'>
+                <AddGoal/>
+                <GoalsList/>
+            </div>
             <CaloriesGraph/>
         </>
     );
