@@ -1,6 +1,8 @@
 //Imports
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { GoalsTracker } from '../../components/goalsTracker';
+import { CaloriesGraph } from '../../components/caloriesGraph';
 
 //Components
 
@@ -13,6 +15,8 @@ const Dashboard = () => {
                     Login
                 </button>
             </Link>
+            <GoalsTracker/>
+            <CaloriesGraph/>
         </>
     );
 };
