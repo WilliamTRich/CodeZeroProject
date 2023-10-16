@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { navigate } from '@reach/router';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddGoal = ()=> {
@@ -15,7 +15,7 @@ const AddGoal = ()=> {
         })
         .then((res)=> {
             console.log(res.data);
-            navigate('/dashboard');
+            useNavigate('/dashboard');
         })
     }
     return(     
