@@ -7,14 +7,15 @@ import {
     Link,
 } from 'react-router-dom';
 import Dashboard from './pages/dashboard/index';
-import Login from './pages/login-reg/index';
+import Login from './pages/login/index';
+import Register from './pages/register/index';
 import MainScreen from './pages/mainpage/index';
 import Chat from './pages/chat/Chat';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainScreen/>,
+        element: <MainScreen />,
     },
     {
         path: 'dashboard',
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     {
         path: 'chat',
         element: <Chat />,
+    },
+    {
+        path: 'register',
+        element: <Register />,
     },
 ]);
 
