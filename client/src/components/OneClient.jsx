@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { navigate } from '@reach/router';
+import { useNavigate } from 'react-router-dom';
 import { Nav } from './Nav';
 
 const OneClient = (props) => {
@@ -14,7 +14,7 @@ const OneClient = (props) => {
         })
         .catch((err)=> {
             console.log(err);
-            navigate('/error')
+            useNavigate('/error')
             
         })
     }, [id])

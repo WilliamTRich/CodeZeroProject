@@ -1,24 +1,77 @@
 import React, { useState, useEffect } from 'react'; 
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 
 
 function Chat() {
 
     const [socket] = useState(() => io(":8000"));
+    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState('');
 
-    //useEffect to make sure we dont create new socke servers on every refresh
-    useEffect(()=> {
-        console.log("Is this running?");
-        socket.on("Welcome", data =>
-            console.log(data));
-        return () => socket.off("Welcome");
+    const sendMessage = () => {
+        if (message) {
+          // Send message to the server
+            socket.emit('newMessageFromClient', message);
+            console.log("I am in the send message constant: " + message)
+
+            setMessage('');
+        }
+    };
+
+    useEffect(() => {
+        socket.on("connect", () => {
+            console.log("Connected to server");
+        });
+    
+        return () => {
+            socket.disconnect();
+            console.log("Disconnected from server");
+        };
     }, [socket]);
+    
+ // useEffect to make sure we don't create new socket servers on every refresh
+    useEffect(() => {
+        // Listen for messages from the server
+        socket.on("newMessageFromServer", msg => {
+            setMessages(prevMessages => [msg, ...prevMessages]);
+            console.log("I am in the useEffect msg: " + msg)
+            console.log("I am in the useEffect setMessages: " + setMessages)
+
+        });
+        console.log("Connected to server");
+        // Clean up the socket connection when the component unmounts
+        return () => {
+            socket.disconnect();
+        };
+        }, [socket]);
+
+
 
     return (
-        <div>
-
+    <div className="max-w-md mx-auto my-8 p-4 rounded-lg shadow-lg bg-gray-100">
+        <div className="h-48 overflow-y-auto border border-gray-300 rounded p-4">
+            {messages.map((msg, index) => (
+                <div key={index} className="mb-2">{msg}</div>
+            ))}
         </div>
-    )
+        <form className="mt-4">
+            <div className="flex">
+                <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="flex-1 rounded-l p-2 focus:outline-none"
+                />
+                <button
+                    onClick={sendMessage}
+                    className="rounded-r bg-blue-500 hover:bg-blue-600 text-white p-2"
+                    type="button"
+                > Send
+                </button>
+            </div>
+        </form>
+    </div>
+    );
 }
 
 export default Chat;
