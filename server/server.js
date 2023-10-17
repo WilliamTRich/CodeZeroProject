@@ -74,34 +74,50 @@ const io = socket(server, {
   }
 })
 
-//connection is a built in listener
-io.on("connection", socket =>{
-  //each client gets a socket id, if this is in the console it means we have a new user
-  console.log('new client socket id: ' + socket.id);
 
-  io.on("connect_error", error => {
-    console.error("Socket connection error:", error);
+io.on("connection", socket => {
+  console.log("new client socket id: " + socket.id);
+
+  socket.on("newMessageFromClient", data => {
+      console.log("Received message from client: " + data);
+      io.emit('newMessageFromServer', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected: ' + socket.id);
+  });
 });
-  //this is sending data to all the other users? might need to modify to find out how to to individ
-  io.on("event_from_client", data => {
-    // socket.broadcast.emit("event_to_all_other_clients", data);
-    console.log("I am in the io.on");
-    // io.emit('newMessageFromServer', data);
-    // io.emit('newMessageFromServer', 'Hello World.');
-    io.broadcast.emit('newMessageFromServer', 'Hello World.');
 
-    console.log("Received message from client: " + data);
-    //   io.emit emits an event to all connected clients
-    // socket.broadcast.emit emits an event to all clients other than this particular one, referenced by the socket variable
-    // socket.emit emits an event directly to this specific client
 
-  });
 
-  // Handle disconnection
-  io.on("disconnect", () => {
-    console.log("Client disconnected: " + socket.id);
-  });
-})
+// //connection is a built in listener
+// io.on("connection", socket =>{
+//   //each client gets a socket id, if this is in the console it means we have a new user
+//   console.log('new client socket id: ' + socket.id);
+
+//   io.on("connect_error", error => {
+//     console.error("Socket connection error:", error);
+// });
+//   //this is sending data to all the other users? might need to modify to find out how to to individ
+//   io.on("event_from_client", data => {
+//     // socket.broadcast.emit("event_to_all_other_clients", data);
+//     console.log("I am in the io.on");
+//     io.emit('newMessageFromServer', data);
+//     // io.emit('newMessageFromServer', 'Hello World.');
+//     io.broadcast.emit('newMessageFromServer', 'Hello World.');
+
+//     console.log("Received message from client: " + data);
+//     //   io.emit emits an event to all connected clients
+//     // socket.broadcast.emit emits an event to all clients other than this particular one, referenced by the socket variable
+//     // socket.emit emits an event directly to this specific client
+
+//   });
+
+//   // Handle disconnection
+//   io.on("disconnect", () => {
+//     console.log("Client disconnected: " + socket.id);
+//   });
+// })
 //************************************************************************** DOJO VERSION************************************************************ */
 
 

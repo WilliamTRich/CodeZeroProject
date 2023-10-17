@@ -4,9 +4,17 @@ import io from 'socket.io-client';
 
 function Chat() {
 
-    const [socket] = useState(() => io(":8000"));
+    // const [socket] = useState(() => io(":8000"));
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
+
+
+    const socket = io(':8000'); 
+    // socket.on('connect', () => {
+    //     console.log('Connected to server');
+    // });
+    socket.emit('newMessageFromClient', 'Hello, server!'); //this works
+
 
     const sendMessage = () => {
         if (message) {
@@ -30,12 +38,15 @@ function Chat() {
 
  // useEffect to make sure we don't create new socket servers on every refresh
     useEffect(() => {
+
         console.log("I am in the useEffect to post messages but oustide socket.on")
         // Listen for messages from the server
         // socket.on("connection", () => {
         //     console.log("Connected to server");
         // });
         socket.on("newMessageFromServer", msg => {
+            socket.emit('newMessageFromClient', 'Hello, server!');
+
             console.log("I am in the socket.on")
             setMessages(prevMessages => 
                 [msg, ...prevMessages], 
