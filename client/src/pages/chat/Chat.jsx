@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
+import { Nav } from '../../components/Nav';
 import io from 'socket.io-client';
 
 
@@ -48,7 +49,11 @@ function Chat() {
 
 
     return (
+
     <div className="max-w-md mx-auto my-8 p-4 rounded-lg shadow-lg bg-gray-100">
+        <div className="">
+            <Nav/>
+        </div>
         <div className="h-48 overflow-y-auto border border-gray-300 rounded p-4">
             {messages.map((msg, index) => (
                 <div key={index} className="mb-2">{msg}</div>
