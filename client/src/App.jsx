@@ -1,18 +1,17 @@
 //Imports
-import { Routes } from 'react-router-dom';
 import {
     createBrowserRouter,
     RouterProvider,
-    Route,
-    Link,
 } from 'react-router-dom';
+
+//Components
 import Dashboard from './pages/dashboard/index';
 import Login from './pages/login-reg/index';
-import MainScreen from './pages/mainpage/index';
+import MainScreen from './pages/mainscreen/index.jsx';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <MainScreen/>,
+        element: <MainScreen />,
     },
     {
         path: 'dashboard',
