@@ -50,7 +50,9 @@ function Chat() {
 
     return (
 
-    <div className="max-w-md mx-auto my-8 p-4 rounded-lg shadow-lg bg-gray-100">
+    // Need to fix the overlapping of the navbar into the chat area: 
+    // the chat area is expanding to the entire viewport including behind the navbar
+      <div className="h-screen w-screen p-4 rounded-lg shadow-lg bg-gray-100">  
         <div className="">
             <Nav/>
         </div>
@@ -59,22 +61,46 @@ function Chat() {
                 <div key={index} className="mb-2">{msg}</div>
             ))}
         </div>
-        <form className="mt-4">
-            <div className="flex">
-                <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="flex-1 rounded-l p-2 focus:outline-none"
-                />
-                <button
-                    onClick={sendMessage}
-                    className="rounded-r bg-blue-500 hover:bg-blue-600 text-white p-2"
-                    type="button"
-                > Send
-                </button>
-            </div>
-        </form>
+        <div id="message-container" className="fixed bottom-0 left-0 right-0 my-6 mx-6">
+            <form id="send-container" className="mt-4">
+                <div className="flex">
+                    <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="flex-1 rounded-l p-2 focus:outline-none"
+                    />
+                    <button
+                        onClick={sendMessage}
+                        className="rounded-r bg-blue-500 hover:bg-blue-600 text-white p-2"
+                        type="button"
+                    > Send
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {/*
+        <div>
+            <form className="mt-4">
+                <div className="flex">
+                    <input
+                    type="text"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="flex-1 rounded-l p-2 focus:outline-none"
+                    />
+                    <button
+                        onClick={sendMessage}
+                        className="rounded-r bg-blue-500 hover:bg-blue-600 text-white p-2"
+                        type="button"
+                    > Send
+                    </button>
+                </div>
+            </form>
+        </div>
+        */}
+
     </div>
     );
 }
