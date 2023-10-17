@@ -5,44 +5,60 @@ import io from 'socket.io-client';
 
 function Chat() {
 
-    const [socket] = useState(() => io(":8000"));
+    // const [socket] = useState(() => io(":8000"));
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
+
+
+    const socket = io(':8000'); 
+    // socket.on('connect', () => {
+    //     console.log('Connected to server');
+    // });
+    socket.emit('newMessageFromClient', 'Hello, server!'); //this works
+
 
     const sendMessage = () => {
         if (message) {
           // Send message to the server
             socket.emit('newMessageFromClient', message);
             console.log("I am in the send message constant: " + message)
-
             setMessage('');
         }
     };
 
-    useEffect(() => {
-        socket.on("connect", () => {
-            console.log("Connected to server");
-        });
+    // useEffect(() => {
+    //     socket.on("connect", () => {
+    //         console.log("Connected to server");
+    //     });
     
-        return () => {
-            socket.disconnect();
-            console.log("Disconnected from server");
-        };
-    }, [socket]);
-    
+    //     return () => {
+    //         socket.disconnect();
+    //         console.log("Disconnected from server");
+    //     };
+    // }, [socket]);
+
  // useEffect to make sure we don't create new socket servers on every refresh
     useEffect(() => {
+
+        console.log("I am in the useEffect to post messages but oustide socket.on")
         // Listen for messages from the server
+        // socket.on("connection", () => {
+        //     console.log("Connected to server");
+        // });
         socket.on("newMessageFromServer", msg => {
-            setMessages(prevMessages => [msg, ...prevMessages]);
+            socket.emit('newMessageFromClient', 'Hello, server!');
+
+            console.log("I am in the socket.on")
+            setMessages(prevMessages => 
+                [msg, ...prevMessages], 
+                console.log("I am in the setmessage creation"));
             console.log("I am in the useEffect msg: " + msg)
             console.log("I am in the useEffect setMessages: " + setMessages)
-
         });
-        console.log("Connected to server");
         // Clean up the socket connection when the component unmounts
         return () => {
             socket.disconnect();
+            console.log("Disconnected from server");
         };
         }, [socket]);
 
