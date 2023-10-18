@@ -1,30 +1,35 @@
 //Imports
-import {
-    createBrowserRouter,
-    RouterProvider,
-} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useRoutes } from 'react-router-dom';
+import axios from 'axios';
 
 //Components
-import Dashboard from './pages/dashboard/index';
-import Login from './pages/login-reg/index';
-import MainScreen from './pages/mainscreen/index.jsx';
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <MainScreen />,
-    },
-    {
-        path: 'dashboard',
-        element: <Dashboard />,
-    },
-    {
-        path: 'login',
-        element: <Login />,
-    },
-]);
+import routes from './routes.jsx';
 
 function App() {
-    return <RouterProvider router={router} />;
+    const [userId, setUserId] = useState({});
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('AccessToken');
+        const setHeader = {
+            headers: {
+                'X-Authorization': accessToken ? accessToken : 'Null',
+            },
+        };
+
+        axios
+            .get('http://localhost:8000/api/users/validate', setHeader)
+            .then((res) => {
+                setUserId(res.data);
+            })
+            .catch(() => {
+                setUserId(null);
+            });
+    }, []);
+
+    const routing = useRoutes(routes(userId));
+
+    return <>{routing}</>;
 }
 
 export default App;

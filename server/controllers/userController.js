@@ -162,6 +162,16 @@ module.exports.deleteUser = async (req, res) => {
     );
 };
 
+module.exports.validateUser = async (req, res) => {
+    const accessToken = req.header('X-Authorization');
+    if (!accessToken || accessToken.length !== 153)
+        return res.status(400).json(['You are unauthorized.']);
+    await jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) return res.status(400).json(['You are not authorized.']);
+        else return res.status(201).json(decoded.userId);
+    });
+};
+
 module.exports.getUsers = async (req, res) => {
     const users = await User.find({});
 
