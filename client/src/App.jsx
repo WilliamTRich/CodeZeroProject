@@ -8,33 +8,30 @@ import routes from './routes.jsx';
 import { UserContext } from './contexts/UserContext.jsx';
 
 function App() {
-    const [userId, setUserId] = useState({});
+  const [user, setUser] = useState({});
 
-    useEffect(() => {
-        const accessToken = localStorage.getItem('AccessToken');
-        const setHeader = {
-            headers: {
-                'X-Authorization': accessToken ? accessToken : 'Null',
-            },
-        };
+  useEffect(() => {
+    const accessToken = localStorage.getItem('AccessToken');
+    const setHeader = {
+      headers: {
+        'X-Authorization': accessToken ? accessToken : 'Null',
+      },
+    };
 
-        axios
-            .get('http://localhost:8000/api/users/validate', setHeader)
-            .then((res) => {
-                setUserId(res.data);
-            })
-            .catch(() => {
-                setUserId(null);
-            });
-    }, []);
+    axios
+      .get(`http://localhost:8000/api/users/validate`, setHeader)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        setUser(null);
+      });
+  }, []);
 
-    const routing = useRoutes(routes(userId));
+  const routing = useRoutes(routes(user));
 
-    return (
-        <UserContext.Provider value={{ userId, setUserId }}>
-            {routing}
-        </UserContext.Provider>
-    );
+  return <UserContext.Provider value={{ user, setUser }}>{routing}</UserContext.Provider>;
 }
 
 export default App;

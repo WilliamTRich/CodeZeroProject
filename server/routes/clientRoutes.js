@@ -7,6 +7,7 @@ module.exports = (app) => {
     app.delete('/api/clients/:id', clientController.deleteClient);
     app.get('/api/clients', clientController.getClients);
     app.get('/api/clients/:id', clientController.getClient);
-    //Validate for Users and Clients
+
+    //Global User Validation for Clients and Trainers
     app.get('/api/users/validate', clientController.validateUser);
 };

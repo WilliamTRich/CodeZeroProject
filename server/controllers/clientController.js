@@ -26,6 +26,7 @@ module.exports.registerClient = async (req, res) => {
                 const accessToken = jwt.sign(
                     {
                         clientId: client._id,
+                        userType: 'client',
                     },
                     process.env.JWT_SECRET,
                 );
@@ -60,6 +61,7 @@ module.exports.loginClient = async (req, res) => {
             const accessToken = jwt.sign(
                 {
                     clientId: client._id,
+                    userType: 'client',
                 },
                 process.env.JWT_SECRET,
             );
@@ -164,11 +166,14 @@ module.exports.deleteClient = async (req, res) => {
 
 module.exports.validateUser = async (req, res) => {
     const accessToken = req.header('X-Authorization');
-    if (!accessToken || accessToken.length !== 153)
-        return res.status(400).json(['You are unauthorized.']);
+    console.log(req.header('X-Authorization'));
+    if (!accessToken) return res.status(400).json(['You are unauthorized.']);
     await jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(400).json(['You are not authorized.']);
-        else return res.status(201).json(decoded.clientId);
+        else
+            return res
+                .status(201)
+                .json({ userId: decoded.clientId, userType: decoded.userType });
     });
 };
 
