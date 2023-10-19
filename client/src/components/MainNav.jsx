@@ -1,4 +1,8 @@
+//Imports
+import { useNavigate } from 'react-router-dom';
+
 const MainNav = () => {
+    const navigate = useNavigate();
     return (
         <div
             className={
@@ -11,6 +15,7 @@ const MainNav = () => {
                     className={
                         'px-6 py-2 text-3xl bg-highlight text-background border-background border-2 hover:bg-secondary hover:text-primary'
                     }
+                    onClick={() => navigate('/client-login')}
                 >
                     Log in as Client
                 </button>

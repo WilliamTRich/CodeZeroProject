@@ -5,6 +5,7 @@ import axios from 'axios';
 
 //Components
 import routes from './routes.jsx';
+import { UserContext } from './contexts/UserContext.jsx';
 
 function App() {
     const [userId, setUserId] = useState({});
@@ -29,7 +30,11 @@ function App() {
 
     const routing = useRoutes(routes(userId));
 
-    return <>{routing}</>;
+    return (
+        <UserContext.Provider value={{ userId, setUserId }}>
+            {routing}
+        </UserContext.Provider>
+    );
 }
 
 export default App;

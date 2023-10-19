@@ -1,14 +1,18 @@
 //Imports
+import { useNavigate } from 'react-router-dom';
 
 //Components
 import FormInput from './FormInput.jsx';
 
-const LoginForm = (userType, method) => {
-    method = 'Register';
+const Form = (props) => {
+    // eslint-disable-next-line react/prop-types
+    let { userType, method } = props;
+    const navigate = useNavigate();
+
     return (
         <div
             className={
-                'flex flex-col h-4/5 w-2/5 gap-8 border-highlight border-4 justify-center items-center rounded-2xl'
+                'flex flex-col h-4/5 w-2/5 gap-4 border-highlight border-4 justify-center items-center rounded-2xl'
             }
         >
             <h1 className={'text-primary text-6xl'}>{method}</h1>
@@ -47,7 +51,7 @@ const LoginForm = (userType, method) => {
                         <FormInput
                             htmlFor={'confirmPassword'}
                             type={'password'}
-                            placeholder={'Password'}
+                            placeholder={'Confirm Password'}
                         />
                     </>
                 ) : (
@@ -60,9 +64,34 @@ const LoginForm = (userType, method) => {
                 >
                     {method}
                 </button>
+                {method === 'Register' ? (
+                    <p className={'text-xl'}>
+                        Already have an account?{' '}
+                        <a
+                            className={
+                                'text-blue-500 underline hover:cursor-pointer'
+                            }
+                            onClick={() => navigate(`/${userType}-login`)}
+                        >
+                            Login
+                        </a>
+                    </p>
+                ) : (
+                    <p className={'text-xl'}>
+                        Need an account?{' '}
+                        <a
+                            className={
+                                'text-blue-500 underline hover:cursor-pointer'
+                            }
+                            onClick={() => navigate(`/${userType}-register`)}
+                        >
+                            Register
+                        </a>
+                    </p>
+                )}
             </form>
         </div>
     );
 };
 
-export default LoginForm;
+export default Form;
