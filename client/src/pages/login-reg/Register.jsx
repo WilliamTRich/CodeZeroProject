@@ -1,6 +1,6 @@
 //Imports
 import React, { useState, useContext } from 'react';
-import useNavigate from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 //Components
@@ -17,7 +17,7 @@ const Register = (props) => {
 
     const registerUser = (user, userType) => {
         axios
-            .post(`http://localhost:8000/api/register`, user)
+            .post(`http://localhost:8000/api/${userType}s`, user)
             .then((res) => {
                 localStorage.setItem(
                     'AccessToken',
@@ -30,6 +30,7 @@ const Register = (props) => {
                 navigate('/dashboard');
             })
             .catch((err) => {
+                console.log(err);
                 const errorResponse = err.response.data; // Get the errors from err.response.data
                 const errorArr = []; // Define a temp error array to push the messages in
                 for (const key of Object.keys(errorResponse)) {
@@ -47,7 +48,12 @@ const Register = (props) => {
                 'flex bg-background h-screen w-screen justify-around items-center'
             }
         >
-            <Form userType={userType} method={method} />
+            <Form
+                userType={userType}
+                method={method}
+                onSubmit={registerUser}
+                errorState={[errors, setErrors]}
+            />
             <img
                 src={'splashscreen-login.avif'}
                 className={'h-4/5 w-auto border-highlight border-4 rounded-2xl'}

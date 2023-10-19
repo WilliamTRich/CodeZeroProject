@@ -4,35 +4,35 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 //Models
-const { User } = require('../models/userModel');
+const { Client } = require('../models/clientModel');
 
-module.exports.registerUser = async (req, res) => {
+module.exports.registerClient = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
-    const userExist = await User.findOne({ email }).catch((e) =>
+    const clientExist = await Client.findOne({ email }).catch((e) =>
         console.log(e),
     );
 
-    if (userExist) {
+    if (clientExist) {
         return res.status(400).json(['Email already in use.']);
     } else {
-        await User.create({
+        await Client.create({
             firstName,
             lastName,
             email,
             password,
         })
-            .then((user) => {
+            .then((client) => {
                 const accessToken = jwt.sign(
                     {
-                        userId: user._id,
+                        clientId: client._id,
                     },
                     process.env.JWT_SECRET,
                 );
 
                 res.set('X-Authorization', accessToken);
                 res.status(201);
-                return res.json(user);
+                return res.json(client);
             })
             .catch((e) => {
                 let retArr = [];
@@ -48,38 +48,38 @@ module.exports.registerUser = async (req, res) => {
     }
 };
 
-//login already created user
-module.exports.loginUser = async (req, res) => {
+//login already created client
+module.exports.loginClient = async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const client = await Client.findOne({ email });
 
-    if (!user) return res.status(400).json(['Email does not exist.']);
+    if (!client) return res.status(400).json(['Email does not exist.']);
     else {
-        if (await bcrypt.compare(password, user.password)) {
+        if (await bcrypt.compare(password, client.password)) {
             const accessToken = jwt.sign(
                 {
-                    userId: user._id,
+                    clientId: client._id,
                 },
                 process.env.JWT_SECRET,
             );
 
             res.set('X-Authorization', accessToken);
             res.status(201);
-            return res.json(user);
+            return res.json(client);
         } else {
             return res.status(400).json(['Password is incorrect.']);
         }
     }
 };
 
-module.exports.updateUser = async (req, res) => {
+module.exports.updateClient = async (req, res) => {
     const accessToken = req.header('X-Authorization');
-    if (!accessToken || accessToken.length !== 153)
+    if (!accessToken)
         return res.status(400).json(['You are unauthorized. Null.']);
-    const userId = req.params.id;
-    if (userId.length !== 24)
-        return res.status(400).json(['User ID is not a valid length.']);
+    const clientId = req.params.id;
+    if (clientId.length !== 24)
+        return res.status(400).json(['Client ID is not a valid length.']);
 
     await jwt.verify(
         accessToken,
@@ -89,20 +89,20 @@ module.exports.updateUser = async (req, res) => {
                 console.log(err);
                 return res.status(400).json(['You are unauthorized.']);
             } else {
-                await User.findOne({ _id: userId }).catch(() => {
-                    return res.status(400).json(['User ID does not exist.']);
+                await Client.findOne({ _id: clientId }).catch(() => {
+                    return res.status(400).json(['Client ID does not exist.']);
                 });
 
-                if (decoded.userId !== userId) {
+                if (decoded.clientId !== clientId) {
                     return res.status(400).json(['You are unauthorized.']);
                 } else {
                     const changes = { ...req.body };
-                    await User.findOneAndUpdate({ _id: userId }, changes, {
+                    await Client.findOneAndUpdate({ _id: clientId }, changes, {
                         new: true,
                         runValidators: true,
                     })
-                        .then((user) => {
-                            return res.status(201).json(user);
+                        .then((client) => {
+                            return res.status(201).json(client);
                         })
                         .catch((e) => {
                             let retArr = [];
@@ -121,13 +121,13 @@ module.exports.updateUser = async (req, res) => {
     );
 };
 
-module.exports.deleteUser = async (req, res) => {
+module.exports.deleteClient = async (req, res) => {
     const accessToken = req.header('X-Authorization');
-    if (!accessToken || accessToken.length !== 153)
+    if (!accessToken)
         return res.status(400).json(['You are unauthorized. Null.']);
-    const userId = req.params.id;
-    if (userId.length !== 24)
-        return res.status(400).json(['User ID is not a valid length.']);
+    const clientId = req.params.id;
+    if (clientId.length !== 24)
+        return res.status(400).json(['Client ID is not a valid length.']);
 
     await jwt.verify(
         accessToken,
@@ -137,24 +137,24 @@ module.exports.deleteUser = async (req, res) => {
                 console.log(err);
                 return res.status(400).json(['You are unauthorized.']);
             } else {
-                await User.findOne({ _id: userId }).catch(() => {
-                    return res.status(400).json(['User ID does not exist.']);
+                await Client.findOne({ _id: clientId }).catch(() => {
+                    return res.status(400).json(['Client ID does not exist.']);
                 });
 
-                if (decoded.userId !== userId) {
+                if (decoded.clientId !== clientId) {
                     return res.status(400).json(['You are unauthorized.']);
                 } else {
-                    await User.findOneAndDelete({ _id: userId })
+                    await Client.findOneAndDelete({ _id: clientId })
                         .then(() => {
                             return res
                                 .status(201)
-                                .json(['User has been deleted']);
+                                .json(['Client has been deleted']);
                         })
                         .catch((e) => {
                             console.log(e);
                             return res
                                 .status(500)
-                                .json(['User has failed to be deleted.']);
+                                .json(['Client has failed to be deleted.']);
                         });
                 }
             }
@@ -168,31 +168,31 @@ module.exports.validateUser = async (req, res) => {
         return res.status(400).json(['You are unauthorized.']);
     await jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(400).json(['You are not authorized.']);
-        else return res.status(201).json(decoded.userId);
+        else return res.status(201).json(decoded.clientId);
     });
 };
 
-module.exports.getUsers = async (req, res) => {
-    const users = await User.find({});
+module.exports.getClients = async (req, res) => {
+    const clients = await Client.find({});
 
-    if (!users) {
-        return res.status(204).json(['There are no users.']);
+    if (!clients) {
+        return res.status(204).json(['There are no clients.']);
     } else {
-        return res.status(201).json(users);
+        return res.status(201).json(clients);
     }
 };
 
-module.exports.getUser = async (req, res) => {
-    const userId = req.params.id;
-    if (userId.length !== 24) {
-        return res.status(400).json(['User ID is not a valid length.']);
+module.exports.getClient = async (req, res) => {
+    const clientId = req.params.id;
+    if (clientId.length !== 24) {
+        return res.status(400).json(['Client ID is not a valid length.']);
     } else {
-        await User.findOne({ _id: userId })
-            .then((user) => {
-                return res.status(201).json(user);
+        await Client.findOne({ _id: clientId })
+            .then((client) => {
+                return res.status(201).json(client);
             })
             .catch((e) => {
-                return res.status(400).json(['User ID does not exist.']);
+                return res.status(400).json(['Client ID does not exist.']);
             });
     }
 };

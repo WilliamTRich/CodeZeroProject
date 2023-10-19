@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt');
 
-const UserSchema = new mongoose.Schema({
+const ClientSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "First name is required"],
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
         minlength: [8, "Password must be at least 8 characters long"]
     },
 
-    //this might work for a connection between trainers and users
+    //this might work for a connection between trainers and clients
     // trainerId: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Trainer',
@@ -35,8 +35,8 @@ const UserSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
-// before the user is saved, hash the password
-UserSchema.pre('save', function (next) {
+// before the client is saved, hash the password
+ClientSchema.pre('save', function (next) {
     bcrypt.hash(this.password, 10)
         .then(hash => {
             this.password = hash;
@@ -44,5 +44,5 @@ UserSchema.pre('save', function (next) {
         });
 });
 
-//export the user
-module.exports.User = mongoose.model("User", UserSchema);
+//export the client
+module.exports.Client = mongoose.model("Client", ClientSchema);

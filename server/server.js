@@ -9,6 +9,6 @@ const app = express()
 app.use(cors())
 app.use(express.json(), express.urlencoded({ extended: true }))
 
-require('./routes/userRoutes')(app)
+require('./routes/clientRoutes')(app)
 
 app.listen(8000, () => console.log('Server is ready on port 8000'))
