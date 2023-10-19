@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import { Nav } from '../../components/Nav';
 import io from 'socket.io-client';
+//when run the front end with socket.io imported it throws an error does not throw error when removed. socket.io already installed in backend and imported to the project. 
 
 
 function Chat() {
