@@ -5,7 +5,7 @@ A Full Stack Fitness App
 TBD
 
 ## Tech Stack ##
-MERN
+MongoDB, Express, React.js, Node.js
 
 ## Collaborators ##
 Table to be added here soon
