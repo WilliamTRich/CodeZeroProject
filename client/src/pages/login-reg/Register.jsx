@@ -20,10 +20,7 @@ const Register = (props) => {
       .post(`http://localhost:8000/api/${userType}s`, user)
       .then((res) => {
         localStorage.setItem('AccessToken', res.headers['x-authorization']);
-        setUser({
-          userType: res.data.userType,
-          userId: res.data.userId,
-        });
+        setUser(res.data);
         navigate('/dashboard');
       })
       .catch((err) => {

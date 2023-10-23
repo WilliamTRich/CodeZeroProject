@@ -1,6 +1,6 @@
 //Imports
 import { useState, useEffect } from 'react';
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 //Components
@@ -9,6 +9,7 @@ import { UserContext } from './contexts/UserContext.jsx';
 
 function App() {
   const [user, setUser] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const accessToken = localStorage.getItem('AccessToken');
@@ -25,11 +26,11 @@ function App() {
       })
       .catch((e) => {
         console.log(e);
-        setUser(null);
+        navigate('/');
       });
-  }, []);
+  }, [user]);
 
-  const routing = useRoutes(routes(user));
+  const routing = useRoutes(routes());
 
   return <UserContext.Provider value={{ user, setUser }}>{routing}</UserContext.Provider>;
 }

@@ -7,10 +7,10 @@ import Dashboard from './pages/dashboard/index.jsx';
 import Login from './pages/login-reg/Login.jsx';
 import Register from './pages/login-reg/Register.jsx';
 
-const routes = (userId) => [
+const routes = () => [
   {
     path: '/dashboard',
-    element: userId ? <Dashboard /> : <Navigate to={'/'} />,
+    element: <Dashboard />,
   },
   {
     path: '/',

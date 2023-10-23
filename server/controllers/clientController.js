@@ -5,6 +5,7 @@ require('dotenv').config();
 
 //Models
 const { Client } = require('../models/clientModel');
+const { Trainer } = require('../models/trainerModel');
 
 module.exports.registerClient = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
@@ -170,10 +171,21 @@ module.exports.validateUser = async (req, res) => {
     if (!accessToken) return res.status(400).json(['You are unauthorized.']);
     await jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(400).json(['You are not authorized.']);
-        else
-            return res
-                .status(201)
-                .json({ userId: decoded.clientId, userType: decoded.userType });
+        else {
+            if (decoded.userType === 'client') {
+                Client.findOne({ _id: decoded.userId })
+                    .then((user) => {
+                        return res.status(201).json(user);
+                    })
+                    .catch((e) => console.log(e));
+            } else {
+                Trainer.findOne({ _id: decoded.userId })
+                    .then((user) => {
+                        return res.status(201).json(user);
+                    })
+                    .catch((e) => console.log(e));
+            }
+        }
     });
 };
 

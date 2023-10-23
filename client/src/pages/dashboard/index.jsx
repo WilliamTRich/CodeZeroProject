@@ -1,20 +1,26 @@
 //Imports
-import React from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 //Components
+import { Nav } from '../../components/Nav.jsx';
+import { UserContext } from '../../contexts/UserContext.jsx';
 
 const Dashboard = () => {
-    return (
-        <>
-            <h1>Dashboard</h1>
-            <Link to="login">
-                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    Login
-                </button>
-            </Link>
-        </>
-    );
+  const { user } = useContext(UserContext);
+
+  return (
+    <>
+      {user ? (
+        <div className={'flex bg-background h-screen w-screen'}>
+          <Nav user={user} />
+        </div>
+      ) : (
+        <h1>Loading...</h1>
+      )}
+    </>
+  );
 };
 
 export default Dashboard;

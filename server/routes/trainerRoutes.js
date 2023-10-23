@@ -1,10 +1,10 @@
-const Controller = require('../controllers/trainerController');
+const trainerController = require('../controllers/trainerController');
 
 module.exports = (app) => {
-    app.get('/api', Controller.index)//test route
-    app.get('/api/trainer/:id', Controller.findOne)//find one
-    app.get('/api/trainers', Controller.findAll)//find all
-    app.post('/api/trainer/new', Controller.create)//create route
-    app.put('/api/trainer/edit/:id', Controller.updateOne)//update one route
-    app.delete('/api/trainer/:id', Controller.deleteOne)//delete one route
-}
+    app.post('/api/trainers', trainerController.registerTrainer);
+    app.post('/api/trainers/login', trainerController.loginTrainer);
+    app.patch('/api/trainers/:id', trainerController.updateTrainer);
+    app.delete('/api/trainers/:id', trainerController.deleteTrainer);
+    app.get('/api/trainers', trainerController.getTrainers);
+    app.get('/api/trainers/:id', trainerController.getTrainer);
+};

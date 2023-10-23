@@ -18,12 +18,8 @@ const Login = (props) => {
     axios
       .post(`http://localhost:8000/api/${userType}s/login`, user)
       .then((res) => {
-        console.log(res.headers);
         localStorage.setItem('AccessToken', res.headers['x-authorization']);
-        setUser({
-          userType: res.data.userType,
-          userId: res.data.userId,
-        });
+        setUser(res.data);
         navigate('/dashboard');
       })
       .catch((err) => {
