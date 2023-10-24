@@ -4,6 +4,7 @@ import axios from 'axios';
 
 
 const AddWorkout = ()=> {
+    const navigate = useNavigate();
     const[workoutDate,setWorkoutDate] = useState("");
     const[workoutTime,setWorkoutTime] = useState("");
     const[live,setLive] = useState("");
@@ -25,7 +26,7 @@ const AddWorkout = ()=> {
         )
         .then((res)=> {
             console.log(res.data);
-            useNavigate('/dashboard');
+            navigate('/dashboard');
         })
     }
     return(     

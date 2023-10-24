@@ -6,6 +6,7 @@ import { CaloriesGraph } from '../../components/caloriesGraph';
 
 import {CreateGoal} from '../../components/Goals';
 
+
 //Components
 
 const Dashboard = () => {
@@ -21,6 +22,7 @@ const Dashboard = () => {
                 <CreateGoal/>
             </div>
             <CaloriesGraph/>
+            
         </>
     );
 };
