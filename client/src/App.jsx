@@ -22,6 +22,7 @@ function App() {
     axios
       .get(`http://localhost:8000/api/users/validate`, setHeader)
       .then((res) => {
+        console.log(res);
         setUser(res.data);
       })
       .catch((e) => {

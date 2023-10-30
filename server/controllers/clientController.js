@@ -167,19 +167,19 @@ module.exports.deleteClient = async (req, res) => {
 
 module.exports.validateUser = async (req, res) => {
     const accessToken = req.header('X-Authorization');
-    console.log(req.header('X-Authorization'));
     if (!accessToken) return res.status(400).json(['You are unauthorized.']);
     await jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(400).json(['You are not authorized.']);
         else {
+            console.log(decoded);
             if (decoded.userType === 'client') {
-                Client.findOne({ _id: decoded.userId })
+                Client.findOne({ _id: decoded.clientId })
                     .then((user) => {
                         return res.status(201).json(user);
                     })
                     .catch((e) => console.log(e));
             } else {
-                Trainer.findOne({ _id: decoded.userId })
+                Trainer.findOne({ _id: decoded.trainerId })
                     .then((user) => {
                         return res.status(201).json(user);
                     })
