@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import Dashboard from './pages/dashboard/index';
 import Login from './pages/login-reg/index';
-import MainScreen from './pages/mainpage/index';
+import MainScreen from './pages/mainscreen/index';
 import Chat from './pages/chat/Chat';
 
 const router = createBrowserRouter([
