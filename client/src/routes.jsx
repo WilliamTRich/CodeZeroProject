@@ -7,6 +7,8 @@ import Dashboard from './pages/dashboard/index.jsx';
 import Login from './pages/login-reg/Login.jsx';
 import Register from './pages/login-reg/Register.jsx';
 import Chat from './pages/chat/Chat';
+import Calendar from './pages/calendar/index.jsx';
+
 import {Nav} from './components/Nav.jsx';
 import ClientLogout from './components/ClientLogout.jsx';
 import TrainerLogout from './components/TrainerLogout.jsx';
@@ -47,6 +49,10 @@ const routes = () => [
     {
       path: 'trainer-logout',
       element: <TrainerLogout userType={'trainer'}/>,
+    },
+    {
+        path: 'calendar',
+        element: <Calendar />,
     }
 ];
 
