@@ -22,12 +22,12 @@ const Dashboard = () => {
             </h1>
 
             <div className="flex flex-col md:flex-row items-end">
-            <div className="w-full md:w-2/3 bg-gray-800 text-white p-4 mb-4 md:mb-0">
+            <div className="w-full md:w-2/3 bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
                     CalendarComponent
                 </div>
 
                 <div className="md:w-1/3 md:pl-4">
-                    <div className="mb-4">
+                    <div className="border border-secondary rounded p-2 mb-4">
                         <CreateGoal />
                     </div>
 
