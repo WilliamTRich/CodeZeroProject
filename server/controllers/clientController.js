@@ -171,7 +171,6 @@ module.exports.validateUser = async (req, res) => {
     await jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(400).json(['You are not authorized.']);
         else {
-            console.log(decoded);
             if (decoded.userType === 'client') {
                 Client.findOne({ _id: decoded.clientId })
                     .then((user) => {

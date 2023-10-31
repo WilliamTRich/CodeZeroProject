@@ -16,7 +16,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.0",
     "nodemon": "^3.0.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "socket.io": "^4.7.2"
   },
   "prettier": {
     "singleQuote": true,
