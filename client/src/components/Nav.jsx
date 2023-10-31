@@ -24,6 +24,7 @@ export const Nav = (props) => {
 
 const logoutUser = () => {
   console.log('Logging out...'); 
+  console.log(userType)
   axios.post(`http://localhost:8000/api/${userType}s/logout`, user)
     .then(() => {
       console.log('Logout successful'); 
@@ -37,45 +38,46 @@ const logoutUser = () => {
 };
 
   return (
-    <div className="flex h-screen w-56 flex-col justify-around bg-accent">
-      <img src="/user-icon.png" className="mx-auto h-32 w-32 justify-center" alt={'User icon'} />
-      <div className="flex h-64 w-full flex-col items-center justify-around text-xl text-amber-100">
-        Hi, {user.firstName}!
-        <button
-          className={
-            'bg-amber-600 w-40 text-center py-2 rounded-lg hover:bg-amber-800 hover:text-amber-200 duration-300'
-          }
-          onClick={DashboardClick}
-        >
-          Dashboard
-        </button>
-        <button
-          className={
-            'bg-amber-600 w-40 text-center py-2 rounded-lg hover:bg-amber-800 hover:text-amber-200 duration-300'
-          }
-          onClick={MessagesClick}
-        >
-          Messages
-        </button>
-        <button
-          className={
-            'bg-amber-600 w-40 text-center py-2 rounded-lg hover:bg-amber-800 hover:text-amber-200 duration-300'
-          }
-          onClick={() => {
-            // Handle Calendar button click needs to be made
-          }}
-        >
-          Calendar
-        </button>
-      </div>
-      <button
-        className={
-          'w-40 self-center bg-red-600 px-8 py-3 text-xl rounded-md text-red-100 hover:bg-red-500 transition duration-300'
-        }
-        onClick={logoutUser}
-      >
-        Log Out
-      </button>
-    </div>
+<div className="flex h-screen w-56 flex-col justify-around bg-accent">
+  <img src="/user-icon.png" className="mx-auto h-32 w-32 justify-center" alt={'User icon'} />
+  <div className="flex h-64 w-full flex-col items-center justify-around text-xl text-primary"> {/* Use your primary text color */}
+    Hi, {user.firstName}!
+    <button
+      className={
+        'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300' /* Use your secondary color classes */
+      }
+      onClick={DashboardClick}
+    >
+      Dashboard
+    </button>
+    <button
+      className={
+        'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300' /* Use your secondary color classes */
+      }
+      onClick={MessagesClick}
+    >
+      Messages
+    </button>
+    <button
+      className={
+        'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300' /* Use your secondary color classes */
+      }
+      onClick={() => {
+        // Handle Calendar button click needs to be made
+      }}
+    >
+      Calendar
+    </button>
+  </div>
+  <button
+    className={
+      'w-40 self-center bg-danger px-8 py-3 text-xl rounded-md text-white hover:bg-danger-dark transition duration-300' /* Use your danger color classes */
+    }
+    onClick={logoutUser}
+  >
+    Log Out
+  </button>
+</div>
+
   );
 };

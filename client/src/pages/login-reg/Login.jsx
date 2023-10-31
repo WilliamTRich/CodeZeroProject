@@ -26,19 +26,19 @@ const Login = (props) => {
   };
 
   return (
-<div className={'flex flex-col md:flex-row h-screen bg-background'}>
-  <div className={'flex flex-col justify-center items-center w-full md:w-1/2 p-8'}>
-    <Form handleSubmit={loginUser} method={'Login'} userType={userType} errorState={[errors, setErrors]} />
-  </div>
+    <div className={'flex flex-col md:flex-row h-screen bg-background'}>
+      <div className={'flex flex-col justify-center items-center w-full md:w-1/2 p-8'}>
+        <Form handleSubmit={loginUser} method={'Login'} userType={userType} errorState={[errors, setErrors]} />
+      </div>
 
-  <div className={'flex justify-center items-center w-full md:w-1/2 p-8'}>
-    <img
-      src={'https://cdn.wallpapersafari.com/63/79/ctZJYf.jpg'}
-      className={'h-auto w-full md:max-w-md border-highlight border-4 rounded-2xl'}
-      alt={'Woman enjoying yoga.'}
-    />
-  </div>
-</div>
+      <div className={'flex justify-center items-center w-full md:w-1/2 p-8'}>
+        <img
+          src={'splashscreen-login.avif'}
+          className={'h-auto w-full md:max-w-md border-highlight border-4 rounded-2xl'}
+          alt={'Woman enjoying yoga.'}
+        />
+      </div>
+    </div>
 
   );
 };
