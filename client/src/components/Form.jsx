@@ -26,11 +26,11 @@ const Form = (props) => {
 
   return (
     <FormProvider {...methods}>
-      <form
+ <form
         onSubmit={(e) => e.preventDefault()}
         noValidate
         autoComplete={'off'}
-        className={'flex flex-col h-4/5 w-2/5 gap-4 border-highlight border-4 justify-center items-center rounded-2xl'}
+        className={'flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl'}
       >
         <h1 className={'text-primary text-5xl font-bold'}>{method}</h1>
         {errors && <p className={'text-red-400'}>{errors[0]}</p>}

@@ -6,6 +6,9 @@ import MainScreen from './pages/mainscreen/index.jsx';
 import Dashboard from './pages/dashboard/index.jsx';
 import Login from './pages/login-reg/Login.jsx';
 import Register from './pages/login-reg/Register.jsx';
+import Chat from './pages/chat/Chat';
+import {Nav} from './components/Nav.jsx';
+
 
 const routes = () => [
   {
@@ -32,6 +35,18 @@ const routes = () => [
     path: 'trainer-register',
     element: <Register userType={'trainer'} />,
   },
+    {
+        path: 'chat',
+        element: <Chat />,
+    },
+    {
+      path: 'client-logout',
+      element: <Nav userType={'client'} />,
+    },
+    {
+      path: 'trainer-logout',
+      element: <Nav userType={'trainer'} />,
+    }
 ];
 
 export default routes;

@@ -29,7 +29,7 @@ function App() {
         console.log(e);
         navigate('/');
       });
-  }, [user]);
+  }, [ navigate, localStorage]);
 
   const routing = useRoutes(routes());
 
