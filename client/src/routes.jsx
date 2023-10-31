@@ -8,7 +8,8 @@ import Login from './pages/login-reg/Login.jsx';
 import Register from './pages/login-reg/Register.jsx';
 import Chat from './pages/chat/Chat';
 import {Nav} from './components/Nav.jsx';
-
+import ClientLogout from './components/ClientLogout.jsx';
+import TrainerLogout from './components/TrainerLogout.jsx';
 
 const routes = () => [
   {
@@ -41,11 +42,11 @@ const routes = () => [
     },
     {
       path: 'client-logout',
-      element: <Nav userType={'client'} />,
+      element: <ClientLogout userType={'client'} />,
     },
     {
       path: 'trainer-logout',
-      element: <Nav userType={'trainer'} />,
+      element: <TrainerLogout userType={'trainer'}/>,
     }
 ];
 
