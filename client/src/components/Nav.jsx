@@ -43,43 +43,44 @@ export const Nav = (props) => {
 
   return (
     <div className="flex h-screen w-56 flex-col justify-around bg-accent">
-      <img src="/user-icon.png" className="mx-auto h-32 w-32 justify-center" alt={'User icon'} />
-      <div className="flex h-64 w-full flex-col items-center justify-around text-xl text-primary"> {/* Use your primary text color */}
-        Hi, {user.firstName}!
-        <button
-          className={
-            'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300' /* Use your secondary color classes */
-          }
-          onClick={DashboardClick}
-        >
-          Dashboard
-        </button>
-        <button
-          className={
-            'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300' /* Use your secondary color classes */
-          }
-          onClick={MessagesClick}
-        >
-          Messages
-        </button>
-        <button
-          className={
-            'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300' /* Use your secondary color classes */
-          }
-          onClick={CalendarClick}
-        >
-          Calendar
-        </button>
-      </div>
-      <button
-        className={
-          'w-40 self-center bg-danger px-8 py-3 text-xl rounded-md text-white hover:bg-danger-dark transition duration-300' /* Use your danger color classes */
-        }
-        onClick={logoutUser}
-      >
-        Log Out
-      </button>
-    </div>
+  <img src="/user-icon.png" className="mx-auto h-32 w-32 justify-center" alt={'User icon'} />
+  <div className="flex h-64 w-full flex-col items-center justify-around text-xl text-primary">
+    Hi, {user.firstName}!
+    <button
+      className={
+        'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300 focus:outline-none'
+      }
+      onClick={DashboardClick}
+    >
+      Dashboard
+    </button>
+    <button
+      className={
+        'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300 focus:outline-none'
+      }
+      onClick={MessagesClick}
+    >
+      Messages
+    </button>
+    <button
+      className={
+        'bg-secondary w-40 text-center py-2 rounded-lg hover:bg-secondary-dark hover:text-secondary-light duration-300 focus:outline-none'
+      }
+      onClick={CalendarClick}
+    >
+      Calendar
+    </button>
+  </div>
+  <button
+    className={
+      'w-40 self-center bg-danger px-8 py-3 text-xl rounded-md text-white hover:bg-danger-dark transition duration-300 focus:outline-none'
+    }
+    onClick={logoutUser}
+  >
+    Log Out
+  </button>
+</div>
+
 
   );
 };
