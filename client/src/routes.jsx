@@ -11,9 +11,14 @@ import Calendar from './pages/calendar/index.jsx';
 import Workout from './pages/workout/index.jsx';
 import Meal from './pages/meal/index.jsx';
 import Goal from './pages/goal/index.jsx';
+import  AddWorkout  from './pages/workout/addWorkout.jsx';
+import  EditWorkout  from './pages/workout/editWorkout.jsx';
+import  AddMeal  from './pages/meal/addMeal.jsx';
+import  EditMeal  from './pages/meal/editMeal.jsx';
+import  AddGoal  from './pages/goal/addGoal.jsx';
+import EditGoal  from './pages/goal/editGoal.jsx';
 
 import {Nav} from './components/Nav.jsx';
-
 
 const routes = () => [
   {
@@ -53,13 +58,37 @@ const routes = () => [
         element: <Workout />,
     },
     {
+        path: 'addworkout',
+        element: <AddWorkout />,
+    },
+    {
+        path: 'editworkout',
+        element: <EditWorkout />,
+    },
+    {
         path: 'meal',
         element: <Meal />,
-    }
-    ,
+    },
+    
+    {
+        path: 'addmeal',
+        element: <AddMeal />,
+    },
+    {
+        path: 'editmeal',
+        element: <EditMeal />,
+    },
     {
         path: 'goal',
         element: <Goal />,
+    },
+    {
+        path: 'addgoal',
+        element: <AddGoal />,
+    },
+    {
+        path: 'editgoal',
+        element: <EditGoal />,
     }
 ];
 

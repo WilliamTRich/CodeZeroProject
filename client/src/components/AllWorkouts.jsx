@@ -9,17 +9,13 @@ const AllWorkouts = (props) => {
 
 
     useEffect(() => {
-        const fetchWorkouts = async () => {
-            try {
-                const response = await axios.get(`/api/workouts/${user._id}`);
-                setWorkouts(response.data);
-            } catch (error) {
-                console.error('Error fetching workouts:', error);
-            }
-        };
-
-        fetchWorkouts();
-    }, [user._id]);
+        axios.get(`http://localhost:8000/api/workouts/${user._id}`)
+            .then(res => {
+                // console.log(res.data)
+                setWorkouts(res.data)
+            })
+            .catch(err => console.error(err))
+    }, [user._id])
 
     const handleEdit = (workoutId) => {
         Navigate('/editworkout')
@@ -27,9 +23,20 @@ const AllWorkouts = (props) => {
     };
 
     const handleDelete = (workoutId) => {
-        // need to add stuff to delete here
         console.log('Delete workout id:', workoutId);
+        axios.delete(`http://localhost:8000/api/workouts/${deletedId}`)
+        .then(res => {
+            console.log(res)
+            removeFromDom(deletedId)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     };
+    
+    const removeFromDom = deletedId => {
+        setWorkouts(workouts.filter(workout => deletedId !== workout._id))
+    }
 
     return (
         <table className="w-full">

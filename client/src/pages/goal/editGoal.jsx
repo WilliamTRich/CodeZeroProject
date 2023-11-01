@@ -7,9 +7,9 @@ import axios from 'axios';
 import { Nav } from '../../components/Nav.jsx';
 import { UserContext } from '../../contexts/UserContext.jsx';
 
-import AddMeal from '../../components/AddMeal'
+import EditGoal from '../../components/EditGoal'
 
-const AddMealPage = (props) => {
+const EditGoalPage = (props) => {
     const { user } = useContext(UserContext);
 
     return (
@@ -21,12 +21,12 @@ const AddMealPage = (props) => {
 
                     <div className="h-screen w-screen flex flex-col p-4 rounded-lg shadow-lg bg-background text-white relative">
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
-                            Add Meals
+                            Edit Goals
                         </h1>
 
                         <div className="flex flex-col items-center">
                             <div className="w-full md:w-[80%] bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
-                                <AddMeal />
+                                <EditGoal />
 
                             </div>
 
@@ -40,4 +40,4 @@ const AddMealPage = (props) => {
     );
 };
 
-export default AddMealPage;
+export default EditGoalPage;

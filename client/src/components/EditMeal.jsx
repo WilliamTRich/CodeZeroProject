@@ -3,14 +3,14 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom"
 
 
-const EditWorkout = (props)=> {
+const EditMeal = (props)=> {
     const {id} = props;
-    const[updateWorkout, setUpdateWorkout] = useState({});
+    const[updateMeal, setUpdateMeal] = useState({});
     useEffect(()=> {
         axios.get(``)
         .then((res)=> {
             console.log(res.data);
-            setUpdateWorkout(res.data);
+            setUpdateMeal(res.data);
         })
         .catch((err)=> {
             console.log(err);
@@ -18,13 +18,13 @@ const EditWorkout = (props)=> {
         })
     }, [id])
     const onChangeHandler = (e) => {
-        let newStateObject = {...updateWorkout};
+        let newStateObject = {...updateMeal};
         newStateObject[e.target.name] = e.target.value
-        setUpdateWorkout(newStateObject);
+        setUpdateMeal(newStateObject);
     }
     const updateSubmitHandler = (e)=> {
         e.preventDefault();
-        axios.put(``, updateWorkout,
+        axios.put(``, updateMeal,
         )
         .then((res)=> {
             console.log(res.data);
@@ -38,16 +38,16 @@ const EditWorkout = (props)=> {
     <div className=''>
         <div>
             <form onSubmit = {updateSubmitHandler}>
-                <label>Workout Date</label>
-                <input onChange={onChangeHandler} name="date" value={updateWorkout.workoutDate}/>
-                <label>Workout Time</label>
-                <input onChange={onChangeHandler} name="time" value={updateWorkout.workoutTime}/>
-                <label>Live?</label>
-                <input onChange={onChangeHandler} name="live" value={updateWorkout.live}/>
-                <label>Self Lead?</label>
-                <input onChange={onChangeHandler} name = "selfLead"value={updateWorkout.selfLead}/>
-                <label>Itinerary</label>
-                <input onChange={onChangeHandler} name="notes" value={updateWorkout.itinerary} />
+                <label>Meal Title</label>
+                <input onChange={onChangeHandler} name="title" value={updateMeal.mealTitle}/>
+                <label>Meal Cook/Prep Time</label>
+                <input onChange={onChangeHandler} name="time" value={updateMeal.mealTime}/>
+                <label>Ingredients</label>
+                <input onChange={onChangeHandler} name="ingredients" value={updateMeal.ingredients}/>
+                <label>Calories</label>
+                <input onChange={onChangeHandler} name = "calories"value={updateMeal.calories}/>
+                <label>Notes</label>
+                <input onChange={onChangeHandler} name="notes" value={updateMeal.notes} />
                 <button>Submit</button>
             </form>
         </div>
@@ -58,4 +58,4 @@ const EditWorkout = (props)=> {
     )
 }
 
-export default EditWorkout;
+export default EditMeal;

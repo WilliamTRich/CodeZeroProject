@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 
-const AddWorkout = ()=> {
+const AddWorkout = (props)=> {
     const navigate = useNavigate();
     const[workoutTitle,setWorkoutTitle] = useState("");
     const[workoutDate,setWorkoutDate] = useState("");
@@ -32,36 +32,79 @@ const AddWorkout = ()=> {
         })
     }
     return(     
-    <div className=''>
-        <h1>Client Name Here</h1>
-        <h2>Add Workout</h2>
+        <div className="flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl">
+            <h1 className="text-primary text-5xl font-bold">Add Workout</h1>
         <div>
-            <form className='addworkout-form' onSubmit={newSubmitHandler}>
-            <div className="mb-3">
-                    <label>Workout Title</label><br/>
-                    <input onChange={(e) => setWorkoutDate(e.target.value)} name="title" value={workoutTitle}/>
+        <form
+                onSubmit={newSubmitHandler}
+                noValidate
+                autoComplete="off"
+                className="flex flex-col w-full max-w-md gap-4"
+            >
+                            <div className="mb-3">
+                    <label className="text-primary mr-2">Workout Title</label>
+
+                    <input 
+                    onChange={(e) => setWorkoutDate(e.target.value)} 
+                    name="title" 
+                    value={workoutTitle}
+                    className="border-primary border-2 rounded p-2 text-black"
+                    />
                 </div>
             <div className="mb-3">
-                    <label>Workout Date</label><br/>
-                    <input onChange={(e) => setWorkoutDate(e.target.value)} name="date" value={workoutDate}/>
+                    <label className="text-primary mr-2">Workout Date</label>
+
+                    <input 
+                    onChange={(e) => setWorkoutDate(e.target.value)} 
+                    name="date" 
+                    value={workoutDate}
+                    className="border-primary border-2 rounded p-2 text-black"
+                    />
                 </div>
                 <div className="mb-3">
-                    <label>Workout Time</label><br/>
-                    <input onChange={(e) => setWorkoutTime(e.target.value)} name="location" value={workoutTime}/>
+                    <label className="text-primary mr-2">Workout Time</label>
+
+                    <input 
+                    onChange={(e) => setWorkoutTime(e.target.value)} 
+                    name="location" 
+                    value={workoutTime}
+                    className="border-primary border-2 rounded p-2 text-black"
+                    />
                 </div>
                 <div className="mb-3">
-                    <label>Live?</label><br/>
-                    <input onChange={(e) => setLive(e.target.value)} name="live" value={live}/>
+                    <label className="text-primary mr-2">Live?</label>
+
+                    <input 
+                    onChange={(e) => setLive(e.target.value)} 
+                    name="live" 
+                    value={live}
+                    className="border-primary border-2 rounded p-2 text-black"
+                    />
                 </div>
                 <div className="mb-3">
-                    <label>Self Lead?</label><br/>
-                    <input onChange={(e) => setSelfLead(e.target.value)} name="self" value={selfLead}/>
+                    <label className="text-primary mr-2">Self Lead?</label>
+
+                    <input 
+                    onChange={(e) => setSelfLead(e.target.value)} 
+                    name="self" 
+                    value={selfLead}
+                    className="border-primary border-2 rounded p-2 text-black"
+                    />
                 </div>
                 <div className="mb-3">
-                    <label>Itinerary</label><br/>
-                    <input onChange={(e) => setNotes(e.target.value)} name="notes" value={notes}/>
+                    <label className="text-primary mr-2">Itinerary</label>
+
+                    <input 
+                    onChange={(e) => setNotes(e.target.value)} 
+                    name="notes" 
+                    value={notes}
+                    className="border-primary border-2 rounded p-2 text-black"
+                    />
                 </div>
-                <button>Add Workout</button>
+                <button
+                    className="bg-highlight text-background py-2 px-4 rounded-lg hover:bg-secondary hover:text-accent-extralight transition duration-300"
+                    type="submit"
+                >Add Workout</button>
             </form>
         </div>
         
@@ -72,4 +115,4 @@ const AddWorkout = ()=> {
     )
 }
 
-export {AddWorkout}
+export default AddWorkout;
