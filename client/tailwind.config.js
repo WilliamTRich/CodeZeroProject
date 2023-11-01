@@ -49,9 +49,7 @@ module.exports = {
                     light: '#444444',    // Lighter gray
                     dark: '#222222',     // Darkest gray
                     mediumlight: '#aaaaaa',    // Lighter gray
-
                     extralight: '#cccccc',    // Lighter gray
-
                 },
                 background: {
                     DEFAULT: '#121212',  // Almost black background
