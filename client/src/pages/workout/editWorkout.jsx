@@ -23,8 +23,8 @@ const EditWorkoutPage = (props) => {
                             Workouts
                         </h1>
 
-                        <div className="flex flex-col items-end">
-                            <div className="w-full md:w-2/3 bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
+                        <div className="flex flex-col items-center">
+                            <div className="w-full md:w-[80%] bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
                                 <EditWorkout />
 
                             </div>

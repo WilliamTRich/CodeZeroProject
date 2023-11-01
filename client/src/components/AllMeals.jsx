@@ -9,17 +9,13 @@ const AllMeals = (props) => {
 
 
     useEffect(() => {
-        const fetchMeals = async () => {
-            try {
-                const response = await axios.get(`/api/meals/${user._id}`);
-                setMeals(response.data);
-            } catch (error) {
-                console.error('Error fetching meals:', error);
-            }
-        };
-
-        fetchMeals();
-    }, [user._id]);
+        axios.get(`http://localhost:8000/api/meals/${user._id}`)
+            .then(res => {
+                // console.log(res.data)
+                setMeals(res.data)
+            })
+            .catch(err => console.error(err))
+    }, [user._id])
 
     const handleEdit = (mealId) => {
         Navigate('/editmeal')
@@ -27,10 +23,21 @@ const AllMeals = (props) => {
     };
 
     const handleDelete = (mealId) => {
-        // need to add stuff to delete here
         console.log('Delete meal id:', mealId);
+        axios.delete(`http://localhost:8000/api/meals/${deletedId}`)
+        .then(res => {
+            console.log(res)
+            removeFromDom(deletedId)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     };
-
+    
+    const removeFromDom = deletedId => {
+        setMeals(meals.filter(meal => deletedId !== meal._id))
+    }
+    
     return (
         <table className="w-full">
             <thead>

@@ -23,7 +23,7 @@ const Meal = (props) => {
                             Meals
                         </h1>
                         <div className='flex flex-col items-center'>
-                            <Link to="/add-workout">
+                            <Link to="/addmeal">
                                 <button className="bg-primary text-white mb-4 py-2 px-4 rounded hover:bg-primary-dark transition duration-300">
                                     Add Meal
                                 </button>

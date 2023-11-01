@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Nav } from '../../components/Nav.jsx';
 import { UserContext } from '../../contexts/UserContext.jsx';
 
-// import EditMeal from '../../components/EditMeal'
+import EditMeal from '../../components/EditMeal'
 
 const EditMealPage = (props) => {
     const { user } = useContext(UserContext);
@@ -23,10 +23,9 @@ const EditMealPage = (props) => {
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
                             Edit Meals
                         </h1>
-
-                        <div className="flex flex-col items-end">
-                            <div className="w-full md:w-2/3 bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
-                                {/* <EditMeal /> */}
+                        <div className="flex flex-col items-center">
+                            <div className="w-full md:w-[80%] bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
+                                <EditMeal />
 
                             </div>
 
