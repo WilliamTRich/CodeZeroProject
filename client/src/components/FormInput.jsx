@@ -14,7 +14,7 @@ const FormInput = ({ name, label, type, id, placeholder, validation }) => {
   const isInvalid = isFormInvalid(inputErrors);
 
   return (
-    <div className={'flex flex-col gap-2 w-2/3'}>
+    <div className={'flex flex-col gap-1 w-2/3'}>
       <div className={'flex justify-between'}>
         <label htmlFor={id} className={'text-primary text-xl font-semibold'}>
           {label}
@@ -24,7 +24,7 @@ const FormInput = ({ name, label, type, id, placeholder, validation }) => {
       {id === 'confirmPassword' ? (
         <input
           className={
-            'bg-accent text-background caret-primary focus:outline-none focus:border-highlight focus:ring-2 focus:ring-highlight text-sm rounded-lg w-full p-2.5'
+            'bg-accent text-accent-extralight caret-primary focus:outline-none focus:border-highlight focus:ring-2 focus:ring-highlight text-sm rounded-lg w-full p-2'
           }
           id={id}
           type={type}
@@ -41,7 +41,7 @@ const FormInput = ({ name, label, type, id, placeholder, validation }) => {
       ) : (
         <input
           className={
-            'bg-accent text-background caret-primary focus:outline-none focus:border-highlight focus:ring-2 focus:ring-highlight text-sm rounded-lg w-full p-2.5'
+            'bg-accent text-accent-extralight caret-primary focus:outline-none focus:border-highlight focus:ring-2 focus:ring-highlight text-sm rounded-lg w-full p-2'
           }
           id={id}
           type={type}

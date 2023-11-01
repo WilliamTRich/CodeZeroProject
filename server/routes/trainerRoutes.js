@@ -3,8 +3,6 @@ const trainerController = require('../controllers/trainerController');
 module.exports = (app) => {
     app.post('/api/trainers', trainerController.registerTrainer);
     app.post('/api/trainers/login', trainerController.loginTrainer);
-    app.post('/api/trainers/logout', trainerController.logoutTrainer);
-
     app.patch('/api/trainers/:id', trainerController.updateTrainer);
     app.delete('/api/trainers/:id', trainerController.deleteTrainer);
     app.get('/api/trainers', trainerController.getTrainers);

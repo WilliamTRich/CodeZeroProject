@@ -53,7 +53,7 @@ const Form = (props) => {
         )}
         <button
           className={
-            'px-6 py-2 mt-4 text-3xl bg-highlight text-background border-background border-2 hover:bg-secondary hover:text-primary'
+            'px-6 py-2 mt-4 text-3xl rounded-lg bg-highlight text-background border-background border-2 hover:bg-secondary hover:text-accent-extralight'
           }
           onClick={onSubmit}
         >
@@ -64,7 +64,7 @@ const Form = (props) => {
             Already have an account?{' '}
             <a
               onClick={() => navigate(`/${userType}-login`)}
-              className={'text-secondary underline hover:cursor-pointer hover:text-blue-500'}
+              className={'text-secondary border-rounded underline hover:cursor-pointer hover:text-blue-500'}
             >
               Login
             </a>
@@ -74,7 +74,7 @@ const Form = (props) => {
             Need an Account?{' '}
             <a
               onClick={() => navigate(`/${userType}-register`)}
-              className={'text-secondary underline hover:cursor-pointer hover:text-blue-500'}
+              className={'text-secondary  underline hover:cursor-pointer hover:text-blue-500'}
             >
               Register
             </a>
