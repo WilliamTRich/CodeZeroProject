@@ -10,6 +10,7 @@ import Chat from './pages/chat/Chat';
 import Calendar from './pages/calendar/index.jsx';
 import Workout from './pages/workout/index.jsx';
 import Meal from './pages/meal/index.jsx';
+import Goal from './pages/goal/index.jsx';
 
 import {Nav} from './components/Nav.jsx';
 
@@ -54,6 +55,11 @@ const routes = () => [
     {
         path: 'meal',
         element: <Meal />,
+    }
+    ,
+    {
+        path: 'goal',
+        element: <Goal />,
     }
 ];
 
