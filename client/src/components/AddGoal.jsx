@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
+import { UserContext } from '../contexts/UserContext.jsx';
 
 const AddGoal = (props) => {
     const navigate = useNavigate();
@@ -9,6 +10,9 @@ const AddGoal = (props) => {
     const [goalEndDate, setGoalEndDate] = useState("");
     const [goalSteps, setGoalSteps] = useState("");
     const [completed, setCompleted] = useState("");
+    const { user } = useContext(UserContext);
+
+    console.log(user)
 
     const newSubmitHandler = (e) => {
         e.preventDefault();
@@ -19,7 +23,7 @@ const AddGoal = (props) => {
             completed,
         };
 
-        axios.post("http://localhost:8000/api/goals", newGoal, {
+        axios.post(`http://localhost:8000/api/goals/${user._id}`, newGoal, {
             withCredentials: true
         })
             .then((res) => {
