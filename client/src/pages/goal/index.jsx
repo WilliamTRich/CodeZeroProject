@@ -23,7 +23,13 @@ const Workout = (props) => {
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
                             Goals
                         </h1>
-
+                        <div className='flex flex-col items-center'>
+                            <Link to="/add-workout">
+                                <button className="bg-primary text-white mb-4 py-2 px-4 rounded hover:bg-primary-dark transition duration-300">
+                                    Add Goal
+                                </button>
+                            </Link>
+                        </div>
                         <div className="flex flex-col items-end">
                             <div className="w-full bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
                                 <AllGoals />
