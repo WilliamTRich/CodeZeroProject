@@ -8,6 +8,8 @@ import Login from './pages/login-reg/Login.jsx';
 import Register from './pages/login-reg/Register.jsx';
 import Chat from './pages/chat/Chat';
 import Calendar from './pages/calendar/index.jsx';
+import Workout from './pages/workout/index.jsx';
+import Meal from './pages/meal/index.jsx';
 
 import {Nav} from './components/Nav.jsx';
 
@@ -44,6 +46,14 @@ const routes = () => [
     {
         path: 'calendar',
         element: <Calendar />,
+    },
+    {
+        path: 'workout',
+        element: <Workout />,
+    },
+    {
+        path: 'meal',
+        element: <Meal />,
     }
 ];
 

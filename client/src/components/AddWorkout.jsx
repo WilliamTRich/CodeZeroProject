@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const AddWorkout = ()=> {
     const navigate = useNavigate();
+    const[workoutTitle,setWorkoutTitle] = useState("");
     const[workoutDate,setWorkoutDate] = useState("");
     const[workoutTime,setWorkoutTime] = useState("");
     const[live,setLive] = useState("");
@@ -13,6 +14,7 @@ const AddWorkout = ()=> {
     const newSubmitHandler = (e) => {
         e.preventDefault();
         const newWorkout = {
+            workoutTitle,
             workoutDate,
             workoutTime,
             live,
@@ -35,6 +37,10 @@ const AddWorkout = ()=> {
         <h2>Add Workout</h2>
         <div>
             <form className='addworkout-form' onSubmit={newSubmitHandler}>
+            <div className="mb-3">
+                    <label>Workout Title</label><br/>
+                    <input onChange={(e) => setWorkoutDate(e.target.value)} name="title" value={workoutTitle}/>
+                </div>
             <div className="mb-3">
                     <label>Workout Date</label><br/>
                     <input onChange={(e) => setWorkoutDate(e.target.value)} name="date" value={workoutDate}/>
