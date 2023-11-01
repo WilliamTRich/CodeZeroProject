@@ -9,68 +9,76 @@ const GoalsTable = (props) => {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
-        const fetchGoals = async () => {
-            try {
-                const response = await axios.get(`/api/goals/${user._id}`);
-                setGoals(response.data);
-            } catch (error) {
-                console.error('Error fetching goals:', error);
-            }
-        };
+        axios.get(`http://localhost:8000/api/goals/${user._id}`)
+            .then(res => {
+                // console.log(res.data)
+                setGoals(res.data)
+            })
+            .catch(err => console.error(err))
+    }, [user._id])
 
-        fetchGoals();
-    }, [user._id]);
 
-    const handleEdit = (goalId) => {
-        // need to add stuff to edit here
+const handleEdit = (goalId) => {
+    // need to add stuff to edit here
 
-        Navigate('/editgoal')
-        console.log('Edit goal id:', goalId);
-    };
+    Navigate('/editgoal')
+    console.log('Edit goal id:', goalId);
+};
 
-    const handleDelete = (goalId) => {
-        // need to add stuff to delete here
-        console.log('Delete goal id:', goalId);
-    };
+const handleDelete = (goalId) => {
+    console.log('Delete goal id:', goalId);
+    axios.delete(`http://localhost:8000/api/goals/${deletedId}`)
+    .then(res => {
+        console.log(res)
+        removeFromDom(deletedId)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+};
 
-    const handleGoalCompletion = (goalIndex) => {
-        const updatedGoals = [...goals];
-        updatedGoals[goalIndex].completed = !updatedGoals[goalIndex].completed;
-        setGoals(updatedGoals);
-    };
+const removeFromDom = deletedId => {
+    setGoals(goals.filter(goal => deletedId !== goal._id))
+}
 
-    return (
-        <table className="w-full">
-            <thead>
-                <tr>
-                    <th>Goal Title</th>
-                    <th>Goal Date</th>
-                    <th>View/Edit/Delete Goal</th>
-                    <th>Mark As Completed</th>
+const handleGoalCompletion = (goalIndex) => {
+    const updatedGoals = [...goals];
+    updatedGoals[goalIndex].completed = !updatedGoals[goalIndex].completed;
+    setGoals(updatedGoals);
+};
+
+return (
+    <table className="w-full">
+        <thead>
+            <tr>
+                <th>Goal Title</th>
+                <th>Goal Date</th>
+                <th>View/Edit/Delete Goal</th>
+                <th>Mark As Completed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {goals.map((goal) => (
+                <tr key={goal._id}>
+                    <td>{goal.goalTitle}</td>
+                    <td>{goal.goalEndDate}</td>
+                    <td>
+                        <button onClick={() => handleView(meal._id)}>View</button>
+                        <button onClick={() => handleEdit(meal._id)}>Edit</button>
+                        <button onClick={() => handleDelete(meal._id)}>Delete</button>
+                    </td>
+                    <td>
+                        <input
+                            type="checkbox"
+                            checked={goal.completed}
+                            onChange={() => handleGoalCompletion(index)}
+                        />
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                {goals.map((goal) => (
-                    <tr key={goal._id}>
-                        <td>{goal.goalTitle}</td>
-                        <td>{goal.goalEndDate}</td>
-                        <td>
-                            <button onClick={() => handleView(meal._id)}>View</button>
-                            <button onClick={() => handleEdit(meal._id)}>Edit</button>
-                            <button onClick={() => handleDelete(meal._id)}>Delete</button>
-                        </td>
-                        <td>
-                            <input
-                                type="checkbox"
-                                checked={goal.completed}
-                                onChange={() => handleGoalCompletion(index)}
-                            />
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    );
+            ))}
+        </tbody>
+    </table>
+);
 };
 
 export default GoalsTable;
