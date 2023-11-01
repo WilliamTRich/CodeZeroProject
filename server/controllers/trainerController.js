@@ -75,11 +75,6 @@ module.exports.loginTrainer = async (req, res) => {
     }
 };
 
-module.exports.logoutTrainer = (req,res) => {
-    res.removeHeader('X-Authorization');
-    localStorage.removeItem('accessToken');
-    return res.status(200).json({ message: 'Trainer logged out successfully.' });
-}
 
 module.exports.updateTrainer = async (req, res) => {
     const accessToken = req.header('X-Authorization');

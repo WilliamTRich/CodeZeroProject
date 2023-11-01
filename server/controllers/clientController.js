@@ -77,12 +77,6 @@ module.exports.loginClient = async (req, res) => {
 };
 
 
-module.exports.logoutClient = (req,res) => {
-    res.removeHeader('X-Authorization');
-    localStorage.removeItem('accessToken');
-    return res.status(200).json({ message: 'Client logged out successfully.' });
-}
-
 module.exports.updateClient = async (req, res) => {
     const accessToken = req.header('X-Authorization');
     if (!accessToken)

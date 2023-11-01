@@ -10,8 +10,7 @@ import Chat from './pages/chat/Chat';
 import Calendar from './pages/calendar/index.jsx';
 
 import {Nav} from './components/Nav.jsx';
-import ClientLogout from './components/ClientLogout.jsx';
-import TrainerLogout from './components/TrainerLogout.jsx';
+
 
 const routes = () => [
   {
@@ -41,14 +40,6 @@ const routes = () => [
     {
         path: 'chat',
         element: <Chat />,
-    },
-    {
-      path: 'client-logout',
-      element: <ClientLogout userType={'client'} />,
-    },
-    {
-      path: 'trainer-logout',
-      element: <TrainerLogout userType={'trainer'}/>,
     },
     {
         path: 'calendar',

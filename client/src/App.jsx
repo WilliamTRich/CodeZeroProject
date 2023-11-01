@@ -10,6 +10,7 @@ import { UserContext } from './contexts/UserContext.jsx';
 function App() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const [verified, setVerified] = useState(false);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('AccessToken');
@@ -24,12 +25,22 @@ function App() {
       .then((res) => {
         console.log(res);
         setUser(res.data);
+        setVerified(true);
       })
       .catch((e) => {
+        setVerified(false);
         console.log(e);
-        navigate('/');
+        // navigate('/');
       });
-  }, [ user, localStorage]);
+  }, [ localStorage]);
+
+
+  useEffect(() => {
+    if (!verified) {
+        navigate('/');
+    }
+}, [user, navigate]);
+
 
   const routing = useRoutes(routes());
 
