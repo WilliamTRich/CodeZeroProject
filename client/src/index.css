@@ -5,7 +5,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #272635; 
+    background-color: #121212; 
     min-height: 100vh;
   }
 
@@ -1068,7 +1068,7 @@ body {
   background: #22d3ee;
   border: 1px solid #4b5563;
   border-radius: 2px;
-  color: #fff;
+  color: #000;
   overflow: hidden;
   position: absolute;
 }
@@ -4529,6 +4529,12 @@ body {
   .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-date,
   .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-count {
     padding: 0 10px 0 0;
+  }
+  .e-title-text{
+    color: #fff !important;
+  }
+  .e-schedule-toolbar-container{
+    display: flex !important;
   }
 }
 /*! Recurrence-Editor component theme */

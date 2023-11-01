@@ -20,6 +20,12 @@ export const Nav = (props) => {
   const CalendarClick = () => {
     navigate('/calendar');
   };
+  const WorkoutClick = () => {
+    navigate('/Workout');
+  };
+  const MealClick = () => {
+    navigate('/Meal');
+  };
 
   const logoutUser = () => {
     console.log('Logging out...');
@@ -32,7 +38,7 @@ export const Nav = (props) => {
   return (
     <div className="flex h-screen w-56 flex-col justify-around bg-accent-dark">
       <img src="/user-icon.png" className="mx-auto h-32 w-32 justify-center" alt={'User icon'} />
-      <div className="flex h-64 w-full flex-col items-center justify-around text-xl text-primary">
+      <div className="flex h-80 w-full flex-col items-center justify-around text-xl text-primary">
         Hi, {user.firstName}!
         <button
           className={
@@ -57,6 +63,22 @@ export const Nav = (props) => {
           onClick={CalendarClick}
         >
           Calendar
+        </button>
+                <button
+          className={
+            'bg-secondary w-40 text-center text-accent-extralight py-2 rounded-lg hover:bg-secondary-dark duration-300 focus:outline-none'
+          }
+          onClick={WorkoutClick}
+        >
+          Workout
+        </button>
+        <button
+          className={
+            'bg-secondary w-40 text-center text-accent-extralight py-2 rounded-lg hover:bg-secondary-dark duration-300 focus:outline-none'
+          }
+          onClick={MealClick}
+        >
+          Meal
         </button>
       </div>
       <button
