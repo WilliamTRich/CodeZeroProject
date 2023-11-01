@@ -17,6 +17,10 @@ const MealSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    calories: {
+        type: String,
+        required: true
+    },
     notes: String,
     client: {
         type: mongoose.Schema.Types.ObjectId,

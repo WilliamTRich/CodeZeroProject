@@ -9,7 +9,6 @@ const AllWorkouts = (props) => {
 
 
     useEffect(() => {
-        // Fetch user's associated workouts from the API
         const fetchWorkouts = async () => {
             try {
                 const response = await axios.get(`/api/workouts/${user._id}`);
@@ -41,7 +40,7 @@ const AllWorkouts = (props) => {
                     <th>Time</th>
                     <th>Live</th>
                     <th>Self Lead</th>
-                    <th>Edit/Delete Workout</th>
+                    <th>View/Edit/Delete Workout</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,8 +51,12 @@ const AllWorkouts = (props) => {
                         <td>{workout.workoutTime}</td>
                         <td>{workout.live ? 'Yes' : 'No'}</td>
                         <td>{workout.selfLead ? 'Yes' : 'No'}</td>
-                        <button onClick={() => handleEdit(workout._id)}>Edit</button>
-                        <button onClick={() => handleDelete(workout._id)}>Delete</button>                    </tr>
+                        <td>
+                            <button onClick={() => handleView(meal._id)}>View</button>
+                            <button onClick={() => handleEdit(meal._id)}>Edit</button>
+                            <button onClick={() => handleDelete(meal._id)}>Delete</button>
+                        </td>
+                    </tr>
                 ))}
             </tbody>
         </table>
