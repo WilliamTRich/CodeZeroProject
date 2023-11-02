@@ -32,14 +32,14 @@ function App() {
         console.log(e);
         // navigate('/');
       });
-  }, [ user,localStorage]);
+  }, [ user, localStorage]);
 
 
   useEffect(() => {
-    if (!verified) {
+    if (!verified && !['/client-login', '/client-register', '/trainer-login','/trainer-register'].includes(window.location.pathname)) {
         navigate('/');
     }
-}, [user, navigate]);
+}, [verified, navigate]);
 
 
   const routing = useRoutes(routes());

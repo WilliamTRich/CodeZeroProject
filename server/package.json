@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "dev": "concurrently \"npm run start\" \"cd ../client && npm run dev\" "
+"dev": "concurrently \"npm install && npm run start\" \"cd ../client && npm install && npm run dev\" "
   },
   "author": "",
   "license": "ISC",
