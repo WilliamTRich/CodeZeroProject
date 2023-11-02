@@ -51,7 +51,7 @@ const AddWorkout = (props) => {
                         <label className="text-primary mr-2">Workout Title</label>
 
                         <input
-                            onChange={(e) => setWorkoutDate(e.target.value)}
+                            onChange={(e) => setWorkoutTitle(e.target.value)}
                             name="title"
                             value={workoutTitle}
                             className="border-primary border-2 rounded p-2 text-black"
