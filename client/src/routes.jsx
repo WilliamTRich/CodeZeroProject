@@ -87,7 +87,7 @@ const routes = () => [
         element: <AddGoal />,
     },
     {
-        path: 'editgoal',
+        path: 'editgoal/:goalId',
         element: <EditGoal />,
     }
 ];
