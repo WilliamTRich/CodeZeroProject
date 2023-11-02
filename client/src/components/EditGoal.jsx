@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 
 const EditGoal = (props)=> {
+    const navigate = useNavigate();
     const {id} = props;
     const[updateGoal, setUpdateGoal] = useState({});
     useEffect(()=> {
@@ -28,7 +29,7 @@ const EditGoal = (props)=> {
         )
         .then((res)=> {
             console.log(res.data);
-            // useNavigate('')
+            navigate('')
         })
         .catch((err)=> {
             console.log(err);

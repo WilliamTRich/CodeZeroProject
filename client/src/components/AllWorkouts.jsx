@@ -1,9 +1,11 @@
 import { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../contexts/UserContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 
 const AllWorkouts = (props) => {
+    const navigate = useNavigate();
     const [workouts, setWorkouts] = useState([]);
     const { user } = useContext(UserContext);
 
@@ -18,7 +20,7 @@ const AllWorkouts = (props) => {
     }, [user._id])
 
     const handleEdit = (workoutId) => {
-        Navigate('/editworkout')
+        navigate('/editworkout')
         console.log('Edit workout id:', workoutId);
     };
 
