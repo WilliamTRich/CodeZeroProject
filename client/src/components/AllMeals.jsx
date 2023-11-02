@@ -1,9 +1,11 @@
 import { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from '../contexts/UserContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 
 const AllMeals = (props) => {
+    const navigate = useNavigate();
     const [meals, setMeals] = useState([]);
     const { user } = useContext(UserContext);
 
@@ -18,7 +20,7 @@ const AllMeals = (props) => {
     }, [user._id])
 
     const handleEdit = (mealId) => {
-        Navigate('/editmeal')
+        navigate('/editmeal')
         console.log('Edit meal id:', mealId);
     };
 
