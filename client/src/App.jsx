@@ -32,7 +32,7 @@ function App() {
         console.log(e);
         // navigate('/');
       });
-  }, [ user, localStorage]);
+  }, [ localStorage]);
 
 
   useEffect(() => {
