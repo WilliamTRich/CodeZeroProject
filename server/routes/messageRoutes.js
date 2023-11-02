@@ -1,7 +1,7 @@
 const messageController = require('../controllers/messageController');
 
 module.exports = (app) => {
-    app.post('/api/messages', trainerController.createMessage);
+    app.post('/api/messages', messageController.createMessage);
     app.patch('/api/messages/:id', messageController.updateMessage);
     app.delete('/api/messages/:id', messageController.deleteMessage);
     app.get('/api/messages', messageController.getAllMessages);
