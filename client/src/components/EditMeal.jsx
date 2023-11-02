@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 
 const EditMeal = (props)=> {
+    const navigate = useNavigate();
     const {id} = props;
     const[updateMeal, setUpdateMeal] = useState({});
     useEffect(()=> {
@@ -14,7 +15,7 @@ const EditMeal = (props)=> {
         })
         .catch((err)=> {
             console.log(err);
-            // useNavigate('/errors')
+            navigate('/errors')
         })
     }, [id])
     const onChangeHandler = (e) => {

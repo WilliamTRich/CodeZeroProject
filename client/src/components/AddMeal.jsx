@@ -18,7 +18,6 @@ const AddMeal = (props) => {
         e.preventDefault();
         const newMeal = {
             mealTitle,
-            mealDate,
             mealTime,
             ingredients,
             calories,

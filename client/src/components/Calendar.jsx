@@ -5,6 +5,7 @@ import { ScheduleComponent, Day, Week, WorkWeek, Month, Agenda, Inject } from '@
 
 const Calendar = (props) => {
     // const { user, setUser, verified } = props;
+    const navigate = useNavigate();
 
 
     const data = [
