@@ -16,8 +16,7 @@ const EditGoalPage = (props) => {
         <>
             {user ? (
                 <div className={'flex bg-background h-screen w-screen'}>
-      <Nav user={user} />
-      {/* <Nav  /> */}
+                    <Nav user={user} />
 
                     <div className="h-screen w-screen flex flex-col p-4 rounded-lg shadow-lg bg-background text-white relative">
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">

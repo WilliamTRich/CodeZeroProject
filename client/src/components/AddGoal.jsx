@@ -9,21 +9,42 @@ const AddGoal = (props) => {
     const [goalTitle, setGoalTitle] = useState("");
     const [goalEndDate, setGoalEndDate] = useState("");
     const [goalSteps, setGoalSteps] = useState("");
-    const [completed, setCompleted] = useState("");
+    const [completed, setCompleted] = useState(false);
     const { user } = useContext(UserContext);
 
     console.log(user)
 
     const newSubmitHandler = (e) => {
         e.preventDefault();
-        const newGoal = {
-            goalTitle,
-            goalEndDate,
-            goalSteps,
-            completed,
-        };
+    
+        const userId= user._id
+        let newGoal;
 
-        axios.post(`http://localhost:8000/api/goals/${user._id}`, newGoal, {
+        if (user.userType === "client") {
+            console.log("user type is client")
+            newGoal = {
+                goalTitle,
+                goalEndDate,
+                goalSteps,
+                completed,
+                client: user._id, 
+            };
+        } else if (user.userType === "trainer") {
+            console.log("user type is trainer")
+            newGoal = {
+                goalTitle,
+                goalEndDate,
+                goalSteps,
+                completed,
+                trainer: user._id, 
+            };
+        } else {
+            console.error("Invalid userType:", user.userType);
+            return; 
+        }
+        console.log(newGoal)
+    
+        axios.post(`http://localhost:8000/api/goals/${userId}`, newGoal, {
             withCredentials: true
         })
             .then((res) => {
@@ -34,7 +55,8 @@ const AddGoal = (props) => {
                 console.error("Error creating goal:", error);
             });
     };
-
+    
+    
     return (
         <div className="flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl">
             <h1 className="text-primary text-5xl font-bold">Add Goal</h1>
@@ -91,9 +113,6 @@ const AddGoal = (props) => {
                 </button>
             </form>
         </div>
-
-
-
     )
 }
 

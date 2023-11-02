@@ -1,34 +1,53 @@
 //Imports
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+
 require('dotenv').config();
 
 //Models
-const  Goal  = require('../models/goalModel');
+const Goal = require('../models/goalModel');
 
 module.exports.getAllGoals = (req, res) => {
+    console.log('I am in the start of the all goals controller');
     const userId = req.params.userId;
 
-    Goal.find({ user: userId })
-        .populate('user') 
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: 'Invalid user ID' });
+    }
+
+    Goal.find({
+        $or: [{ client: userId }, { trainer: userId }],
+    })
+        .populate({
+            path: 'user',
+            options: { strictPopulate: false },
+        })
         .then((goals) => {
             if (goals.length > 0) {
                 res.json(goals);
             } else {
                 res.status(404).json({
                     message: 'No goals found for the user.',
-                }); 
+                });
             }
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).json({ error: error.message }); 
+            res.status(500).json({ error: error.message });
         });
 };
 
 module.exports.getGoalById = (req, res) => {
-    Goal.findOne({ _id: req.params.goalId, user: req.params.userId })
-        .populate('user')
+    const { userId, goalId } = req.params;
+    Goal.findOne({
+        _id: goalId,
+        $or: [{ client: userId }, { trainer: userId }],
+    })
+        .populate({
+            path: 'user',
+            options: { strictPopulate: false },
+        })
         .then((goal) => {
             if (!goal) {
                 return res.status(404).json({ error: 'Goal not found' });
@@ -47,7 +66,13 @@ module.exports.createGoal = (req, res) => {
 
 module.exports.updateGoal = (req, res) => {
     Goal.findOneAndUpdate(
-        { _id: req.params.goalId, user: req.params.userId },
+        {
+            _id: req.params.goalId,
+            $or: [
+                { client: req.params.userId },
+                { trainer: req.params.userId },
+            ],
+        },
         req.body,
         { new: true },
     )
