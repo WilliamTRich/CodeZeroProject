@@ -9,6 +9,7 @@ const GoalsTable = (props) => {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
+        console.log(user._id)
         axios.get(`http://localhost:8000/api/goals/${user._id}`)
             .then(res => {
                 // console.log(res.data)
