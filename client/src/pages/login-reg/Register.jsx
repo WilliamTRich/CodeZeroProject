@@ -38,7 +38,7 @@ const Register = (props) => {
       <div className={'flex justify-center items-center w-full md:w-1/2 p-8'}>
 
         <img
-          src={'https://cdn.wallpapersafari.com/63/79/ctZJYf.jpg'}
+          src={'abworkout.jpg'}
           className={'h-5/6 w-auto border-highlight border-4 rounded-2xl'}
           alt={'Woman enjoying yoga.'}
         />
