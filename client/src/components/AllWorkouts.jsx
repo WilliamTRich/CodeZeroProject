@@ -9,6 +9,12 @@ const AllWorkouts = (props) => {
     const [workouts, setWorkouts] = useState([]);
     const { user } = useContext(UserContext);
 
+    const convertToAmPmFormat = (time24Hour) => {
+        const [hours, minutes] = time24Hour.split(':');
+        const formattedTime = new Date(0, 0, 0, hours, minutes);
+        const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+        return formattedTime.toLocaleTimeString([], options);
+    };
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/workouts/${user._id}`)
@@ -74,7 +80,7 @@ const AllWorkouts = (props) => {
                                 day: 'numeric'
                             })}
                         </td>
-                        <td className="text-center">{workout.workoutTime}</td>
+                        <td className="text-center">{workout && convertToAmPmFormat(workout.workoutTime)}</td>
                         <td className="text-center">{workout.live ? 'Yes' : 'No'}</td>
                         <td className="text-center">{workout.selfLed ? 'Yes' : 'No'}</td>
                         <td className="text-center space-x-2">

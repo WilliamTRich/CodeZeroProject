@@ -8,8 +8,14 @@ const EditWorkout = (props) => {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const { workoutId } = useParams();
-    const [updateWorkout, setUpdateWorkout] = useState({});
-
+    const [updateWorkout, setUpdateWorkout] = useState({
+        workoutTitle: '',
+        workoutDate: '',
+        workoutTime: '',
+        live: '',
+        selfLed: '',
+        notes: ''
+        });
     console.log(user._id)
 
     const formatDate = (date) => {
@@ -59,6 +65,7 @@ const EditWorkout = (props) => {
                 console.log(err);
             })
     }
+
     return (
         <div className="flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl">
             <h1 className="text-primary text-5xl font-bold">Edit Workout</h1>
@@ -72,7 +79,7 @@ const EditWorkout = (props) => {
                     <label className="text-primary mr-2">Workout Title: </label>
                     <input
                         onChange={onChangeHandler}
-                        name="title"
+                        name="workoutTitle"
                         value={updateWorkout.workoutTitle || ''}
                         className="border-primary border-2 rounded p-2 text-black"
                     />
@@ -81,7 +88,7 @@ const EditWorkout = (props) => {
                     <label className="text-primary mr-2">Workout Date: </label>
                     <input
                         onChange={onChangeHandler}
-                        name="date"
+                        name="workoutDate"
                         value={updateWorkout.workoutDate || ''}
                         type="date"
                         className="border-primary border-2 rounded p-2 text-black"
@@ -91,9 +98,8 @@ const EditWorkout = (props) => {
                     <label className="text-primary mr-2">Workout Time: </label>
                     <input
                         onChange={onChangeHandler}
-                        name="time"
+                        name="workoutTime"
                         type="time"
-
                         value={updateWorkout.workoutTime || ''}
                         className="border-primary border-2 rounded p-2 text-black"
                     />
@@ -102,7 +108,6 @@ const EditWorkout = (props) => {
                     <label className="text-primary mr-2">Live?</label>
                     <select
                         onChange={onChangeHandler}
-
                         value={updateWorkout.live || false}
                         name="live"
                         className="border-primary border-2 rounded p-2 text-black"
@@ -115,7 +120,7 @@ const EditWorkout = (props) => {
                     <label className="text-primary mr-2">Self Led?</label>
                     <select
                         onChange={onChangeHandler}
-                        value={updateWorkout.selfLed || false}
+                        value={updateWorkout.selfLed|| false}
                         name="self led"
                         className="border-primary border-2 rounded p-2 text-black"
                     >
