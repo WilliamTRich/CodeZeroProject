@@ -23,20 +23,20 @@ const GoalsTable = (props) => {
         console.log('Edit goal id:', goalId);
     };
 
-    const handleDelete = (goalId) => {
+    const handleDelete = (goalId, user) => {
         console.log('Delete goal id:', goalId);
-        axios.delete(`http://localhost:8000/api/goals/${deletedId}`)
+        axios.delete(`http://localhost:8000/api/goals/${user._id}/${goalId}`)
             .then(res => {
                 console.log(res)
-                removeFromDom(deletedId)
+                removeFromDom(goalId)
             })
             .catch(err => {
                 console.log(err)
             })
     };
 
-    const removeFromDom = deletedId => {
-        setGoals(goals.filter(goal => deletedId !== goal._id))
+    const removeFromDom = goalId => {
+        setGoals(goals.filter(goal => goalId !== goal._id))
     }
 
     const handleGoalCompletion = (goalIndex, user) => {
@@ -70,9 +70,9 @@ const GoalsTable = (props) => {
             <thead>
                 <tr>
                     <th className="text-center">Goal Title</th>
-                    <th className="text-center">Goal Date</th>
-                    <th className="text-center">View/Edit/Delete Goal</th>
+                    <th className="text-center">Goal End Date</th>
                     <th className="text-center">Mark As Completed</th>
+                    <th className="text-center">View/Edit/Delete Goal</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,18 +86,18 @@ const GoalsTable = (props) => {
                                 day: 'numeric'
                             })}
                         </td>
-                        <td className="text-center space-x-2">
-                            <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleView(goal._id, user)}>View</button>
-                            <button className="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleEdit(goal._id, user)}>Edit</button>
-                            <button className="bg-accent-medium hover:bg-accent-light text-black hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleDelete(goal._id, user)}>Delete</button>
-
-                        </td>
                         <td className="text-center">
                             <input
                                 type="checkbox"
                                 checked={goal.completed}
                                 onChange={() => handleGoalCompletion(index, user)}
                             />
+                        </td>
+                        <td className="text-center space-x-2">
+                            <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleView(goal._id, user)}>View</button>
+                            <button className="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleEdit(goal._id, user)}>Edit</button>
+                            <button className="bg-accent-medium hover:bg-accent-light text-black hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleDelete(goal._id, user)}>Delete</button>
+
                         </td>
                     </tr>
                 ))}
