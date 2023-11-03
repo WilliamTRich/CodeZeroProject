@@ -20,6 +20,7 @@ import EditGoal  from './pages/goal/editGoal.jsx';
 import ViewGoalPage from './pages/goal/viewGoal.jsx';
 
 import {Nav} from './components/Nav.jsx';
+import ViewWorkoutPage from './pages/workout/viewWorkout.jsx';
 
 const routes = () => [
   {
@@ -94,6 +95,18 @@ const routes = () => [
     {
         path: 'viewgoal/:goalId',
         element: <ViewGoalPage />,
+    },
+    {
+        path: 'addworkout',
+        element: <AddWorkout/>
+    },
+    {
+        path: 'editworkout/:workoutId',
+        element: <EditWorkout/>
+    },
+    {
+        path: 'viewworkout/:workoutId',
+        element: <ViewWorkoutPage/>
     }
 ];
 

@@ -17,8 +17,6 @@ const Workout = (props) => {
             {user ? (
                 <div className={'flex bg-background h-screen w-screen'}>
                     <Nav user={user} />
-                    {/* <Nav /> */}
-
                     <div className="h-screen w-screen flex flex-col p-4 rounded-lg shadow-lg bg-background text-white relative">
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
                             Goals
@@ -33,9 +31,7 @@ const Workout = (props) => {
                         <div className="flex flex-col items-end">
                             <div className="w-full bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
                                 <AllGoals />
-
                             </div>
-
                         </div>
                     </div>
                 </div>

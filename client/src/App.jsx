@@ -23,14 +23,12 @@ function App() {
     axios
       .get(`http://localhost:8000/api/users/validate`, setHeader)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
         setVerified(true);
       })
       .catch((e) => {
         setVerified(false);
         console.log(e);
-        // navigate('/');
       });
   }, [ localStorage]);
 

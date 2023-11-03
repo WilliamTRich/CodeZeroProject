@@ -33,7 +33,6 @@ const EditGoal = (props) => {
             })
             .catch((err) => {
                 console.log(err);
-                // useNavigate('/errors')
             })
     }, [user._id, goalId])
 
@@ -71,7 +70,7 @@ const EditGoal = (props) => {
                 className="flex flex-col w-full max-w-md gap-4"
             >
                 <div className="mb-3">
-                    <label className="text-primary mr-2">Goal Title</label>
+                    <label className="text-primary mr-2">Goal Title: </label>
                     <input
                         onChange={onChangeHandler}
                         name="goalTitle"
@@ -80,7 +79,7 @@ const EditGoal = (props) => {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="text-primary mr-2">Goal End Date</label>
+                    <label className="text-primary mr-2">Goal End Date: </label>
                     <input
                         onChange={onChangeHandler}
                         name="goalEndDate"
@@ -90,7 +89,7 @@ const EditGoal = (props) => {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="text-primary mr-2">Goal Steps</label>
+                    <label className="text-primary mr-2">Goal Steps: </label>
                     <input
                         onChange={onChangeHandler}
                         name="goalSteps"
