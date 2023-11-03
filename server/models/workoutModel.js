@@ -17,7 +17,7 @@ const WorkoutSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    selfLead: {
+    selfLed: {
         type: Boolean,
         default: false
     },

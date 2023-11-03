@@ -23,7 +23,6 @@ function App() {
     axios
       .get(`http://localhost:8000/api/users/validate`, setHeader)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
         setVerified(true);
       })
@@ -32,14 +31,14 @@ function App() {
         console.log(e);
         navigate('/');
       });
-  }, [ user,localStorage]);
+  }, [ localStorage]);
 
 
   useEffect(() => {
-    if (!verified) {
+    if (!verified && !['/client-login', '/client-register', '/trainer-login','/trainer-register'].includes(window.location.pathname)) {
         navigate('/');
     }
-}, [user,navigate]);
+}, [verified, navigate]);
 
 
   const routing = useRoutes(routes());

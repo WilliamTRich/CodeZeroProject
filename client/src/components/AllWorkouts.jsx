@@ -13,23 +13,27 @@ const AllWorkouts = (props) => {
     useEffect(() => {
         axios.get(`http://localhost:8000/api/workouts/${user._id}`)
             .then(res => {
-                // console.log(res.data)
                 setWorkouts(res.data)
             })
             .catch(err => console.error(err))
     }, [user._id])
 
+    const handleView = (workoutId, user) => {
+        navigate(`/viewworkout/${workoutId}`)
+        console.log('View workout id:', workoutId);
+    };
+
     const handleEdit = (workoutId) => {
-        navigate('/editworkout')
+        navigate(`/editworkout/${workoutId}`)
         console.log('Edit workout id:', workoutId);
     };
 
-    const handleDelete = (workoutId) => {
+    const handleDelete = (workoutId, user) => {
         console.log('Delete workout id:', workoutId);
-        axios.delete(`http://localhost:8000/api/workouts/${deletedId}`)
+        axios.delete(`http://localhost:8000/api/workouts/${user._id}/${workoutId}`)
         .then(res => {
             console.log(res)
-            removeFromDom(deletedId)
+            removeFromDom(workoutId)
         })
         .catch(err => {
             console.log(err)
@@ -40,30 +44,44 @@ const AllWorkouts = (props) => {
         setWorkouts(workouts.filter(workout => deletedId !== workout._id))
     }
 
+    const formattedDate = new Date(workouts.workoutDate).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+
+
     return (
         <table className="w-full">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Live</th>
-                    <th>Self Lead</th>
-                    <th>View/Edit/Delete Workout</th>
+                    <th className="text-center">Title</th>
+                    <th className="text-center">Date</th>
+                    <th className="text-center">Time</th>
+                    <th className="text-center">Live</th>
+                    <th className="text-center">Self Led</th>
+                    <th className="text-center">View/Edit/Delete Workout</th>
                 </tr>
             </thead>
             <tbody>
                 {workouts.map((workout) => (
                     <tr key={workout._id}>
-                        <td>{workout.workoutTitle}</td>
-                        <td>{new Date(workout.workoutDate).toLocaleDateString()}</td>
-                        <td>{workout.workoutTime}</td>
-                        <td>{workout.live ? 'Yes' : 'No'}</td>
-                        <td>{workout.selfLead ? 'Yes' : 'No'}</td>
-                        <td>
-                            <button onClick={() => handleView(meal._id)}>View</button>
-                            <button onClick={() => handleEdit(meal._id)}>Edit</button>
-                            <button onClick={() => handleDelete(meal._id)}>Delete</button>
+                        <td  className="text-center">{workout.workoutTitle}</td>
+                        <td className="text-center">                            
+                        {new Date(workout.workoutDate).toLocaleDateString(undefined, {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                            })}
+                        </td>
+                        <td className="text-center">{workout.workoutTime}</td>
+                        <td className="text-center">{workout.live ? 'Yes' : 'No'}</td>
+                        <td className="text-center">{workout.selfLed ? 'Yes' : 'No'}</td>
+                        <td className="text-center space-x-2">
+                            <button className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleView(workout._id, user)}>View</button>
+                            <button className="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleEdit(workout._id, user)}>Edit</button>
+                            <button className="bg-accent-medium hover:bg-accent-light text-black hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onClick={() => handleDelete(workout._id, user)}>Delete</button>
+
                         </td>
                     </tr>
                 ))}
