@@ -86,7 +86,16 @@ module.exports.updateGoal = (req, res) => {
 };
 
 module.exports.deleteGoal = (req, res) => {
-    Goal.findOneAndDelete({ _id: req.params.goalId, user: req.params.userId })
+    const { userId, goalId } = req.params;
+    console.log('I am in the delete goal controller', userId, goalId);
+    Goal.findOneAndDelete({
+        _id: goalId,
+        $or: [{ client: userId }, { trainer: userId }],
+    })
+        .populate({
+            path: 'user',
+            options: { strictPopulate: false },
+        })
         .then((deletedGoal) => {
             if (!deletedGoal) {
                 return res.status(404).json({ error: 'Goal not found' });
@@ -95,3 +104,22 @@ module.exports.deleteGoal = (req, res) => {
         })
         .catch((error) => res.status(500).json({ error: error.message }));
 };
+
+// module.exports.getGoalById = (req, res) => {
+//     const { userId, goalId } = req.params;
+//     Goal.findOne({
+//         _id: goalId,
+//         $or: [{ client: userId }, { trainer: userId }],
+//     })
+//         .populate({
+//             path: 'user',
+//             options: { strictPopulate: false },
+//         })
+//         .then((goal) => {
+//             if (!goal) {
+//                 return res.status(404).json({ error: 'Goal not found' });
+//             }
+//             res.json(goal);
+//         })
+//         .catch((error) => res.status(500).json({ error: error.message }));
+// };
