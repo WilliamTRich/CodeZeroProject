@@ -17,11 +17,17 @@ const GoalsTable = (props) => {
             .catch(err => console.error(err))
     }, [user._id])
 
+    const handleView = (goalId, user) => {
+        
+        navigate(`/viewgoal/${goalId}`)
+        console.log('View goal id:', goalId);
+    };
 
     const handleEdit = (goalId, user) => {
         navigate(`/editgoal/${goalId}`)
         console.log('Edit goal id:', goalId);
     };
+
 
     const handleDelete = (goalId, user) => {
         console.log('Delete goal id:', goalId);
