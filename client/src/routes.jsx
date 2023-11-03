@@ -17,6 +17,7 @@ import  AddMeal  from './pages/meal/addMeal.jsx';
 import  EditMeal  from './pages/meal/editMeal.jsx';
 import  AddGoal  from './pages/goal/addGoal.jsx';
 import EditGoal  from './pages/goal/editGoal.jsx';
+import ViewGoalPage from './pages/goal/viewGoal.jsx';
 
 import {Nav} from './components/Nav.jsx';
 
@@ -89,6 +90,10 @@ const routes = () => [
     {
         path: 'editgoal/:goalId',
         element: <EditGoal />,
+    },
+    {
+        path: 'viewgoal/:goalId',
+        element: <ViewGoalPage />,
     }
 ];
 

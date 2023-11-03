@@ -6,7 +6,6 @@ import axios from 'axios';
 //Components
 import { Nav } from '../../components/Nav.jsx';
 import { UserContext } from '../../contexts/UserContext.jsx';
-
 import ViewGoal from '../../components/ViewGoal'
 
 const ViewGoalPage = (props) => {
