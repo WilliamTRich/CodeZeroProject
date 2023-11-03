@@ -10,11 +10,26 @@ const EditGoal = (props) => {
     const { goalId } = useParams();
     const [updateGoal, setUpdateGoal] = useState({});
 
+    const formatDate = (date) => {
+        const year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        month = month < 10 ? `0${month}` : month;
+        day = day < 10 ? `0${day}` : day;
+
+        const formattedDate = `${year}-${month}-${day}`;
+        return formattedDate;
+    };
+
+
+
     useEffect(() => {
         axios.get(`http://localhost:8000/api/goals/${user._id}/${goalId}`)
             .then((res) => {
-                console.log(res.data);
-                setUpdateGoal(res.data);
+                const formattedDate = formatDate(new Date(res.data.goalEndDate));
+                const updatedGoalData = { ...res.data, goalEndDate: formattedDate };
+                setUpdateGoal(updatedGoalData);
             })
             .catch((err) => {
                 console.log(err);
@@ -24,16 +39,22 @@ const EditGoal = (props) => {
 
     const onChangeHandler = (e) => {
         let newStateObject = { ...updateGoal };
-        newStateObject[e.target.name] = e.target.value
+        if (e.target.name === 'goalEndDate') {
+            const selectedDate = new Date(e.target.value);
+            const formattedDate = formatDate(selectedDate);
+            newStateObject[e.target.name] = formattedDate;
+        } else {
+            newStateObject[e.target.name] = e.target.value;
+        }
         setUpdateGoal(newStateObject);
-    }
+    };
 
     const updateSubmitHandler = (e) => {
         e.preventDefault();
         axios.patch(`http://localhost:8000/api/goals/${user._id}/${goalId}`, updateGoal)
             .then((res) => {
                 console.log(res.data);
-                navigate('/goal'); 
+                navigate('/goal');
             })
             .catch((err) => {
                 console.log(err);
