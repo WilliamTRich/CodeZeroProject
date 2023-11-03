@@ -15,7 +15,7 @@ const MainScreen = () => {
                     Welcome to Pulse360, your ultimate fitness companion!
                     Whether you're a seasoned athlete or just starting your
                     wellness journey, our app is designed to empower you to
-                    achieve your fitness goals and lead a healthier lifestyle.
+                    achieve your fitness goals and led a healthier lifestyle.
                     With personalized workout plans, comprehensive tracking
                     tools, and a supportive community, Pulse360 is here to
                     guide you every step of the way towards a fitter, stronger,

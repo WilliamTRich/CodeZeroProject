@@ -17,8 +17,10 @@ import  AddMeal  from './pages/meal/addMeal.jsx';
 import  EditMeal  from './pages/meal/editMeal.jsx';
 import  AddGoal  from './pages/goal/addGoal.jsx';
 import EditGoal  from './pages/goal/editGoal.jsx';
+import ViewGoalPage from './pages/goal/viewGoal.jsx';
 
 import {Nav} from './components/Nav.jsx';
+import ViewWorkoutPage from './pages/workout/viewWorkout.jsx';
 
 const routes = () => [
   {
@@ -87,8 +89,24 @@ const routes = () => [
         element: <AddGoal />,
     },
     {
-        path: 'editgoal',
+        path: 'editgoal/:goalId',
         element: <EditGoal />,
+    },
+    {
+        path: 'viewgoal/:goalId',
+        element: <ViewGoalPage />,
+    },
+    {
+        path: 'addworkout',
+        element: <AddWorkout/>
+    },
+    {
+        path: 'editworkout/:workoutId',
+        element: <EditWorkout/>
+    },
+    {
+        path: 'viewworkout/:workoutId',
+        element: <ViewWorkoutPage/>
     }
 ];
 

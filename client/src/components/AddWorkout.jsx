@@ -10,23 +10,54 @@ const AddWorkout = (props) => {
     const [workoutTitle, setWorkoutTitle] = useState("");
     const [workoutDate, setWorkoutDate] = useState("");
     const [workoutTime, setWorkoutTime] = useState("");
-    const [live, setLive] = useState("");
-    const [selfLead, setSelfLead] = useState("");
+    const [live, setLive] = useState(false);
+    const [selfLed, setSelfLed] = useState(false);
     const [notes, setNotes] = useState("");
     const { user } = useContext(UserContext);
 
-    
+    const handleLiveChange = (e) => {
+        setLive(e.target.value === 'true');
+    };
+
+    const handleSelfLeadChange = (e) => {
+        setSelfLed(e.target.value === 'true');
+    };
+
     const newSubmitHandler = (e) => {
         e.preventDefault();
-        const newWorkout = {
-            workoutTitle,
-            workoutDate,
-            workoutTime,
-            live,
-            selfLead,
-            notes,
-        };
-        axios.post(`http://localhost:8000/api/workouts/${user._id}`, newWorkout, {
+
+        const userId = user._id
+        let newWorkout;
+
+        if (user.userType === "client") {
+            console.log("user type is client")
+            newWorkout = {
+                workoutTitle,
+                workoutDate,
+                workoutTime,
+                live,
+                selfLed,
+                notes,
+                client: user._id,
+            }
+            console.log(newWorkout);
+        } else if (user.userType === "trainer") {
+            console.log("user type is trainer")
+            newWorkout = {
+                workoutTitle,
+                workoutDate,
+                workoutTime,
+                live,
+                selfLed,
+                notes,
+                trainer: user._id,
+            };
+        } else {
+            console.error("Invalid userType:", user.userType);
+            return;
+        }
+
+        axios.post(`http://localhost:8000/api/workouts/${userId}`, newWorkout, {
             withCredentials: true
         })
             .then((res) => {
@@ -37,6 +68,7 @@ const AddWorkout = (props) => {
                 console.error("Error creating goal:", error);
             });
     }
+
     return (
         <div className="flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl">
             <h1 className="text-primary text-5xl font-bold">Add Workout</h1>
@@ -48,7 +80,7 @@ const AddWorkout = (props) => {
                     className="flex flex-col w-full max-w-md gap-4"
                 >
                     <div className="mb-3">
-                        <label className="text-primary mr-2">Workout Title</label>
+                        <label className="text-primary mr-2">Workout Title: </label>
 
                         <input
                             onChange={(e) => setWorkoutTitle(e.target.value)}
@@ -58,53 +90,64 @@ const AddWorkout = (props) => {
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="text-primary mr-2">Workout Date</label>
+                        <label className="text-primary mr-2">Workout Date: </label>
 
                         <input
                             onChange={(e) => setWorkoutDate(e.target.value)}
                             name="date"
                             value={workoutDate}
+                            type="date"
+
                             className="border-primary border-2 rounded p-2 text-black"
                         />
                     </div>
                     <div className="mb-3">
-                        <label className="text-primary mr-2">Workout Time</label>
+                        <label className="text-primary mr-2">Workout Time: </label>
 
                         <input
                             onChange={(e) => setWorkoutTime(e.target.value)}
-                            name="location"
+                            name="time"
                             value={workoutTime}
+                            type="time"
                             className="border-primary border-2 rounded p-2 text-black"
                         />
                     </div>
                     <div className="mb-3">
                         <label className="text-primary mr-2">Live?</label>
-
-                        <input
-                            onChange={(e) => setLive(e.target.value)}
-                            name="live"
-                            value={live}
+                        <select
+                            onChange={handleLiveChange}
+                            value={live.toString()} name="live"
                             className="border-primary border-2 rounded p-2 text-black"
-                        />
+                        >
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+
                     </div>
                     <div className="mb-3">
-                        <label className="text-primary mr-2">Self Lead?</label>
-
-                        <input
-                            onChange={(e) => setSelfLead(e.target.value)}
-                            name="self"
-                            value={selfLead}
+                        <label className="text-primary mr-2">Self Led?</label>
+                        <select
+                            onChange={handleSelfLeadChange}
+                            value={selfLed.toString()}
+                            name="self led"
                             className="border-primary border-2 rounded p-2 text-black"
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label className="text-primary mr-2">Itinerary</label>
+                        >
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
 
-                        <input
+                    </div>
+                    <div className="mb-3 flex">
+                        <label className="text-primary mr-2">Notes/Instructions: </label>
+
+                        <textarea
                             onChange={(e) => setNotes(e.target.value)}
                             name="notes"
                             value={notes}
+                            type="text"
                             className="border-primary border-2 rounded p-2 text-black"
+                            rows="5"
+
                         />
                     </div>
                     <button

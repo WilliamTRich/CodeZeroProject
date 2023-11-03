@@ -26,6 +26,12 @@ require('./config/mongooseConfig');
 require('./routes/clientRoutes')(app);
 require('./routes/trainerRoutes')(app);
 require('./routes/associationRoutes')(app);
+require('./routes/goalRoutes')(app);
+require('./routes/mealRoutes')(app);
+require('./routes/workoutRoutes')(app);
+
+// require('./routes/eventRoutes')(app);
+require('./routes/messageRoutes')(app);
 
 const server = app.listen(port, () => {
     console.log(`Listening on port: ${port}`);
