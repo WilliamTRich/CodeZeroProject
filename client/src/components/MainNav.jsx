@@ -9,11 +9,11 @@ const MainNav = () => {
         Pulse360
       </h1>
       <div className={'flex items-center space-x-4'}>
-        <button
+        <button 
           className={
             'px-6 py-2 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-highlight text-background border-background border-2 rounded-lg hover:bg-secondary hover:text-accent-extralight'
           }
-          onClick={() => navigate('/client-login')}
+          onClick={() =>navigate('/client-login')}
         >
           Log in as Client
         </button>
