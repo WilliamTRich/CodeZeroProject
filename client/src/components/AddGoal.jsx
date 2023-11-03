@@ -65,7 +65,7 @@ const AddGoal = (props) => {
                 className="flex flex-col w-full max-w-md gap-4"
             >
                 <div className="mb-3">
-                    <label className="text-primary mr-2">Goal Title</label>
+                    <label className="text-primary mr-2">Goal Title: </label>
                     <input
                         onChange={(e) => setGoalTitle(e.target.value)}
                         name="title"
@@ -74,7 +74,7 @@ const AddGoal = (props) => {
                     />
                 </div>
                 <div className="mb-3">
-                    <label className="text-primary mr-2">Goal End Date</label>
+                    <label className="text-primary mr-2">Goal End Date: </label>
                     <input
                         onChange={(e) => setGoalEndDate(e.target.value)}
                         name="date"
@@ -83,14 +83,16 @@ const AddGoal = (props) => {
                         className="border-primary border-2 rounded p-2 text-black"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Goal Steps</label>
-                    <input
-                        onChange={(e) => setGoalSteps(e.target.value)}
-                        name="goalSteps"
-                        value={goalSteps}
-                        className="border-primary border-2 rounded p-2 text-black"
-                    />
+                <div className="mb-3 flex">
+                    <label className="text-primary mr-2">Steps to Achieve Goal: </label>
+                    <textarea
+                            onChange={(e) => setNotes(e.target.value)}
+                            name="goalSteps"
+                            value={goalSteps}
+                            type="text"
+                            className="border-primary border-2 rounded p-2 text-black"
+                            rows="5"
+                        />
                 </div>
                 <div className="mb-3">
                     <label className="text-primary mr-2">Completed?</label>
