@@ -30,7 +30,7 @@ function App() {
       .catch((e) => {
         setVerified(false);
         console.log(e);
-        // navigate('/');
+        navigate('/');
       });
   }, [ user,localStorage]);
 
@@ -39,7 +39,7 @@ function App() {
     if (!verified) {
         navigate('/');
     }
-}, [user, navigate]);
+}, [user,navigate]);
 
 
   const routing = useRoutes(routes());
