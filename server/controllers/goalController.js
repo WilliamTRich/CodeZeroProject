@@ -9,13 +9,10 @@ require('dotenv').config();
 const Goal = require('../models/goalModel');
 
 module.exports.getAllGoals = (req, res) => {
-    console.log('I am in the start of the all goals controller');
     const userId = req.params.userId;
-
     if (!mongoose.Types.ObjectId.isValid(userId)) {
         return res.status(400).json({ message: 'Invalid user ID' });
     }
-
     Goal.find({
         $or: [{ client: userId }, { trainer: userId }],
     })
@@ -87,7 +84,6 @@ module.exports.updateGoal = (req, res) => {
 
 module.exports.deleteGoal = (req, res) => {
     const { userId, goalId } = req.params;
-    console.log('I am in the delete goal controller', userId, goalId);
     Goal.findOneAndDelete({
         _id: goalId,
         $or: [{ client: userId }, { trainer: userId }],
@@ -104,22 +100,3 @@ module.exports.deleteGoal = (req, res) => {
         })
         .catch((error) => res.status(500).json({ error: error.message }));
 };
-
-// module.exports.getGoalById = (req, res) => {
-//     const { userId, goalId } = req.params;
-//     Goal.findOne({
-//         _id: goalId,
-//         $or: [{ client: userId }, { trainer: userId }],
-//     })
-//         .populate({
-//             path: 'user',
-//             options: { strictPopulate: false },
-//         })
-//         .then((goal) => {
-//             if (!goal) {
-//                 return res.status(404).json({ error: 'Goal not found' });
-//             }
-//             res.json(goal);
-//         })
-//         .catch((error) => res.status(500).json({ error: error.message }));
-// };

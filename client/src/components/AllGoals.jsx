@@ -9,7 +9,6 @@ const GoalsTable = (props) => {
     const { user } = useContext(UserContext);
 
     useEffect(() => {
-        console.log(user._id)
         axios.get(`http://localhost:8000/api/goals/${user._id}`)
             .then(res => {
                 setGoals(res.data)
@@ -18,7 +17,6 @@ const GoalsTable = (props) => {
     }, [user._id])
 
     const handleView = (goalId, user) => {
-        
         navigate(`/viewgoal/${goalId}`)
         console.log('View goal id:', goalId);
     };

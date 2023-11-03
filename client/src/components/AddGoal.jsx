@@ -12,7 +12,6 @@ const AddGoal = (props) => {
     const [completed, setCompleted] = useState(false);
     const { user } = useContext(UserContext);
 
-    console.log(user)
 
     const newSubmitHandler = (e) => {
         e.preventDefault();
@@ -42,7 +41,6 @@ const AddGoal = (props) => {
             console.error("Invalid userType:", user.userType);
             return; 
         }
-        console.log(newGoal)
     
         axios.post(`http://localhost:8000/api/goals/${userId}`, newGoal, {
             withCredentials: true

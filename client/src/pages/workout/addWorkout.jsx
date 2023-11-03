@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Nav } from '../../components/Nav.jsx';
 import { UserContext } from '../../contexts/UserContext.jsx';
 import AddWorkout from '../../components/AddWorkout'
+import BackButton from '../../components/BackButton.jsx';
 
 const AddWorkoutPage = (props) => {
     const { user } = useContext(UserContext);
@@ -16,8 +17,6 @@ const AddWorkoutPage = (props) => {
             {user ? (
                 <div className={'flex bg-background h-screen w-screen'}>
                     <Nav user={user} />
-                    {/* <Nav  /> */}
-
                     <div className="h-screen w-screen flex flex-col p-4 rounded-lg shadow-lg bg-background text-white relative">
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
                             Add Workouts
@@ -26,10 +25,9 @@ const AddWorkoutPage = (props) => {
                         <div className="flex flex-col items-center">
                             <div className="w-full md:w-[80%] bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
                                 <AddWorkout />
-
                             </div>
-
                         </div>
+                        <BackButton/>
                     </div>
                 </div>
             ) : (
