@@ -26,15 +26,20 @@ const Form = (props) => {
 
   return (
     <FormProvider {...methods}>
- <form
+      <form
         onSubmit={(e) => e.preventDefault()}
         noValidate
         autoComplete={'off'}
         className={'flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl'}
       >
         <h1 className={'text-primary text-5xl font-bold'}>{method}</h1>
-        {errors && <p className={'text-red-400'}>{errors[0]}</p>}
-        {method === 'Register' ? (
+        {errors && errors.length > 0 && (
+          <div className={'text-red-400'}>
+            {errors.map((error, index) => (
+              <p key={index}>{error}</p>
+            ))}
+          </div>
+        )}        {method === 'Register' ? (
           <>
             <FormInput {...firstname_validation} />
             <FormInput {...lastname_validation} />

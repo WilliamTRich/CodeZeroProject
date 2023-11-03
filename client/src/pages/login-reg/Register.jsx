@@ -16,6 +16,7 @@ const Register = (props) => {
   const navigate = useNavigate();
 
   const registerUser = (user) => {
+    console.log(" I am in the register user")
     axios
       .post(`http://localhost:8000/api/${userType}s`, user)
       .then((res) => {

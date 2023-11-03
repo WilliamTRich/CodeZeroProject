@@ -36,10 +36,8 @@ export const Nav = (props) => {
 
   const logoutUser = () => {
     console.log('Logging out...');
-    console.log(localStorage.getItem('AccessToken'))
     setUser({})
     navigate('/')
-    console.log(localStorage.getItem('AccessToken'))
   };
 
   return (
