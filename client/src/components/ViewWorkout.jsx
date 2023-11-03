@@ -32,39 +32,37 @@ const ViewWorkout = (props) => {
 
     return (
         <div className="flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl">
-            <div className="flex items-center">            
+            <div className="flex items-center">
                 <label className="text-primary text-lg font-semibold p-2">Workout Title:</label>
                 <p>{workout.workoutTitle}</p>
             </div>
-            <div className="flex items-center">            
+            <div className="flex items-center">
                 <label className="text-primary text-lg font-semibold p-2">Workout Date:</label>
                 <p>
-                    {/* {workout.workoutDate} */}
                     {new Date(workout.workoutDate).toLocaleDateString(undefined, {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric'
-                            })}                
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    })}
                 </p>
             </div>
-            <div className="flex flex-col items-center">            
+            <div className="flex flex-col items-center">
                 <label className="text-primary text-lg font-semibold">Workout Time:</label>
                 <p>{workout && convertToAmPmFormat(workout.workoutTime)}</p>
             </div>
-            <div className="flex flex-col items-center">            
+            <div className="flex flex-col items-center">
                 <label className="text-primary text-lg font-semibold">Live?</label>
                 <p>{workout.live ? 'Yes' : 'No'}</p>
-            </div>            
-            <div className="flex flex-col items-center">            
+            </div>
+            <div className="flex flex-col items-center">
                 <label className="text-primary text-lg font-semibold">Self Led?</label>
                 <p>{workout.selfLed ? 'Yes' : 'No'}</p>
             </div>
-            <div className="flex flex-col items-center">            
+            <div className="flex flex-col items-center">
                 <label className="text-primary text-lg font-semibold">Notes/Instructions: </label>
                 <p>{workout.notes}</p>
             </div>
         </div>
-
     );
 };
 

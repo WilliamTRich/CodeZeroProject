@@ -23,7 +23,6 @@ const EditGoal = (props) => {
     };
 
 
-
     useEffect(() => {
         axios.get(`http://localhost:8000/api/goals/${user._id}/${goalId}`)
             .then((res) => {
@@ -108,7 +107,6 @@ const EditGoal = (props) => {
                         className="border-primary border-2 rounded p-2 text-black"
                     />
                 </div>
-
                 <button
                     className="bg-highlight text-background py-2 px-4 rounded-lg hover:bg-secondary hover:text-accent-extralight transition duration-300"
                     type="submit"

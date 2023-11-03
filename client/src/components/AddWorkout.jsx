@@ -81,7 +81,6 @@ const AddWorkout = (props) => {
                 >
                     <div className="mb-3">
                         <label className="text-primary mr-2">Workout Title: </label>
-
                         <input
                             onChange={(e) => setWorkoutTitle(e.target.value)}
                             name="title"
@@ -91,19 +90,16 @@ const AddWorkout = (props) => {
                     </div>
                     <div className="mb-3">
                         <label className="text-primary mr-2">Workout Date: </label>
-
                         <input
                             onChange={(e) => setWorkoutDate(e.target.value)}
                             name="date"
                             value={workoutDate}
                             type="date"
-
                             className="border-primary border-2 rounded p-2 text-black"
                         />
                     </div>
                     <div className="mb-3">
                         <label className="text-primary mr-2">Workout Time: </label>
-
                         <input
                             onChange={(e) => setWorkoutTime(e.target.value)}
                             name="time"
@@ -122,7 +118,6 @@ const AddWorkout = (props) => {
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
-
                     </div>
                     <div className="mb-3">
                         <label className="text-primary mr-2">Self Led?</label>
@@ -135,11 +130,9 @@ const AddWorkout = (props) => {
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
-
                     </div>
                     <div className="mb-3 flex">
                         <label className="text-primary mr-2">Notes/Instructions: </label>
-
                         <textarea
                             onChange={(e) => setNotes(e.target.value)}
                             name="notes"
@@ -147,7 +140,6 @@ const AddWorkout = (props) => {
                             type="text"
                             className="border-primary border-2 rounded p-2 text-black"
                             rows="5"
-
                         />
                     </div>
                     <button
@@ -156,11 +148,7 @@ const AddWorkout = (props) => {
                     >Add Workout</button>
                 </form>
             </div>
-
-
         </div>
-
-
     )
 }
 
