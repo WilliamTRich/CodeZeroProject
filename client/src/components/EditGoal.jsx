@@ -88,13 +88,15 @@ const EditGoal = (props) => {
                         className="border-primary border-2 rounded p-2 text-black"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Goal Steps: </label>
-                    <input
+                <div className="mb-3 flex">
+                    <label className="text-primary mr-2">Steps to Achieve Goal: </label>
+                    <textarea
                         onChange={onChangeHandler}
-                        name="goalSteps"
+                        name="notes"
                         value={updateGoal.goalSteps || ''}
+                        type="text"
                         className="border-primary border-2 rounded p-2 text-black"
+                        rows="5"
                     />
                 </div>
                 <div className="mb-3">

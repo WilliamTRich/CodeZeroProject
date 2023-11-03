@@ -61,7 +61,7 @@ const ViewWorkout = (props) => {
             </div>
             <div className="flex flex-col items-center">            
                 <label className="text-primary text-lg font-semibold">Notes/Instructions: </label>
-                <p>{workout.notes ? 'Yes' : 'No'}</p>
+                <p>{workout.notes}</p>
             </div>
         </div>
 
