@@ -23,9 +23,9 @@ const MainScreen = () => {
                 <img
                     src={'splashscreen-main.avif'}
                     alt={'Splash screen picture.'}
-                    className={'h-[40em] w-[28em] md:w-[40em] object-cover border-highlight border-4 rounded-2xl mb-6 md:mb-0 md:h-full'}
+                    className={'h-[20em] w-[14em] md:w-[30em] object-cover border-highlight border-4 rounded-2xl mb-6 md:mb-0 md:h-full'}
                 />
-                <div className={'md:w-[28em] text-lg sm:text-l md:text-xl lg:text-2xl xl:text-3xl text-primary text-center md:text-left overflow-hidden'}>
+                <div className={'md:w-[28em] text-base sm:text-sm md:text-base lg:text-lg xl:text-xl text-primary text-center md:text-left overflow-hidden'}>
                     <h2 className={`text-center text-3xl md:text-4xl font-bold mb-4 fade-in ${isVisible ? 'visible' : ''}`}>
                         Welcome to Pulse360
                     </h2>
@@ -51,7 +51,7 @@ const MainScreen = () => {
                 </button>
                 <button
                     className={
-                        `px-6 py-2 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-highlight text-background border-background border-2 rounded-lg hover:bg-secondary hover:text-accent-extralight fade-in ${isVisible ? 'visible' : ''}`
+                        `px-6 py-2 mr-10 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-highlight text-background border-background border-2 rounded-lg hover:bg-secondary hover:text-accent-extralight fade-in ${isVisible ? 'visible' : ''}`
                     }
                     onClick={() => navigate('/trainer-login')}
                 >

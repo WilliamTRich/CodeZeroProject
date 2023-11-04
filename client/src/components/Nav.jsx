@@ -41,16 +41,19 @@ export const Nav = (props) => {
   };
 
   return (
-    <div className="flex h-screen w-56 flex-col justify-evenly bg-accent-dark">
+    <div className="flex h-screen w-56 flex-col justify-evenly items-center bg-accent-dark">
       <div>
         <img
           src={'pulse360Logo.png'}
           alt={'pulse360 logo and tag: full cycle fitness'}
-          className={' w-[100%] object-cover rounded-2xl  md:mb-0 md:h-full'}
-        />
+          className={'w-full h-auto object-cover md:max-h-[9em]'}
+          />
       </div>
 
-      <img src="/user-icon.png" className="mx-auto h-32 w-32 justify-center" alt={'User icon'} />
+      <img
+        src="/user-icon.png"
+        className="mx-auto h-16 w-16 md:h-16 md:w-16 lg:h-20 lg:w-20 xl:h-24 xl:w-24 justify-center"
+        alt={'User icon'} />
       <div className="flex h-96 w-full flex-col items-center justify-around text-xl text-primary">
         Hi, {user.firstName}!
         <button

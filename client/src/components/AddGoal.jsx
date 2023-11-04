@@ -86,7 +86,7 @@ const AddGoal = (props) => {
                 <div className="mb-3 flex">
                     <label className="text-primary mr-2">Steps to Achieve Goal: </label>
                     <textarea
-                            onChange={(e) => setNotes(e.target.value)}
+                            onChange={(e) => setGoalSteps(e.target.value)}
                             name="goalSteps"
                             value={goalSteps}
                             type="text"
