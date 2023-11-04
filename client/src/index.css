@@ -9,6 +9,64 @@ body {
     min-height: 100vh;
   }
 
+  @keyframes fadeinGrow {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1); 
+    }
+  }
+
+  @keyframes fadeInGrowShrink {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1); 
+    }
+  }
+  
+  .fade-in {
+    opacity: 0;
+    animation: fadeinGrow 2s ease-in-out forwards; 
+  }
+
+  .fade-in:nth-child(1) {
+    animation-delay: 1s; 
+  }
+  
+  .fade-in:nth-child(2) {
+    animation-delay: 2.5s; 
+  }
+  
+  .fade-in:nth-child(3) {
+    animation-delay: 4s; 
+  }
+
+  .fade-in-buttons button {
+    opacity: 0;
+    animation-delay: 4.5s; 
+    animation: fadeInGrowShrink 2s ease-in-out forwards; 
+  }
+  
+  .fade-in-buttons button:nth-child(1) {
+    animation-delay: 5.5s; 
+  }
+  
+  .fade-in-buttons button:nth-child(2) {
+    animation-delay: 6.5s;
+  }
+
+/* this is the styling for the calendar ************************************ */
   /*! TreeView's tailwind theme wise override definitions and variables */
 /* stylelint-disable */
 /* stylelint-disable property-no-vendor-prefix */

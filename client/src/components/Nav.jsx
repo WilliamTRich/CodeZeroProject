@@ -41,7 +41,15 @@ export const Nav = (props) => {
   };
 
   return (
-    <div className="flex h-screen w-56 flex-col justify-around bg-accent-dark">
+    <div className="flex h-screen w-56 flex-col justify-evenly bg-accent-dark">
+      <div>
+        <img
+          src={'pulse360Logo.png'}
+          alt={'pulse360 logo and tag: full cycle fitness'}
+          className={' w-[100%] object-cover rounded-2xl  md:mb-0 md:h-full'}
+        />
+      </div>
+
       <img src="/user-icon.png" className="mx-auto h-32 w-32 justify-center" alt={'User icon'} />
       <div className="flex h-96 w-full flex-col items-center justify-around text-xl text-primary">
         Hi, {user.firstName}!
@@ -77,7 +85,7 @@ export const Nav = (props) => {
         >
           Goals
         </button>
-                <button
+        <button
           className={
             'bg-secondary w-40 text-center text-accent-extralight py-2 rounded-lg hover:bg-secondary-dark duration-300 focus:outline-none'
           }

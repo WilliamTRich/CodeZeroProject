@@ -24,23 +24,22 @@ const Login = (props) => {
         setErrors([...err.response.data]);
       });
   };
-
   return (
     <div className={'flex flex-col md:flex-row h-screen bg-background'}>
-      <div className={'flex flex-col justify-center items-center w-full md:w-1/2 p-8'}>
+      <div className={'flex flex-col justify-center items-center w-full p-4 md:p-8'}>
         <Form handleSubmit={loginUser} method={'Login'} userType={userType} errorState={[errors, setErrors]} />
       </div>
-
-      <div className={'flex justify-center items-center w-full md:w-1/2 p-8'}>
+  
+      <div className={'flex justify-center items-center w-full '}>
         <img
           src={'splashscreen-login.avif'}
-          className={'h-auto w-full md:max-w-md border-highlight border-4 rounded-2xl'}
+          className={'h-auto w-full md:max-w-[75%] border-highlight border-4 rounded-2xl'}
           alt={'Woman enjoying yoga.'}
         />
       </div>
     </div>
-
   );
+  
 };
 
 export default Login;

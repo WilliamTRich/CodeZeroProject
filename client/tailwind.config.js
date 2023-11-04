@@ -20,7 +20,7 @@ module.exports = {
                     dark: '#217AA3',     // Darker sky blue
                 },
                 accent: {
-                    DEFAULT: '#333333',  // Dark gray (adjust as needed)
+                    DEFAULT: '#333333',  // Dark gray 
                     light: '#444444',    // Lighter gray
                     dark: '#222222',     // Darkest gray
                     mediumlight: '#aaaaaa',    // Lighter gray
