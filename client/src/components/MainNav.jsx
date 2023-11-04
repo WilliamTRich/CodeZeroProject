@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const MainNav = () => {
   const navigate = useNavigate();
   return (
-    <div className={'flex h-1/6 px-4 py-2 w-full justify-center items-center border-b-2 border-b-highlight'} >                       <img
+    <div className={'flex h-1/6 px-4 py-2 w-full justify-center items-center border-b-2 border-b-highlight'} >                       
+    <img
         src={'pulse360Logo.png'}
         alt={'pulse360 logo and tag: full cycle fitness'}
         className={'h-[10%] w-[10%] object-cover rounded-2xl mb-6 md:mb-0 md:h-full'}

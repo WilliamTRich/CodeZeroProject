@@ -6,6 +6,8 @@ import axios from 'axios';
 //Components
 import Form from '../../components/Form.jsx';
 import { UserContext } from '../../contexts/UserContext.jsx';
+import MainNav from '../../components/MainNav.jsx';
+
 
 const Register = (props) => {
   // eslint-disable-next-line react/prop-types
@@ -31,8 +33,10 @@ const Register = (props) => {
   };
 
   return (
-    <div className={'flex flex-col md:flex-row h-screen bg-background'}>
-      <div className={'flex flex-col justify-center items-center w-full md:w-1/2 p-8'}>
+    <div className={'flex flex-col min-h-screen w-screen bg-background'}>
+    <MainNav/>
+    <div className={'flex flex-col md:flex-row bg-background'}>
+    <div className={'flex flex-col justify-center items-center w-[50%] md:p-8'}>
 
         <Form handleSubmit={registerUser} method={'Register'} userType={userType} errorState={[errors, setErrors]} />
       </div>
@@ -40,9 +44,10 @@ const Register = (props) => {
 
         <img
           src={'abworkout.jpg'}
-          className={'h-5/6 w-auto border-highlight border-4 rounded-2xl'}
-          alt={'Woman enjoying yoga.'}
+          className={'h-auto w-full md:max-w-[75%] border-highlight border-4 rounded-2xl'}
+          alt={'Woman crushing ab day.'}
         />
+      </div>
       </div>
 
     </div>
