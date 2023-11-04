@@ -91,7 +91,7 @@ const EditGoal = (props) => {
                     <label className="text-primary mr-2">Steps to Achieve Goal: </label>
                     <textarea
                         onChange={onChangeHandler}
-                        name="notes"
+                        name="goalSteps"
                         value={updateGoal.goalSteps || ''}
                         type="text"
                         className="border-primary border-2 rounded p-2 text-black"

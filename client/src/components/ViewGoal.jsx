@@ -9,6 +9,12 @@ const ViewGoal = (props) => {
     const navigate = useNavigate();
     const { goalId } = useParams();
 
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = new Date(dateString).toLocaleDateString(undefined, options);
+        return formattedDate;
+    };
+
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/goals/${user._id}/${goalId}`)
@@ -32,7 +38,7 @@ const ViewGoal = (props) => {
             </div>
             <div className="flex items-center">            
                 <label className="text-primary text-lg font-semibold p-2">Goal End Date:</label>
-                <p>{goal.goalEndDate}</p>
+                <p>{formatDate(goal.goalEndDate)}</p>
             </div>
             <div className="flex flex-col items-center">            
                 <label className="text-primary text-lg font-semibold">Goal Steps:</label>
