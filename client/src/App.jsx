@@ -29,6 +29,7 @@ function App() {
       .catch((e) => {
         setVerified(false);
         console.log(e);
+        navigate('/');
       });
   }, [ localStorage]);
 
