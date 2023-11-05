@@ -44,5 +44,65 @@
     "jsxSingleQuote": false,
     "bracketSameLine": false,
     "endOfLine": "lf"
+  }, 
+  "ej2-react-schedule":{ 
+    "_from": "@syncfusion/ej2-react-schedule@*",
+    "_id": "@syncfusion/ej2-react-schedule@23.1.39",
+    "_inBundle": false,
+    "_integrity": "sha512-CZnFwnKS01L0OIJx61rRswC+5WYhwKWyi1zeQmmhlPeXpwiyLYmwejV55KI6VtmjAJS35HQpsVwUTM3/pl/M6w==",
+    "_location": "/@syncfusion/ej2-react-schedule",
+    "_phantomChildren": {},
+    "_requested": {
+      "type": "range",
+      "registry": true,
+      "raw": "@syncfusion/ej2-react-schedule@*",
+      "name": "@syncfusion/ej2-react-schedule",
+      "escapedName": "@syncfusion%2fej2-react-schedule",
+      "scope": "@syncfusion",
+      "rawSpec": "*",
+      "saveSpec": null,
+      "fetchSpec": "*"
+    },
+    "_requiredBy": [
+      "/"
+    ],
+    "_resolved": "https://nexus.syncfusion.com/repository/ej2-hotfix-new/@syncfusion/ej2-react-schedule/-/ej2-react-schedule-23.1.39.tgz",
+    "_shasum": "192def6cc4ea2e21f892614972f61badf114f06d",
+    "_spec": "@syncfusion/ej2-react-schedule@*",
+    "_where": "/jenkins/workspace/elease-automation_release_23.1.1/packages/included",
+    "author": {
+      "name": "Syncfusion Inc."
+    },
+    "bugs": {
+      "url": "https://github.com/syncfusion/ej2-react-ui-components/issues"
+    },
+    "bundleDependencies": false,
+    "dependencies": {
+      "@syncfusion/ej2-base": "~23.1.38",
+      "@syncfusion/ej2-react-base": "~23.1.36",
+      "@syncfusion/ej2-schedule": "23.1.40"
+    },
+    "deprecated": false,
+    "description": "Flexible scheduling library with more built-in features and enhanced customization options similar to outlook and google calendar, allowing the users to plan and manage their appointments with efficient data-binding support. for React",
+    "devDependencies": {},
+    "es2015": "dist/es6/ej2-react-schedule.es2015.js",
+    "homepage": "https://www.syncfusion.com/react-components",
+    "keywords": [
+      "react",
+      "reactjs",
+      "react-schedule",
+      "react-scheduler",
+      "ej2-react-scheduler"
+    ],
+    "license": "SEE LICENSE IN license",
+    "main": "./dist/ej2-react-schedule.umd.min.js",
+    "module": "./index.js",
+    "name": "@syncfusion/ej2-react-schedule",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/syncfusion/ej2-react-ui-components.git"
+    },
+    "version": "23.1.40",
+    "sideEffects": false
   }
 }

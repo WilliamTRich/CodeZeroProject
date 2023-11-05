@@ -7,6 +7,8 @@ import axios from 'axios';
 import routes from './routes.jsx';
 import { UserContext } from './contexts/UserContext.jsx';
 
+
+
 function App() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
