@@ -49,64 +49,64 @@ const EditMeal = (props) => {
                 autoComplete="off"
                 className="flex flex-col w-full max-w-md gap-4"
             >
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Meal Title</label>
+                    <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Meal Title: </label>
                     <input
                         onChange={onChangeHandler}
                         name="mealTitle"
                         value={updateMeal.mealTitle}
-                        className="border-primary border-2 rounded p-2 text-black"
-
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Meal Cook/Prep Time</label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Meal Cook/Prep Time: </label>
                     <input
                         onChange={onChangeHandler}
                         name="mealTime"
                         value={updateMeal.mealTime}
-                        className="border-primary border-2 rounded p-2 text-black"
-
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Calories</label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Calories: </label>
                     <input
                         onChange={onChangeHandler}
                         name="calories"
                         value={updateMeal.calories}
-                        className="border-primary border-2 rounded p-2 text-black"
-
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Ingredients</label>
-                    <input
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Ingredients: </label>
+                    <textarea
                         onChange={onChangeHandler}
                         name="ingredients"
                         value={updateMeal.ingredients}
-                        className="border-primary border-2 rounded p-2 text-black"
-
+                        type="text"
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
+                        rows="5"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Instructions</label>
-                    <input
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Instructions: </label>
+                    <textarea
                         onChange={onChangeHandler}
                         name="instructions"
                         value={updateMeal.instructions}
-                        className="border-primary border-2 rounded p-2 text-black"
-
+                        type="text"
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
+                        rows="5"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Notes</label>
-                    <input
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Notes: </label>
+                    <textarea
                         onChange={onChangeHandler}
                         name="notes"
                         value={updateMeal.notes}
-                        className="border-primary border-2 rounded p-2 text-black"
-
+                        type="text"
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
+                        rows="5"
                     />
                 </div>
                 <button

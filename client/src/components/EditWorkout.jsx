@@ -74,17 +74,17 @@ const EditWorkout = (props) => {
                 autoComplete="off"
                 className="flex flex-col w-full max-w-md gap-4"
             >
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Workout Title: </label>
+                    <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Workout Title: </label>
                     <input
                         onChange={onChangeHandler}
                         name="workoutTitle"
                         value={updateWorkout.workoutTitle || ''}
-                        className="border-primary border-2 rounded p-2 text-black"
-                    />
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
+                        />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Workout Date: </label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Workout Date: </label>
                     <input
                         onChange={onChangeHandler}
                         name="workoutDate"
@@ -93,8 +93,8 @@ const EditWorkout = (props) => {
                         className="border-primary border-2 rounded p-2 text-black"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Workout Time: </label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Workout Time: </label>
                     <input
                         onChange={onChangeHandler}
                         name="workoutTime"
@@ -103,8 +103,8 @@ const EditWorkout = (props) => {
                         className="border-primary border-2 rounded p-2 text-black"
                     />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Live?</label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Live?</label>
                     <select
                         onChange={onChangeHandler}
                         value={updateWorkout.live || false}
@@ -115,8 +115,8 @@ const EditWorkout = (props) => {
                         <option value="false">No</option>
                     </select>
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Self Led?</label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Self Led?</label>
                     <select
                         onChange={onChangeHandler}
                         value={updateWorkout.selfLed|| false}
@@ -128,15 +128,15 @@ const EditWorkout = (props) => {
                     </select>
 
                 </div>
-                <div className="mb-3 flex">
-                    <label className="text-primary mr-2">Notes/Instructions: </label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Notes/ Instructions: </label>
 
                     <textarea
                         onChange={onChangeHandler}
                         name="notes"
                         value={updateWorkout.notes}
                         type="text"
-                        className="border-primary border-2 rounded p-2 text-black"
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
                         rows="5"
 
                     />
