@@ -18,12 +18,12 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-      axios.get(`http://localhost:8000/api/goals/${user._id}`)
-          .then(res => {
-              // console.log(res.data)
-              setGoals(res.data)
-          })
-          .catch(err => console.error(err))
+    axios.get(`http://localhost:8000/api/goals/${user._id}`)
+      .then(res => {
+        // console.log(res.data)
+        setGoals(res.data)
+      })
+      .catch(err => console.error(err))
   }, [user._id])
 
 
@@ -31,8 +31,10 @@ const Dashboard = () => {
     <>
       {user ? (
         <div className="flex bg-background h-screen w-screen">
-          <Nav user={user} />
-          <div className="h-screen w-screen flex flex-col p-4 rounded-lg shadow-lg bg-background text-white relative">
+          <div className="fixed h-screen w-48 flex flex-col justify-evenly items-center bg-accent-dark left-0 top-0">
+            <Nav user={user} />
+          </div>
+          <div className="flex-1 flex flex-col p-4 rounded-lg shadow-lg bg-background text-white ml-48 mr-4">
             <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
               Dashboard
             </h1>
@@ -44,25 +46,25 @@ const Dashboard = () => {
               </div>
 
               <div className="md:w-1/3 md:pl-4 flex flex-col">
-<div className="border border-secondary rounded p-2 mb-4 flex-1">
-    <h2 className="text-primary text-lg font-semibold mb-2">Goals</h2>
-    <table className="w-full">
-        <thead>
-            <tr className="bg-primary text-white">
-                <th className="py-2 px-4 text-sm">Goal Title</th> 
-                <th className="py-2 px-4 text-sm">Goal End Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {goals.map((goal) => (
-                <tr key={goal._id} className="border-b border-secondary">
-                    <td className="py-2 px-4 text-sm">{goal.goalTitle}</td> 
-                    <td className="py-2 px-4 text-sm">{goal.goalEndDate}</td> 
-                </tr>
-            ))}
-        </tbody>
-    </table>
-</div>
+                <div className="border border-secondary rounded p-2 mb-4 flex-1">
+                  <h2 className="text-primary text-lg font-semibold mb-2">Goals</h2>
+                  <table className="w-full">
+                    <thead>
+                      <tr className="bg-primary text-white">
+                        <th className="py-2 px-4 text-sm">Goal Title</th>
+                        <th className="py-2 px-4 text-sm">Goal End Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {goals.map((goal) => (
+                        <tr key={goal._id} className="border-b border-secondary">
+                          <td className="py-2 px-4 text-sm">{goal.goalTitle}</td>
+                          <td className="py-2 px-4 text-sm">{goal.goalEndDate}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
 
 
                 <div className="border border-secondary rounded p-2 flex-1">

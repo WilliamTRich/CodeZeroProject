@@ -16,7 +16,6 @@ const EditWorkout = (props) => {
         selfLed: '',
         notes: ''
         });
-    console.log(user._id)
 
     const formatDate = (date) => {
         const year = date.getFullYear();

@@ -1,61 +1,123 @@
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect, useContext } from "react"
 import axios from 'axios'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { UserContext } from '../contexts/UserContext.jsx';
 
 
-const EditMeal = (props)=> {
+const EditMeal = (props) => {
     const navigate = useNavigate();
-    const {id} = props;
-    const[updateMeal, setUpdateMeal] = useState({});
-    useEffect(()=> {
-        axios.get(``)
-        .then((res)=> {
-            console.log(res.data);
-            setUpdateMeal(res.data);
-        })
-        .catch((err)=> {
-            console.log(err);
-            navigate('/errors')
-        })
-    }, [id])
+    const { user } = useContext(UserContext);
+    const { mealId } = useParams();
+    const [updateMeal, setUpdateMeal] = useState({});
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/meals/${user._id}/${mealId}`)
+            .then((res) => {
+                console.log(res.data);
+                setUpdateMeal(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+                console.log("idk but seomting is going wrong")
+            })
+    }, [user._id, mealId])
+
     const onChangeHandler = (e) => {
-        let newStateObject = {...updateMeal};
+        let newStateObject = { ...updateMeal };
         newStateObject[e.target.name] = e.target.value
         setUpdateMeal(newStateObject);
     }
-    const updateSubmitHandler = (e)=> {
+
+    const updateSubmitHandler = (e) => {
         e.preventDefault();
-        axios.put(``, updateMeal,
-        )
-        .then((res)=> {
-            console.log(res.data);
-            // useNavigate('')
-        })
-        .catch((err)=> {
-            console.log(err);
-        })
+        axios.patch(`http://localhost:8000/api/meals/${user._id}/${mealId}`, updateMeal)
+            .then((res) => {
+                console.log(res.data);
+                navigate('/meal');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
-    return(     
-    <div className=''>
-        <div>
-            <form onSubmit = {updateSubmitHandler}>
-                <label>Meal Title</label>
-                <input onChange={onChangeHandler} name="title" value={updateMeal.mealTitle}/>
-                <label>Meal Cook/Prep Time</label>
-                <input onChange={onChangeHandler} name="time" value={updateMeal.mealTime}/>
-                <label>Ingredients</label>
-                <input onChange={onChangeHandler} name="ingredients" value={updateMeal.ingredients}/>
-                <label>Calories</label>
-                <input onChange={onChangeHandler} name = "calories"value={updateMeal.calories}/>
-                <label>Notes</label>
-                <input onChange={onChangeHandler} name="notes" value={updateMeal.notes} />
-                <button>Submit</button>
-            </form>
+
+    return (
+        <div className="flex flex-col w-full md:w-[100%] lg:w-[100%] xl:w-[100%] p-6 gap-4 border-highlight border-4 justify-center items-center rounded-2xl">
+            <h1 className="text-primary text-5xl font-bold">Edit Meal</h1>
+            <form
+                onSubmit={updateSubmitHandler}
+                noValidate
+                autoComplete="off"
+                className="flex flex-col w-full max-w-md gap-4"
+            >
+                <div className="mb-3">
+                    <label className="text-primary mr-2">Meal Title</label>
+                    <input
+                        onChange={onChangeHandler}
+                        name="mealTitle"
+                        value={updateMeal.mealTitle}
+                        className="border-primary border-2 rounded p-2 text-black"
+
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="text-primary mr-2">Meal Cook/Prep Time</label>
+                    <input
+                        onChange={onChangeHandler}
+                        name="mealTime"
+                        value={updateMeal.mealTime}
+                        className="border-primary border-2 rounded p-2 text-black"
+
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="text-primary mr-2">Calories</label>
+                    <input
+                        onChange={onChangeHandler}
+                        name="calories"
+                        value={updateMeal.calories}
+                        className="border-primary border-2 rounded p-2 text-black"
+
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="text-primary mr-2">Ingredients</label>
+                    <input
+                        onChange={onChangeHandler}
+                        name="ingredients"
+                        value={updateMeal.ingredients}
+                        className="border-primary border-2 rounded p-2 text-black"
+
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="text-primary mr-2">Instructions</label>
+                    <input
+                        onChange={onChangeHandler}
+                        name="instructions"
+                        value={updateMeal.instructions}
+                        className="border-primary border-2 rounded p-2 text-black"
+
+                    />
+                </div>
+                <div className="mb-3">
+                    <label className="text-primary mr-2">Notes</label>
+                    <input
+                        onChange={onChangeHandler}
+                        name="notes"
+                        value={updateMeal.notes}
+                        className="border-primary border-2 rounded p-2 text-black"
+
+                    />
+                </div>
+                <button
+                    className="bg-highlight text-background py-2 px-4 rounded-lg hover:bg-secondary hover:text-accent-extralight transition duration-300"
+                    type="submit"
+                >
+                    Update Meal
+                </button>            
+                </form>
         </div>
-        
-    </div>
-            
-    
+
     )
 }
 

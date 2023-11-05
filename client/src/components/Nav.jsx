@@ -41,7 +41,7 @@ export const Nav = (props) => {
   };
 
   return (
-    <div className="flex h-screen w-56 flex-col justify-evenly items-center bg-accent-dark">
+    <div className="flex h-screen flex-col justify-evenly items-center bg-accent-dark">
       <div>
         <img
           src={'pulse360Logo.png'}
