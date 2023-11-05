@@ -79,17 +79,17 @@ const AddWorkout = (props) => {
                     autoComplete="off"
                     className="flex flex-col w-full max-w-md gap-4"
                 >
-                    <div className="mb-3">
-                        <label className="text-primary mr-2">Workout Title: </label>
+                    <div className="mb-3 flex w-full">
+                        <label className="w-32 text-primary mr-2">Workout Title: </label>
                         <input
                             onChange={(e) => setWorkoutTitle(e.target.value)}
                             name="title"
                             value={workoutTitle}
-                            className="border-primary border-2 rounded p-2 text-black"
-                        />
+                            className="border-primary border-2 rounded p-2 text-black flex-1"
+                            />
                     </div>
-                    <div className="mb-3">
-                        <label className="text-primary mr-2">Workout Date: </label>
+                    <div className="mb-3 flex w-full">
+                        <label className="w-32 text-primary mr-2">Workout Date: </label>
                         <input
                             onChange={(e) => setWorkoutDate(e.target.value)}
                             name="date"
@@ -98,8 +98,8 @@ const AddWorkout = (props) => {
                             className="border-primary border-2 rounded p-2 text-black"
                         />
                     </div>
-                    <div className="mb-3">
-                        <label className="text-primary mr-2">Workout Time: </label>
+                    <div className="mb-3 flex w-full">
+                        <label className="w-32 text-primary mr-2">Workout Time: </label>
                         <input
                             onChange={(e) => setWorkoutTime(e.target.value)}
                             name="time"
@@ -108,8 +108,8 @@ const AddWorkout = (props) => {
                             className="border-primary border-2 rounded p-2 text-black"
                         />
                     </div>
-                    <div className="mb-3">
-                        <label className="text-primary mr-2">Live?</label>
+                    <div className="mb-3 flex w-full">
+                        <label className="w-32 text-primary mr-2">Live?</label>
                         <select
                             onChange={handleLiveChange}
                             value={live.toString()} name="live"
@@ -119,8 +119,8 @@ const AddWorkout = (props) => {
                             <option value="false">No</option>
                         </select>
                     </div>
-                    <div className="mb-3">
-                        <label className="text-primary mr-2">Self Led?</label>
+                    <div className="mb-3 flex w-full">
+                        <label className="w-32 text-primary mr-2">Self Led?</label>
                         <select
                             onChange={handleSelfLeadChange}
                             value={selfLed.toString()}
@@ -131,14 +131,14 @@ const AddWorkout = (props) => {
                             <option value="false">No</option>
                         </select>
                     </div>
-                    <div className="mb-3 flex">
-                        <label className="text-primary mr-2">Notes/Instructions: </label>
+                    <div className="mb-3 flex w-full">
+                        <label className="w-32 text-primary mr-2">Notes/ Instructions: </label>
                         <textarea
                             onChange={(e) => setNotes(e.target.value)}
                             name="notes"
                             value={notes}
                             type="text"
-                            className="border-primary border-2 rounded p-2 text-black"
+                            className="border-primary border-2 rounded p-2 text-black flex-1"
                             rows="5"
                         />
                     </div>

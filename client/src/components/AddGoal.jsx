@@ -64,17 +64,17 @@ const AddGoal = (props) => {
                 autoComplete="off"
                 className="flex flex-col w-full max-w-md gap-4"
             >
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Goal Title: </label>
+                    <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Goal Title: </label>
                     <input
                         onChange={(e) => setGoalTitle(e.target.value)}
                         name="title"
                         value={goalTitle}
-                        className="border-primary border-2 rounded p-2 text-black"
-                    />
+                        className="border-primary border-2 rounded p-2 text-black flex-1"
+                        />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Goal End Date: </label>
+                <div className="mb-3 flex">
+                    <label className="w-32 text-primary mr-2">Goal End Date: </label>
                     <input
                         onChange={(e) => setGoalEndDate(e.target.value)}
                         name="date"
@@ -83,19 +83,19 @@ const AddGoal = (props) => {
                         className="border-primary border-2 rounded p-2 text-black"
                     />
                 </div>
-                <div className="mb-3 flex">
-                    <label className="text-primary mr-2">Steps to Achieve Goal: </label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Steps to Achieve Goal: </label>
                     <textarea
                             onChange={(e) => setGoalSteps(e.target.value)}
                             name="goalSteps"
                             value={goalSteps}
                             type="text"
-                            className="border-primary border-2 rounded p-2 text-black"
+                            className="flex-1 border-primary border-2 rounded p-2 text-black"
                             rows="5"
                         />
                 </div>
-                <div className="mb-3">
-                    <label className="text-primary mr-2">Completed?</label>
+                <div className="mb-3 flex w-full">
+                    <label className="w-32 text-primary mr-2">Completed?</label>
                     <input
                         type="checkbox"
                         onChange={(e) => setCompleted(e.target.checked)}

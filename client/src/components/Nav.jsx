@@ -44,7 +44,7 @@ export const Nav = (props) => {
     <div className="flex h-screen flex-col justify-evenly items-center bg-accent-dark">
       <div>
         <img
-          src={'pulse360Logo.png'}
+          src={'/public/pulse360Logo.png'}
           alt={'pulse360 logo and tag: full cycle fitness'}
           className={'w-full h-auto object-cover md:max-h-[9em]'}
           />
