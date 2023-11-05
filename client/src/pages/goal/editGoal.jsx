@@ -17,8 +17,10 @@ const EditGoalPage = (props) => {
         <>
             {user ? (
                 <div className={'flex bg-background h-screen w-screen'}>
-                    <Nav user={user} />
-                    <div className="h-screen w-screen flex flex-col p-4 rounded-lg shadow-lg bg-background text-white relative">
+                    <div className="fixed h-screen w-48 flex flex-col justify-evenly items-center bg-accent-dark left-0 top-0">
+                        <Nav user={user} />
+                    </div>
+                    <div className="flex-1 flex flex-col p-4 rounded-lg shadow-lg bg-background text-white ml-48 mr-4">
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
                             Edit Goal
                         </h1>
@@ -27,7 +29,7 @@ const EditGoalPage = (props) => {
                                 <EditGoal />
                             </div>
                         </div>
-                        <BackButton/>
+                        <BackButton />
                     </div>
                 </div>
             ) : (

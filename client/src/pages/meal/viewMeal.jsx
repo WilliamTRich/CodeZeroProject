@@ -6,11 +6,10 @@ import axios from 'axios';
 //Components
 import { Nav } from '../../components/Nav.jsx';
 import { UserContext } from '../../contexts/UserContext.jsx';
-
-import AddGoal from '../../components/AddGoal'
+import ViewMeal from '../../components/ViewMeal'
 import BackButton from '../../components/BackButton.jsx';
 
-const AddGoalPage = (props) => {
+const ViewMealPage = (props) => {
     const { user } = useContext(UserContext);
 
     return (
@@ -22,11 +21,12 @@ const AddGoalPage = (props) => {
                     </div>
                     <div className="flex-1 flex flex-col p-4 rounded-lg shadow-lg bg-background text-white ml-48 mr-4">
                         <h1 className="text-5xl font-semibold mb-4 border-b-2 border-primary w-full text-end">
-                            Add Goals
+                            View Meal
                         </h1>
+
                         <div className="flex flex-col items-center">
                             <div className="w-full md:w-[80%] bg-gray-800 text-white p-4 mb-4 md:mb-0 border border-secondary rounded">
-                                <AddGoal />
+                                <ViewMeal />
                             </div>
                         </div>
                         <BackButton />
@@ -39,4 +39,4 @@ const AddGoalPage = (props) => {
     );
 };
 
-export default AddGoalPage;
+export default ViewMealPage;
