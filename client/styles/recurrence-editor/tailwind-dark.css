@@ -1,0 +1,606 @@
+.e-ddl.e-control-wrapper .e-ddl-icon::before {
+    transform: rotate(0deg);
+    transition: transform 300ms ease;
+}
+
+.e-ddl.e-control-wrapper.e-icon-anim .e-ddl-icon::before {
+    transform: rotate(180deg);
+    transition: transform 300ms ease;
+}
+
+.e-dropdownbase .e-list-item.e-active.e-hover {
+    color: #fff;
+}
+
+.e-input-group:not(.e-disabled) .e-control.e-dropdownlist~.e-ddl-icon:active,
+.e-input-group:not(.e-disabled) .e-control.e-dropdownlist~.e-ddl-icon:hover,
+.e-input-group:not(.e-disabled) .e-back-icon:active,
+.e-input-group:not(.e-disabled) .e-back-icon:hover,
+.e-popup.e-ddl .e-input-group:not(.e-disabled) .e-clear-icon:active,
+.e-popup.e-ddl .e-input-group:not(.e-disabled) .e-clear-icon:hover {
+    background: transparent;
+}
+
+.e-input-group .e-ddl-icon:not(:active)::after {
+    animation: none;
+}
+
+.e-ddl.e-popup {
+    border: 0;
+    border-radius: 4px;
+    box-shadow:
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    margin-top: 4px;
+}
+
+.e-small .e-ddl.e-popup,
+.e-small.e-ddl.e-popup {
+    border-radius: 2px;
+    margin-top: 2px;
+}
+
+.e-bigger .e-ddl.e-popup,
+.e-bigger.e-ddl.e-popup {
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+.e-bigger.e-small .e-ddl.e-popup,
+.e-small.e-bigger.e-ddl.e-popup {
+    border-radius: 4px;
+    margin-top: 6px;
+}
+
+.e-popup.e-ddl .e-dropdownbase {
+    min-height: 26px;
+    padding: 4px 0;
+}
+
+.e-bigger .e-popup.e-ddl-device-filter .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) {
+    border-color: #4b5563;
+}
+
+.e-bigger .e-popup.e-ddl-device-filter {
+    margin-top: 0;
+}
+
+.e-bigger .e-ddl-device .e-input-group,
+.e-bigger .e-ddl-device .e-input-group.e-input-focus:not(.e-success):not(.e-warning):not(.e-error) {
+    background: #374151;
+    border-width: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.e-bigger .e-ddl-device .e-input-group .e-back-icon,
+.e-bigger .e-ddl-device .e-input-group input.e-input,
+.e-bigger .e-ddl-device .e-input-group .e-clear-icon {
+    background-color: #374151;
+}
+
+.e-input-group.e-ddl,
+.e-input-group.e-ddl .e-input,
+.e-input-group.e-ddl .e-ddl-icon {
+    background: #1f2937;
+}
+
+.e-ddl.e-ddl-device.e-ddl-device-filter .e-input-group:hover:not(.e-disabled):not(.e-float-icon-left),
+.e-ddl.e-ddl-device.e-ddl-device-filter .e-input-group.e-control-wrapper:hover:not(.e-disabled):not(.e-float-icon-left) {
+    border-bottom-width: 0;
+}
+
+.e-ddl.e-popup.e-outline .e-filter-parent {
+    padding: 4px 8px;
+}
+
+/*! recurrence editor theme wise definitions*/
+/*! Recurrence-Editor component layout */
+.e-recurrenceeditor .e-editor {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin: 0 auto;
+    max-width: 1240px;
+}
+
+.e-recurrenceeditor .e-recurrence-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.e-recurrenceeditor .e-recurrence-table.e-repeat-content-wrapper td:last-child {
+    width: 27%;
+}
+
+.e-recurrenceeditor .e-recurrence-table.e-month-expand-wrapper td:first-child {
+    width: 24%;
+}
+
+.e-recurrenceeditor .e-recurrence-table .e-repeat-content {
+    display: inline-block;
+    font-weight: normal;
+    padding: 18px 0 0 8px;
+}
+
+.e-recurrenceeditor .e-recurrence-table .e-input-wrapper {
+    float: none;
+    width: 100%;
+}
+
+.e-recurrenceeditor .e-recurrence-table .e-week-position {
+    min-width: 94px;
+    position: relative;
+    right: 20px;
+}
+
+.e-recurrenceeditor .e-recurrence-table .e-day-position {
+    min-width: 120px;
+}
+
+.e-recurrenceeditor .e-recurrence-table .e-monthday-element {
+    padding-left: 10px;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side.e-form-left {
+    padding: 0 8px 16px 0;
+}
+
+.e-recurrenceeditor .e-form-left {
+    padding: 0 8px 16px 0;
+}
+
+.e-recurrenceeditor .e-form-right,
+.e-recurrenceeditor .e-input-wrapper-side.e-form-right {
+    padding: 0 0 10px;
+}
+
+.e-recurrenceeditor .e-input-wrapper {
+    float: left;
+    width: 50%;
+}
+
+.e-recurrenceeditor .e-input-wrapper div {
+    margin-bottom: 2.5%;
+}
+
+.e-recurrenceeditor .e-input-wrapper.e-end-on-date,
+.e-recurrenceeditor .e-input-wrapper.e-end-on-count {
+    padding-right: 0;
+}
+
+.e-recurrenceeditor.e-rtl .e-end-on>div,
+.e-recurrenceeditor.e-rtl .e-month-expander>div>div {
+    float: right;
+}
+
+.e-recurrenceeditor.e-rtl .e-form-left,
+.e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-form-left {
+    padding: 0 0 10px 8px;
+}
+
+.e-recurrenceeditor.e-rtl .e-form-right,
+.e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-form-right {
+    padding: 0 8px 10px 0;
+}
+
+.e-recurrenceeditor.e-rtl .e-recurrence-table .e-monthday-element {
+    position: relative;
+    right: 10px;
+}
+
+.e-recurrenceeditor.e-rtl .e-week-position {
+    left: 20px;
+    right: 0;
+}
+
+.e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-end-on .e-end-on-label,
+.e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-non-week>.e-month-expander-label {
+    padding-right: 0;
+}
+
+.e-recurrenceeditor.e-rtl .e-end-on-label {
+    margin-bottom: 5px;
+}
+
+.e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-end-on .e-end-on-left {
+    padding: 0 0 0 8px;
+}
+
+.e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-date,
+.e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-count {
+    padding: 0 8px 0 0;
+}
+
+.e-recurrenceeditor.e-rtl .e-recurrenceeditor .e-recurrence-table.e-month-expand-wrapper td:first-child {
+    width: 30px;
+}
+
+.e-recurrenceeditor .e-days .e-week-expander-label {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.e-recurrenceeditor .e-days button {
+    border-radius: 50%;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    height: 35px;
+    margin: 0 8px 10px;
+    width: 35px;
+}
+
+.e-recurrenceeditor .e-hide-recurrence-element {
+    display: none;
+}
+
+.e-recurrenceeditor .e-half-space {
+    width: 20%;
+}
+
+.e-recurrenceeditor .e-year-expander {
+    margin-bottom: 11px;
+}
+
+.e-recurrenceeditor .e-month-expander tr:first-child .e-input-wrapper {
+    padding-bottom: 11px;
+}
+
+.e-recurrenceeditor .e-month-expander-checkbox-wrapper.e-input-wrapper {
+    padding-top: 3px;
+}
+
+.e-recurrenceeditor .e-month-expander-checkbox-wrapper.e-input-wrapper .e-month-type .e-label {
+    display: none;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side {
+    float: left;
+    padding: 16px 20px 0;
+    width: 50%;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side.e-end-on .e-end-on-label {
+    float: none;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 7px;
+    padding-right: 16px;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side.e-end-on .e-end-on-left {
+    padding-right: 16px;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side.e-non-week>.e-input-wrapper {
+    margin: 0;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side.e-non-week>.e-month-expander-label {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 7px;
+    padding-right: 16px;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side .e-days .e-form-left {
+    padding-bottom: 6px;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side .e-non-week .e-form-left {
+    padding-bottom: 12px;
+}
+
+.e-recurrenceeditor .e-input-wrapper-side.e-form-right {
+    margin-bottom: 11px;
+}
+
+.e-bigger .e-recurrenceeditor {
+    padding: 0;
+}
+
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side.e-form-left {
+    padding: 0 12px 11px 0;
+}
+
+.e-bigger .e-recurrenceeditor .e-form-left {
+    padding: 0 12px 14px 0;
+}
+
+.e-bigger .e-recurrenceeditor .e-form-right,
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side.e-form-right {
+    padding: 0 0 10px;
+}
+
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side .e-days .e-form-left {
+    padding-bottom: 6px;
+}
+
+.e-bigger .e-recurrenceeditor .e-recurrence-table .e-monthday-element {
+    padding-left: 70px;
+}
+
+.e-bigger .e-recurrenceeditor .e-week-position {
+    min-width: 130px;
+    right: 0;
+}
+
+.e-bigger .e-recurrenceeditor .e-day-position {
+    min-width: 197px;
+    padding-left: 54px;
+}
+
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side.e-non-week>.e-month-expander-label {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side.e-end-on .e-end-on-left {
+    padding-right: 2px;
+}
+
+.e-bigger .e-recurrenceeditor .e-end-on-label {
+    margin-bottom: 0;
+}
+
+.e-bigger .e-recurrenceeditor .e-days .e-week-expander-label {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side .e-non-week .e-form-left {
+    padding-bottom: 12px;
+}
+
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side.e-end-on .e-end-on-label {
+    font-size: 16px;
+    margin-bottom: 1px;
+}
+
+.e-bigger .e-recurrenceeditor .e-month-expander tr:first-child .e-input-wrapper,
+.e-bigger .e-recurrenceeditor .e-year-expander,
+.e-bigger .e-recurrenceeditor .e-input-wrapper-side.e-form-right {
+    margin-bottom: 11px;
+}
+
+.e-bigger .e-recurrenceeditor .e-recurrence-table.e-month-expand-wrapper td:first-child {
+    width: 30px;
+}
+
+.e-bigger .e-recurrenceeditor .e-days button {
+    height: 40px;
+    width: 40px;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-form-left,
+.e-bigger .e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-form-left {
+    padding: 0 0 10px 12px;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-form-right,
+.e-bigger .e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-form-right {
+    padding: 0 12px 10px 0;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-recurrence-table .e-monthday-element,
+.e-bigger .e-recurrenceeditor.e-rtl .e-recurrence-table .e-day-position {
+    padding: 0 64px 0 0;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-end-on .e-end-on-label,
+.e-bigger .e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-non-week>.e-month-expander-label {
+    padding-right: 0;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-end-on-label {
+    margin-bottom: 5px;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-end-on .e-end-on-left {
+    padding: 0 0 0 12px;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-date,
+.e-bigger .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-count {
+    padding: 0 12px 0 0;
+}
+
+.e-bigger .e-recurrenceeditor.e-rtl .e-recurrence-table .e-week-position {
+    left: 0;
+}
+
+.e-device .e-recurrenceeditor .e-recurrence-table.e-repeat-content-wrapper td:last-child {
+    width: 25%;
+}
+
+.e-device .e-recurrenceeditor .e-recurrence-table.e-month-expand-wrapper td:first-child {
+    width: 20%;
+}
+
+.e-device .e-recurrenceeditor .e-week-expander-label {
+    margin-bottom: 6px;
+}
+
+.e-device .e-recurrenceeditor .e-month-expander-label {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.e-device .e-recurrenceeditor .e-footer-content {
+    padding: 12px;
+}
+
+.e-device .e-recurrenceeditor .e-form-left,
+.e-device .e-recurrenceeditor .e-input-wrapper-side.e-form-left {
+    padding: 0 3px 10px 0;
+}
+
+.e-device .e-recurrenceeditor .e-form-right,
+.e-device .e-recurrenceeditor .e-input-wrapper-side.e-form-right {
+    padding: 0 0 10px 3px;
+}
+
+.e-device .e-recurrenceeditor .e-input-wrapper.e-end-on-date,
+.e-device .e-recurrenceeditor .e-input-wrapper.e-end-on-count {
+    padding: 0 0 0 10px;
+}
+
+.e-device .e-recurrenceeditor .e-input-wrapper-side.e-end-on .e-end-on-left {
+    padding-right: 10px;
+}
+
+.e-device .e-recurrenceeditor.e-end-on {
+    padding-right: 0;
+}
+
+.e-device .e-recurrenceeditor.e-end-on .e-end-on-label {
+    float: none;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 7px;
+}
+
+.e-device .e-recurrenceeditor.e-end-on .e-end-on-left {
+    padding-right: 0;
+}
+
+.e-device .e-recurrenceeditor .e-recurrence-table .e-monthday-element,
+.e-device .e-recurrenceeditor .e-recurrence-table .e-day-position {
+    padding-left: 20px;
+}
+
+.e-device .e-recurrenceeditor .e-recurrence-table .e-monthday-element {
+    margin-left: 20px;
+}
+
+.e-device .e-recurrenceeditor .e-week-position {
+    right: 0;
+    padding-right: 10px;
+}
+
+.e-device .e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-end-on .e-end-on-left {
+    padding-right: 0;
+}
+
+.e-device .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-date,
+.e-device .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-count {
+    padding: 0 10px 0 0;
+}
+
+.e-device .e-recurrenceeditor.e-rtl .e-recurrence-table .e-monthday-element {
+    padding: 0 20px 0 0;
+}
+
+.e-device .e-recurrenceeditor.e-rtl .e-recurrence-table .e-day-position {
+    padding: 0 50px 0 0;
+}
+
+.e-device .e-recurrenceeditor.e-rtl .e-week-position {
+    left: 0;
+}
+
+.e-device.e-recurrence-dialog .e-dlg-header-content {
+    background: none;
+    box-shadow: none;
+    padding-bottom: 10px;
+}
+
+.e-device.e-recurrence-dialog .e-editor .e-input-wrapper-side.e-end-on .e-end-on-label {
+    margin-bottom: 7px;
+}
+
+.e-device.e-recurrence-dialog .e-footer-content {
+    padding: 16px 8px;
+}
+
+@media (max-width: 1024px) {
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-end-on {
+        width: 100%;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-non-week {
+        width: 65%;
+    }
+}
+
+@media (max-width: 580px) {
+    .e-recurrenceeditor {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .e-recurrenceeditor .e-editor {
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .e-recurrenceeditor .e-editor>.e-input-wrapper.e-form-left {
+        margin-top: 0;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-non-week>.e-month-expander-label,
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-end-on .e-end-on-label {
+        margin-bottom: 7px;
+    }
+
+    .e-recurrenceeditor .e-editor>div {
+        margin-top: 20px;
+    }
+
+    .e-recurrenceeditor .e-editor>.e-input-wrapper {
+        width: 100%;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-end-on {
+        width: 100%;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-end-on .e-input-wrapper {
+        width: 50%;
+    }
+
+    .e-recurrenceeditor .e-editor .e-form-left,
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-form-left {
+        padding: 0 0 10px;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper.e-end-on-date,
+    .e-recurrenceeditor .e-editor .e-input-wrapper.e-end-on-count {
+        padding: 0 0 0 10px;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-end-on .e-end-on-left {
+        padding-right: 10px;
+    }
+
+    .e-recurrenceeditor .e-editor .e-form-right,
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-form-right {
+        padding-left: 0;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-days {
+        width: 100%;
+    }
+
+    .e-recurrenceeditor .e-editor .e-input-wrapper-side.e-non-week {
+        width: 65%;
+    }
+
+    .e-recurrenceeditor .e-editor .e-recurrence-table .e-day-position {
+        padding-left: 50px;
+    }
+
+    .e-recurrenceeditor.e-rtl .e-input-wrapper-side.e-end-on .e-end-on-left {
+        padding-right: 0;
+    }
+
+    .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-date,
+    .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-count {
+        padding: 0 10px 0 0;
+    }
+}
+
+/*! Recurrence-Editor component theme */

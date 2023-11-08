@@ -616,7 +616,7 @@ body {
 }
 .e-schedule .e-content-wrap,
 .e-schedule .e-scroll-container {
-  -webkit-overflow-scrolling: touch; /* stylelint-disable-line property-no-vendor-prefix */
+  /* -webkit-overflow-scrolling: touch; stylelint-disable-line property-no-vendor-prefix */
   overflow: auto;
 }
 .e-schedule .e-hide-childs > * {
@@ -4588,11 +4588,18 @@ body {
   .e-recurrenceeditor.e-rtl .e-input-wrapper.e-end-on-count {
     padding: 0 10px 0 0;
   }
+
+/* me (Kate) trying to edit the calendar to fix its formatiing and the fact the event thing is showing on alllllll pages */
+
   .e-title-text{
     color: #fff !important;
   }
   .e-schedule-toolbar-container{
     display: flex !important;
   }
+  .e-schedule-dialog-container {
+    display: none;
+  }
 }
 /*! Recurrence-Editor component theme */
+
