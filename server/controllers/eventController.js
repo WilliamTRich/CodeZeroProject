@@ -1,22 +1,52 @@
 //Imports
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+
 require('dotenv').config();
 
 //Models
-const { Event } = require('../models/eventModel');
+const Event = require('../models/eventModel');
 
 module.exports.getAllEvents = (req, res) => {
-    Event.find({ user: req.params.userId })
-        .populate('user')
-        .then(events => res.json(events))
-        .catch(error => res.status(500).json({ error: error.message }));
+    const userId = req.params.userId;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: 'Invalid user ID' });
+    }
+    Event.find({
+        $or: [{ client: userId }, { trainer: userId }],
+    })
+        .populate({
+            path: 'user',
+            options: { strictPopulate: false },
+        })
+        .then((events) => {
+            if (events.length > 0) {
+                res.json(events);
+            } else {
+                res.status(404).json({
+                    message: 'No goals found for the user.',
+                });
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        });
 };
 
+
 module.exports.getEventById = (req, res) => {
-    Event.findOne({ _id: req.params.eventId, user: req.params.userId })
-        .populate('user')
-        .then(event => {
+    const { userId, eventId } = req.params;
+    Event.findOne({
+        _id: eventId,
+        $or: [{ client: userId }, { trainer: userId }],
+    })
+        .populate({
+            path: 'user',
+            options: { strictPopulate: false },
+        })
+        .then((event) => {
             if (!event) {
                 return res.status(404).json({ error: 'Event not found' });
             }
@@ -34,9 +64,15 @@ module.exports.createEvent = (req, res) => {
 
 module.exports.updateEvent = (req, res) => {
     Event.findOneAndUpdate(
-        { _id: req.params.eventId, user: req.params.userId },
+        {
+            _id: req.params.eventId,
+            $or: [
+                { client: req.params.userId },
+                { trainer: req.params.userId },
+            ],
+        },
         req.body,
-        { new: true }
+        { new: true },
     )
         .then(updatedEvent => {
             if (!updatedEvent) {
@@ -48,12 +84,21 @@ module.exports.updateEvent = (req, res) => {
 };
 
 module.exports.deleteEvent = (req, res) => {
-    Event.findOneAndDelete({ _id: req.params.eventId, user: req.params.userId })
-        .then(deletedEvent => {
-            if (!deletedEvent) {
-                return res.status(404).json({ error: 'Event not found' });
-            }
-            res.json({ message: 'Event deleted successfully' });
-        })
+    const { userId, eventId } = req.params;
+
+    Event.findOneAndDelete({
+        _id: eventId,
+        $or: [{ client: userId }, { trainer: userId }],
+    })
+    .populate({
+        path: 'user',
+        options: { strictPopulate: false },
+    })
+    .then((deletedEvent) => {
+        if (!deletedEvent) {
+            return res.status(404).json({ error: 'Event not found' });
+        }
+        res.json({ message: 'Event deleted successfully' });
+    })
         .catch(error => res.status(500).json({ error: error.message }));
 };
