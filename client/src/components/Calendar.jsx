@@ -11,8 +11,15 @@ import { addClass, Browser, closest, extend, Internationalization, isNullOrUndef
 import { DataManager, Predicate, Query } from '@syncfusion/ej2-data';
 import { tz } from 'moment-timezone';
 // import 'client/styles/schedule/tailwind-dark.css';
+import axios from 'axios';
+
 
 const Overview = () => {
+    //weather APIs
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+    const weatherAPIKey = "20b1c93d52d57ffe35a6cada2e8468e1"
+
     const [currentView, setCurrentView] = useState('Week');
     const [isTimelineView, setIsTimelineView] = useState(false);
     let scheduleObj = useRef(null);
@@ -23,6 +30,7 @@ const Overview = () => {
     let workWeekObj = useRef(null);
     let resourceObj = useRef(null);
     let liveTimeInterval;
+
     const weekDays = [ //gives the weekdays numerical values
         { text: 'Sunday', value: 0 },
         { text: 'Monday', value: 1 },
@@ -32,10 +40,12 @@ const Overview = () => {
         { text: 'Friday', value: 5 },
         { text: 'Saturday', value: 6 }
     ];
+
     const exportItems = [ //allows for export to apple calednar or excel
         { text: 'iCalendar', iconCss: 'e-icons e-export' },
         { text: 'Excel', iconCss: 'e-icons e-export-excel' }
     ];
+
     const contextMenuItems = [ //adds the icons to the menu at the top of the calendar
         { text: 'New Event', iconCss: 'e-icons e-plus', id: 'Add' },
         { text: 'New Recurring Event', iconCss: 'e-icons e-repeat', id: 'AddRecurrence' },
@@ -57,6 +67,7 @@ const Overview = () => {
             ]
         }
     ];
+
     const calendarCollections = [ //Different Calednar collections, can add a workout/meal calednar, but need to change colors
         { CalendarText: 'My Calendar', CalendarId: 1, CalendarColor: '#c43081' },
         { CalendarText: 'Work', CalendarId: 2, CalendarColor: '#ff7f50' },
@@ -149,10 +160,9 @@ const Overview = () => {
             console.log('timeBtn.current is not null');
             timeBtn.current.innerHTML = liveTime;// update the innerHTML of the element  with the formatted time
         } else {
-            console.error('timeBtn or timeBtn.current is null'); 
+            console.error('timeBtn or timeBtn.current is null');
         }
     };
-
 
     const onImportClick = (args) => { //on import click imports the files
         scheduleObj.current.importICalendar(args.event.target.files[0]);
@@ -178,7 +188,7 @@ const Overview = () => {
             scheduleObj.current.exportToICalendar(); //icalednar export (also google)
         }
     };
- // ******************** will need to update this to our data fields *************************************//
+    // ******************** will need to update this to our data fields *************************************//
     const getEventData = () => { // function to get event data
         const date = scheduleObj.current.selectedDate; //gets the date selected from the calendar
         return {
@@ -224,7 +234,7 @@ const Overview = () => {
         }
     };
 
-    useEffect(() => {
+    useEffect(() => { //useEffect to change the view to whaterver view type the user has selected which runs whenever the isTimelineView is changed
         let updatedView = currentView;
         switch (currentView) {
             case 'Day':
@@ -254,11 +264,11 @@ const Overview = () => {
         scheduleObj.current.currentView = updatedView;
     }, [isTimelineView]);
 
-    const onChange = (args) => {
+    const onChange = (args) => { //onChange function which looks to see which timeline view is checked and set the timeline view based on whats checked
         setIsTimelineView(args.checked);
     };
 
-    const timelineTemplate = () => {
+    const timelineTemplate = () => { //function to return html code and looks for a change in the checkbox for if the user sleected a timline view or not
         return (<div className='template'>
             <div className='icon-child'>
                 <CheckBoxComponent id='timeline_views' checked={isTimelineView} change={onChange} />
@@ -267,7 +277,7 @@ const Overview = () => {
         </div>);
     };
 
-    const groupTemplate = () => {
+    const groupTemplate = () => { //function to check if the user has selected grouping of calendars or not which will only show one calendar at a time
         return (<div className='template'>
             <div className='icon-child'>
                 <CheckBoxComponent id='grouping' checked={true} change={(args) => { scheduleObj.current.group.resources = args.checked ? ['Calendars'] : []; }} />
@@ -275,7 +285,8 @@ const Overview = () => {
             <div className='text-child'>Grouping</div>
         </div>);
     };
-    const gridlineTemplate = () => {
+
+    const gridlineTemplate = () => { //function to check if the user has selected gridlines to show or not 
         return (<div className='template'>
             <div className='icon-child'>
                 <CheckBoxComponent id='timeSlots' checked={true} change={(args) => { scheduleObj.current.timeScale.enable = args.checked; }} />
@@ -283,7 +294,8 @@ const Overview = () => {
             <div className='text-child'>Gridlines</div>
         </div>);
     };
-    const autoHeightTemplate = () => {
+
+    const autoHeightTemplate = () => { //function to check if the user has selected to have row auto height selected
         return (<div className='template'>
             <div className='icon-child'>
                 <CheckBoxComponent id='row_auto_height' checked={false} change={(args) => { scheduleObj.current.rowAutoHeight = args.checked; }} />
@@ -291,13 +303,46 @@ const Overview = () => {
             <div className='text-child'>Row Auto Height</div>
         </div>);
     };
-    const getDateHeaderDay = (value) => {
+
+    const getDateHeaderDay = (value) => { //returns the day of the week as a 3 letter return
         return intl.formatDate(value, { skeleton: 'E' });
     };
-    const getDateHeaderDate = (value) => {
+
+    const getDateHeaderDate = (value) => { //returns the day of the week as a number ie 31
         return intl.formatDate(value, { skeleton: 'd' });
     };
-    const getWeather = (value) => {
+
+
+    useEffect(() => {
+        if (latitude !== null && longitude !== null) {
+            axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=${weatherAPIKey}`)
+                .then(response => {
+                    const data = response.data;
+                    console.log('Weather data:', data);
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                });
+        }
+    }, [latitude, longitude]);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const currentLatitude = position.coords.latitude;
+                const currentLongitude = position.coords.longitude;
+                setLatitude(currentLatitude);
+                setLongitude(currentLongitude);
+                console.long(currentLatitude, currentLongitude)
+            },
+            (error) => {
+                console.error('Error getting location:', error.message);
+            }
+        );
+    }, []);
+
+
+    const getWeather = (value) => { // get weather which currently makes the day have a set weather image, not pulling live
         switch (value.getDay()) {
             case 0:
                 return '<img class="weather-image"  src= "https://ej2.syncfusion.com/react/demos/src/schedule/images/weather-clear.svg" />';
@@ -317,6 +362,7 @@ const Overview = () => {
                 return null;
         }
     };
+
     const dateHeaderTemplate = (props) => {
         return (<Fragment>
             <div>{getDateHeaderDay(props.date)}</div>
@@ -324,6 +370,7 @@ const Overview = () => {
             <div className="date-text" dangerouslySetInnerHTML={{ __html: getWeather(props.date) }}></div>
         </Fragment>);
     };
+
     const onResourceChange = (args) => {
         let resourcePredicate;
         for (let value of args.value) {
@@ -336,12 +383,12 @@ const Overview = () => {
         }
         scheduleObj.current.resources[0].query = resourcePredicate ? new Query().where(resourcePredicate) : new Query().where('CalendarId', 'equal', 1);
     };
+
     let generateEvents = () => {
         let eventData = [];
         let eventSubjects = [
             'Workout', 'Meal Time', 'Work', 'Meeting', 'Traveling', 'Rest Day', 'Game',
-            'Party', 'Anniversary', 'Birthday', 'Grocery Shopping', 'Yoga/Meditation', 'Goal Date',
-            'Deadlines', 'Personal', 'Doctors/Health', 'School Event', 'School/Education', 'Community Event', 'Volunteering',
+            'Party', 'Anniversary', 'Birthday', 'Grocery Shopping', 'Yoga/Meditation', 'Goal Date', 'Deadlines', 'Personal', 'Doctors/Health', 'School Event', 'School/Education', 'Community Event', 'Volunteering',
             'To Do', 'Vacation', 'Other'
         ];
         let weekDate = new Date(new Date().setDate(new Date().getDate() - new Date().getDay()));
@@ -394,10 +441,12 @@ const Overview = () => {
         }
         return overviewEvents;
     };
+
     const createUpload = () => {
         const element = document.querySelector('.calendar-import .e-css.e-btn');
         element.classList.add('e-inherit');
     };
+    
     const btnClick = () => {
         let settingsPanel = document.querySelector('.overview-content .right-panel');
         if (settingsPanel.classList.contains('hide')) {
@@ -410,6 +459,7 @@ const Overview = () => {
         }
         scheduleObj.current.refreshEvents();
     };
+
     const contextMenuOpen = (args) => {
         let newEventElement = document.querySelector('.e-new-event');
         if (newEventElement) {
@@ -421,7 +471,7 @@ const Overview = () => {
         if (closest(targetElement, '.e-contextmenu')) {
             return;
         }
-        if (selectedTarget) { 
+        if (selectedTarget) {
             selectedTarget.classList.add('e-selected-cell');
         } else {
             console.error('selectedTarget is null');
@@ -491,6 +541,7 @@ const Overview = () => {
                 break;
         }
     };
+
     const timezoneChange = (args) => {
         console.log('Timezone changed:', args.value);
 
@@ -500,6 +551,7 @@ const Overview = () => {
         updateLiveTime();
         document.querySelector('.schedule-overview #timezoneBtn').innerHTML = '<span class="e-btn-icon e-icons e-time-zone e-icon-left"></span>' + args.itemData.text;
     };
+
     const weekNumberChange = (args) => {
         if (args.value == "Off") {
             scheduleObj.current.showWeekNumber = false;
@@ -509,6 +561,7 @@ const Overview = () => {
             scheduleObj.current.weekRule = args.value;
         }
     };
+
     const tooltipChange = (args) => {
         if (args.value === "Off") {
             scheduleObj.current.eventSettings.enableTooltip = false;
@@ -519,12 +572,12 @@ const Overview = () => {
     };
 
     useEffect(() => {
-    const intervalId = setInterval(() => {
-        if (timeBtn.current) {
-            updateLiveTime();
-        }
-    }, 10000);
-    
+        const intervalId = setInterval(() => {
+            if (timeBtn.current) {
+                updateLiveTime();
+            }
+        }, 10000);
+
         return () => clearInterval(intervalId);
     }, [timeBtn.current]); // Only re-run the effect if timeBtn.current changes
 
