@@ -8,6 +8,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const dotenv = require('dotenv');
 
 dotenv.config();
+const weatherAPIKey = process.env.WEATHER_API_KEY;
 const port = 8000;
 
 const app = express();
@@ -29,7 +30,6 @@ require('./routes/associationRoutes')(app);
 require('./routes/goalRoutes')(app);
 require('./routes/mealRoutes')(app);
 require('./routes/workoutRoutes')(app);
-
 require('./routes/eventRoutes')(app);
 require('./routes/messageRoutes')(app);
 

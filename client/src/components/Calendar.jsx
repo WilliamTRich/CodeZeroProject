@@ -13,12 +13,12 @@ import { tz } from 'moment-timezone';
 // import 'client/styles/schedule/tailwind-dark.css';
 import axios from 'axios';
 
+const weatherAPIKey = import.meta.env.REACT_APP_WEATHER_API_KEY;
 
 const Overview = () => {
     //weather APIs
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-    const weatherAPIKey = process.env.REACT_APP_WEATHER_API_KEY;
 
     const [currentView, setCurrentView] = useState('Week');
     const [isTimelineView, setIsTimelineView] = useState(false);
@@ -304,13 +304,6 @@ const Overview = () => {
         </div>);
     };
 
-    const getDateHeaderDay = (value) => { //returns the day of the week as a 3 letter return
-        return intl.formatDate(value, { skeleton: 'E' });
-    };
-
-    const getDateHeaderDate = (value) => { //returns the day of the week as a number ie 31
-        return intl.formatDate(value, { skeleton: 'd' });
-    };
 
 
     useEffect(() => { //  useeffect to pull the weather data, updates when lat or long changes
@@ -333,7 +326,7 @@ const Overview = () => {
                 const currentLongitude = position.coords.longitude;
                 setLatitude(currentLatitude);
                 setLongitude(currentLongitude);
-                console.long(currentLatitude, currentLongitude)
+                console.log(currentLatitude, currentLongitude)
             },
             (error) => {
                 console.error('Error getting location:', error.message);
@@ -363,15 +356,23 @@ const Overview = () => {
         }
     };
 
-    const dateHeaderTemplate = (props) => {
+    const getDateHeaderDay = (value) => { //returns the day of the week as a 3 letter return
+        return intl.formatDate(value, { skeleton: 'E' });
+    };
+
+    const getDateHeaderDate = (value) => { //returns the day of the week as a number ie 31
+        return intl.formatDate(value, { skeleton: 'd' });
+    };
+
+    const dateHeaderTemplate = (props) => { //calls the above functions in the divs to show the vals
         return (<Fragment>
             <div>{getDateHeaderDay(props.date)}</div>
             <div>{getDateHeaderDate(props.date)}</div>
             <div className="date-text" dangerouslySetInnerHTML={{ __html: getWeather(props.date) }}></div>
-        </Fragment>);
+        </Fragment>); // fragments are a good way to group child elements
     };
 
-    const onResourceChange = (args) => {
+    const onResourceChange = (args) => { // function to filter the data based on the calendar id
         let resourcePredicate;
         for (let value of args.value) {
             if (resourcePredicate) {
@@ -384,16 +385,17 @@ const Overview = () => {
         scheduleObj.current.resources[0].query = resourcePredicate ? new Query().where(resourcePredicate) : new Query().where('CalendarId', 'equal', 1);
     };
 
+    //this function just hard codes in some events --------------------------------------------//
     let generateEvents = () => {
-        let eventData = [];
+        let eventData = []; // array that will store the generated event objects
         let eventSubjects = [
             'Workout', 'Meal Time', 'Work', 'Meeting', 'Traveling', 'Rest Day', 'Game',
             'Party', 'Anniversary', 'Birthday', 'Grocery Shopping', 'Yoga/Meditation', 'Goal Date', 'Deadlines', 'Personal', 'Doctors/Health', 'School Event', 'School/Education', 'Community Event', 'Volunteering',
             'To Do', 'Vacation', 'Other'
-        ];
-        let weekDate = new Date(new Date().setDate(new Date().getDate() - new Date().getDay()));
-        let startDate = new Date(weekDate.getFullYear(), weekDate.getMonth(), weekDate.getDate(), 10, 0);
-        let endDate = new Date(weekDate.getFullYear(), weekDate.getMonth(), weekDate.getDate(), 11, 30);
+        ]; //array containing various event subjects
+        let weekDate = new Date(new Date().setDate(new Date().getDate() - new Date().getDay())); // start date of the week, set to the last Sunday
+        let startDate = new Date(weekDate.getFullYear(), weekDate.getMonth(), weekDate.getDate(), 10, 0); //   start time for events, set to 10:00 AM
+        let endDate = new Date(weekDate.getFullYear(), weekDate.getMonth(), weekDate.getDate(), 11, 30); //end time for events, set to 11:30 AM
         eventData.push({
             Id: 1,
             Subject: eventSubjects[Math.floor(Math.random() * (24 - 0 + 1) + 0)],
@@ -446,7 +448,7 @@ const Overview = () => {
         const element = document.querySelector('.calendar-import .e-css.e-btn');
         element.classList.add('e-inherit');
     };
-    
+
     const btnClick = () => {
         let settingsPanel = document.querySelector('.overview-content .right-panel');
         if (settingsPanel.classList.contains('hide')) {
