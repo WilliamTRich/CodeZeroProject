@@ -18,7 +18,7 @@ const Overview = () => {
     //weather APIs
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
-    const weatherAPIKey = "20b1c93d52d57ffe35a6cada2e8468e1"
+    const weatherAPIKey = process.env.REACT_APP_WEATHER_API_KEY;
 
     const [currentView, setCurrentView] = useState('Week');
     const [isTimelineView, setIsTimelineView] = useState(false);
@@ -313,7 +313,7 @@ const Overview = () => {
     };
 
 
-    useEffect(() => {
+    useEffect(() => { //  useeffect to pull the weather data, updates when lat or long changes
         if (latitude !== null && longitude !== null) {
             axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,daily&appid=${weatherAPIKey}`)
                 .then(response => {
@@ -326,7 +326,7 @@ const Overview = () => {
         }
     }, [latitude, longitude]);
 
-    useEffect(() => {
+    useEffect(() => {//useEffect to get the users latitude and longitute
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const currentLatitude = position.coords.latitude;
