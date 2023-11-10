@@ -23,7 +23,7 @@ const Overview = () => {
     let workWeekObj = useRef(null);
     let resourceObj = useRef(null);
     let liveTimeInterval;
-    const weekDays = [
+    const weekDays = [ //gives the weekdays numerical values
         { text: 'Sunday', value: 0 },
         { text: 'Monday', value: 1 },
         { text: 'Tuesday', value: 2 },
@@ -32,11 +32,11 @@ const Overview = () => {
         { text: 'Friday', value: 5 },
         { text: 'Saturday', value: 6 }
     ];
-    const exportItems = [
+    const exportItems = [ //allows for export to apple calednar or excel
         { text: 'iCalendar', iconCss: 'e-icons e-export' },
         { text: 'Excel', iconCss: 'e-icons e-export-excel' }
     ];
-    const contextMenuItems = [
+    const contextMenuItems = [ //adds the icons to the menu at the top of the calendar
         { text: 'New Event', iconCss: 'e-icons e-plus', id: 'Add' },
         { text: 'New Recurring Event', iconCss: 'e-icons e-repeat', id: 'AddRecurrence' },
         { text: 'Today', iconCss: 'e-icons e-timeline-today', id: 'Today' },
@@ -57,13 +57,16 @@ const Overview = () => {
             ]
         }
     ];
-    const calendarCollections = [
+    const calendarCollections = [ //Different Calednar collections, can add a workout/meal calednar, but need to change colors
         { CalendarText: 'My Calendar', CalendarId: 1, CalendarColor: '#c43081' },
-        { CalendarText: 'Company', CalendarId: 2, CalendarColor: '#ff7f50' },
-        { CalendarText: 'Birthday', CalendarId: 3, CalendarColor: '#AF27CD' },
-        { CalendarText: 'Holiday', CalendarId: 4, CalendarColor: '#808000' }
+        { CalendarText: 'Work', CalendarId: 2, CalendarColor: '#ff7f50' },
+        { CalendarText: 'Holiday/Events', CalendarId: 4, CalendarColor: '#808000' },
+        { CalendarText: 'Workout', CalendarId: 4, CalendarColor: '#51fc5f' },
+        { CalendarText: 'Meal', CalendarId: 4, CalendarColor: '#51fcf6' },
+        { CalendarText: 'Goal', CalendarId: 4, CalendarColor: '#AF27CD' }
+
     ];
-    const timezoneData = [
+    const timezoneData = [ //timezone data to adjust properly
         { text: 'UTC -12:00', value: 'Etc/GMT+12' },
         { text: 'UTC -11:00', value: 'Etc/GMT+11' },
         { text: 'UTC -10:00', value: 'Etc/GMT+10' },
@@ -93,7 +96,7 @@ const Overview = () => {
         { text: 'UTC +13:00', value: 'Etc/GMT-13' },
         { text: 'UTC +14:00', value: 'Etc/GMT-14' }
     ];
-    const majorSlotData = [
+    const majorSlotData = [ //giving times numerical values
         { Name: '1 hour', Value: 60 },
         { Name: '1.5 hours', Value: 90 },
         { Name: '2 hours', Value: 120 },
@@ -119,75 +122,78 @@ const Overview = () => {
         { Name: '12 hours', Value: 720 }
     ];
     const minorSlotData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const timeFormatData = [
+    const timeFormatData = [ //defining the two types of time formats
         { Name: "12 hours", Value: "hh:mm a" },
         { Name: "24 hours", Value: "HH:mm" }
     ];
-    const weekNumberData = [
+    const weekNumberData = [ //define how we are counting the weeks, if at all or by number of days in the week
         { Name: 'Off', Value: 'Off' },
         { Name: 'First Day of Year', Value: 'FirstDay' },
         { Name: 'First Full Week', Value: 'FirstFullWeek' },
         { Name: 'First Four-Day Week', Value: 'FirstFourDayWeek' }
     ];
-    const tooltipData = [
+    const tooltipData = [ // not sure
         { Name: 'Off', Value: 'Off' },
         { Name: 'On', Value: 'On' }
     ];
-    const importTemplateFn = (data) => {
+    const importTemplateFn = (data) => { //takes in data and puts out an HTML div based on the data given  - allows for dynamic divs
         const template = '<div class="e-template-btn"><span class="e-btn-icon e-icons e-upload-1 e-icon-left"></span>${text}</div>';
         return compile(template.trim())(data);
     };
+
     const updateLiveTime = () => {
-        if (scheduleObj && scheduleObj.current && scheduleObj.current.timezone) {
-            let scheduleTimezone = scheduleObj.current.timezone;
-            let liveTime;
-            if (scheduleObj.current.isAdaptive) {
-                liveTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: scheduleTimezone });
-            } else {
-                liveTime = new Date().toLocaleTimeString('en-US', { timeZone: scheduleTimezone });
-            }
-            timeBtn.current.innerHTML = liveTime;
+        console.log('Updating live time...');
+        let userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;// get the user's timezone from the browser
+        let liveTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: userTimezone });// format the current time to 12 hour format
+        if (timeBtn && timeBtn.current) {
+            console.log('timeBtn.current is not null');
+            timeBtn.current.innerHTML = liveTime;// update the innerHTML of the element  with the formatted time
         } else {
-            console.error('Invalid scheduleObj or missing timezone property');
+            console.error('timeBtn or timeBtn.current is null'); 
         }
     };
-    
-    const onImportClick = (args) => {
+
+
+    const onImportClick = (args) => { //on import click imports the files
         scheduleObj.current.importICalendar(args.event.target.files[0]);
     };
-    const onPrint = () => {
+
+    const onPrint = () => { //on print click run print function
         scheduleObj.current.print();
     };
-    const onExportClick = (args) => {
-        if (args.item.text === 'Excel') {
-            let exportDatas = [];
-            let eventCollection = scheduleObj.current.getEvents();
-            let resourceCollection = scheduleObj.current.getResourceCollections();
-            let resourceData = resourceCollection[0].dataSource;
-            for (let resource of resourceData) {
+
+    const onExportClick = (args) => { //function to export the calendar
+        if (args.item.text === 'Excel') { //checks if the person slected excel
+            let exportDatas = []; //an empty array to store the data
+            let eventCollection = scheduleObj.current.getEvents(); // gets the events from the calendar
+            let resourceCollection = scheduleObj.current.getResourceCollections(); //gets the resource collections
+            let resourceData = resourceCollection[0].dataSource; //sets the firt resource collection to the resource data
+            for (let resource of resourceData) { //goes through the items in resource data and filters for those with a mathcinn ID
                 let data = eventCollection.filter((e) => e.CalendarId === resource.CalendarId);
                 exportDatas = exportDatas.concat(data);
             }
-            scheduleObj.current.exportToExcel({ exportType: 'xlsx', customData: exportDatas, fields: ['Id', 'Subject', 'StartTime', 'EndTime', 'CalendarId'] });
+            scheduleObj.current.exportToExcel({ exportType: 'xlsx', customData: exportDatas, fields: ['Id', 'Subject', 'StartTime', 'EndTime', 'CalendarId'] }); //esports the fields listed 
         }
         else {
-            scheduleObj.current.exportToICalendar();
+            scheduleObj.current.exportToICalendar(); //icalednar export (also google)
         }
     };
-    const getEventData = () => {
-        const date = scheduleObj.current.selectedDate;
+ // ******************** will need to update this to our data fields *************************************//
+    const getEventData = () => { // function to get event data
+        const date = scheduleObj.current.selectedDate; //gets the date selected from the calendar
         return {
-            Id: scheduleObj.current.getEventMaxID(),
-            Subject: '',
-            StartTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), new Date().getHours(), 0, 0),
-            EndTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), new Date().getHours() + 1, 0, 0),
-            Location: '',
-            Description: '',
-            IsAllDay: false,
-            CalendarId: 1
+            Id: scheduleObj.current.getEventMaxID(), //gets the max ID already made
+            Subject: '', //set subject to blank
+            StartTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), new Date().getHours(), 0, 0), //sets start time to the time clicked on
+            EndTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), new Date().getHours() + 1, 0, 0), //adds one hour ro the start time to make the end time
+            Location: '', // puts location as blank
+            Description: '', // puts description as blank
+            IsAllDay: false, //sets all day to false
+            CalendarId: 1 //sets the calednar id to 1 versus the other calendars
         };
     };
-    const onToolbarItemClicked = (args) => {
+
+    const onToolbarItemClicked = (args) => { // function to set the timeline view to whatever the user has selected or to select the new event/recurring event editors
         switch (args.item.text) {
             case 'Day':
                 setCurrentView(isTimelineView ? 'TimelineDay' : 'Day');
@@ -217,6 +223,7 @@ const Overview = () => {
                 break;
         }
     };
+
     useEffect(() => {
         let updatedView = currentView;
         switch (currentView) {
@@ -246,9 +253,11 @@ const Overview = () => {
         }
         scheduleObj.current.currentView = updatedView;
     }, [isTimelineView]);
+
     const onChange = (args) => {
         setIsTimelineView(args.checked);
     };
+
     const timelineTemplate = () => {
         return (<div className='template'>
             <div className='icon-child'>
@@ -257,6 +266,7 @@ const Overview = () => {
             <div className='text-child'>Timeline Views</div>
         </div>);
     };
+
     const groupTemplate = () => {
         return (<div className='template'>
             <div className='icon-child'>
@@ -411,6 +421,11 @@ const Overview = () => {
         if (closest(targetElement, '.e-contextmenu')) {
             return;
         }
+        if (selectedTarget) { 
+            selectedTarget.classList.add('e-selected-cell');
+        } else {
+            console.error('selectedTarget is null');
+        }
         selectedTarget = closest(targetElement, '.e-appointment,.e-work-cells,.e-vertical-view .e-date-header-wrap .e-all-day-cells,.e-vertical-view .e-date-header-wrap .e-header-cells');
         if (isNullOrUndefined(selectedTarget)) {
             args.cancel = true;
@@ -477,7 +492,11 @@ const Overview = () => {
         }
     };
     const timezoneChange = (args) => {
-        scheduleObj.current.timezone = args.value;
+        console.log('Timezone changed:', args.value);
+
+        // scheduleObj.current.timezone = args.value; //should be picking the time zone but it isnt working
+        scheduleObj.current.timezone = 'Etc/GMT-5';
+        console.log("I am in the timezone change")
         updateLiveTime();
         document.querySelector('.schedule-overview #timezoneBtn').innerHTML = '<span class="e-btn-icon e-icons e-time-zone e-icon-left"></span>' + args.itemData.text;
     };
@@ -498,17 +517,28 @@ const Overview = () => {
             scheduleObj.current.eventSettings.enableTooltip = true;
         }
     };
+
+    useEffect(() => {
+    const intervalId = setInterval(() => {
+        if (timeBtn.current) {
+            updateLiveTime();
+        }
+    }, 10000);
+    
+        return () => clearInterval(intervalId);
+    }, [timeBtn.current]); // Only re-run the effect if timeBtn.current changes
+
     return (<div className='schedule-control-section'>
         <div className='col-lg-12 control-section'>
             <div className='content-wrapper'>
                 <div className='schedule-overview'>
                     <AppBarComponent colorMode="Primary">
-                        <span className="time e-icons e-time-zone"></span>
-                        <span id="timezoneBtn" className="time ">UTC</span>
-                        <span className="time e-icons e-clock"></span>
+                        <span className="time e-icons e-time-zone p-1"></span>
+                        <span id="timezoneBtn" className="time p-1 ">UTC</span>
+                        <span className="time e-icons e-clock p-1"></span>
                         <span id="timeBtn" className="time current-time" ref={timeBtn}></span>
                         <div className="e-appbar-spacer"></div>
-                        {/* <div className='control-panel calendar-export'>
+                        <div className='control-panel calendar-export'>
                             <ButtonComponent id='printBtn' cssClass='title-bar-btn e-inherit' iconCss='e-icons e-print' onClick={(onPrint)} content='Print' />
                         </div>
                         <div className='control-panel import-button'>
@@ -516,10 +546,20 @@ const Overview = () => {
                         </div>
                         <div className='control-panel calendar-export'>
                             <DropDownButtonComponent id='exportBtn' content='Export' cssClass='e-inherit' items={exportItems} select={onExportClick} />
-                        </div> */}
+                        </div>
                         <ButtonComponent id='settingsBtn' cssClass='overview-toolbar-settings e-inherit' iconCss='e-icons e-settings' iconPosition='Top' content='' onClick={btnClick} />
                     </AppBarComponent>
-                    <ToolbarComponent id='toolbarOptions' cssClass='overview-toolbar' width='100%' height={70} overflowMode='Scrollable' scrollStep={100} created={() => liveTimeInterval = setInterval(() => { updateLiveTime(); }, 1000)} clicked={onToolbarItemClicked}>
+                    {/* <ToolbarComponent id='toolbarOptions' cssClass='overview-toolbar' width='100%' height={70} overflowMode='Scrollable' scrollStep={100} created={() => liveTimeInterval = setInterval(() => { updateLiveTime(); }, 1000)} clicked={onToolbarItemClicked}> */}
+                    <ToolbarComponent
+                        id='toolbarOptions'
+                        cssClass='overview-toolbar'
+                        width='100%'
+                        height={70}
+                        overflowMode='Scrollable'
+                        scrollStep={100}
+                        created={() => (liveTimeInterval = setInterval(() => updateLiveTime(), 10000))}
+                        clicked={onToolbarItemClicked}
+                    >
                         <ItemsDirective>
                             <ItemDirective prefixIcon='e-icons e-plus' tooltipText='New Event' text='New Event' tabIndex={0} />
                             <ItemDirective prefixIcon='e-icons e-repeat' tooltipText='New Recurring Event' text='New Recurring Event' tabIndex={0} />
